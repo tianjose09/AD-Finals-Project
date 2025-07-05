@@ -1,0 +1,52 @@
+services:
+  activity3:
+    build:
+      context: .
+    container_name: activity3-service
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.docker
+    develop:
+      watch:
+        - path: .
+          target: /var/www/html
+          action: sync
+        - path: ./composer.json
+          action: rebuild
+        - path: ./composer.lock
+          action: rebuild
+    depends_on:
+      - mongodb
+      - postgresql 
+  mongodb:
+    image: mongo:latest
+    container_name: activity3-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootPassword
+      MONGO_INITDB_DATABASE: guintodatabase
+    ports:
+      - "23567:27017"
+    volumes:
+      - activity3-mongodb:/data/db/mongodb
+
+  postgresql:
+    image: postgres:15
+    container_name: activity3-postgresql
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: guintodatabase
+    ports:
+      - "5112:5432"
+    volumes:
+      - activity3-postgresql:/data/db/postgresql
+    #command: postgres -c listen_addresses='*'
+
+volumes:
+  activity3-mongodb:
+    driver: local
+  activity3-postgresql:
+    driver: local
