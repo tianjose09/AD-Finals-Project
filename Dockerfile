@@ -15,10 +15,11 @@ COPY --from=composer:2.6 /usr/bin/composer /usr/local/bin/composer
 
 COPY . /var/www/html/
 
+
+RUN composer install
+
 USER yourUsernameHere
 
 EXPOSE 8000
-
-RUN composer install
 
 CMD ["php", "-S", "0.0.0.0:8000", "router.php"]

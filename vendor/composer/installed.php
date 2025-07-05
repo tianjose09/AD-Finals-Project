@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'tianjose09/ad-meeting-calendar',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'b15a00835d0da809513d1ba0dc450cbfc00455dd',
+        'name' => 'tianjose09/ad-finals-project',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '999a9ae5f885ee2c29b2dc36ba3c8dbf8aa05429',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -55,10 +55,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'tianjose09/ad-meeting-calendar' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'b15a00835d0da809513d1ba0dc450cbfc00455dd',
+        'tianjose09/ad-finals-project' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '999a9ae5f885ee2c29b2dc36ba3c8dbf8aa05429',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
