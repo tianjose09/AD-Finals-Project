@@ -79,4 +79,96 @@ foreach ($planets as $p) {
   ]);
 }
 
+$flightStmt = $pdo->prepare("
+  INSERT INTO public.\"flights\" (
+    planet_id,
+    departure_time,
+    return_time,
+    capacity,
+    price,
+    package_type
+  ) VALUES (
+    :planet_id,
+    :departure_time,
+    :return_time,
+    :capacity,
+    :price,
+    :package_type
+  ) RETURNING id
+");
+
+foreach ($flights as $f) {
+  $flightStmt->execute([
+    ':planet_id' => $f['planet_id'],
+    ':departure_time' => $f['departure_time'],
+    ':return_time' => $f['return_time'],
+    ':capacity' => $f['capacity'],
+    ':price' => $f['price'],
+    ':package_type' => $f['package_type'],
+  ]);
+  $flightId = $flightStmt->fetchColumn();
+}
+
+$bookingStmt = $pdo->prepare("
+  INSERT INTO public.\"bookings\" (
+    user_id,
+    flight_id,
+    travel_date,
+    seat_number,
+    ticket_code,
+    status,
+    feedback
+  ) VALUES (
+    :user_id,
+    :flight_id,
+    :travel_date,
+    :seat_number,
+    :ticket_code,
+    :status,
+    :feedback
+  ) RETURNING id
+");
+
+foreach ($bookings as $b) {
+  $bookingStmt->execute([
+    ':user_id' => $b['user_id'],
+    ':flight_id' => $b['flight_id'],
+    ':travel_date' => $b['travel_date'],
+    ':seat_number' => $b['seat_number'],
+    ':ticket_code' => $b['ticket_code'],
+    ':status' => $b['status'],
+    ':feedback' => $b['feedback'],
+  ]);
+  $bookingId = $bookingStmt->fetchColumn();
+}
+
+$ticketStmt = $pdo->prepare("
+  INSERT INTO public.\"tickets\" (
+    booking_id,
+    flight_id,
+    flight_number,
+    launch_pad,
+    gate,
+    qr_code
+  ) VALUES (
+    :booking_id,
+    :flight_id,
+    :flight_number,
+    :launch_pad,
+    :gate,
+    :qr_code
+  )
+");
+
+foreach ($tickets as $t) {
+  $ticketStmt->execute([
+    ':booking_id' => $t['booking_id'],
+    ':flight_id' => $t['flight_id'],
+    ':flight_number' => $t['flight_number'],
+    ':launch_pad' => $t['launch_pad'],
+    ':gate' => $t['gate'],
+    ':qr_code' => $t['qr_code'],
+  ]);
+}
+
 echo "✅ PostgreSQL seeding complete!\n";
