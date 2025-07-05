@@ -14,7 +14,7 @@ return [
         'departure_time' => '2025-08-15 11:00:00',
         'return_time' => '2025-08-20 15:30:00',
         'capacity' => 30,
-        'price' => 35000.00,
+        'price' => 30000.00,
         'package_type' => 'VIP',
     ],
     [
