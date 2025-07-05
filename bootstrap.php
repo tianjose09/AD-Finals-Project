@@ -9,4 +9,5 @@ define('LAYOUTS_PATH', BASE_PATH . '/layouts');
 define('ERRORS_PATH', BASE_PATH . '/errors');
 define('HANDLERS_PATH', BASE_PATH . '/handlers');
 define('DUMMIES_PATH', BASE_PATH . '/staticDatas/dummies');
+define('IMAGES_PATH', BASE_PATH . '/assets/img');
 chdir(BASE_PATH);
