@@ -18,7 +18,6 @@ foreach ($requiredKeys as $key) {
 }
 
 $typeConfig = [
-    'env_name'   => $_ENV['ENV_guinto'] ?? 'local',
 
     'pg_host'    => $_ENV['PG_HOST'],
     'pg_port'    => $_ENV['PG_PORT'],

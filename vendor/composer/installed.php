@@ -3,7 +3,7 @@
         'name' => 'tianjose09/ad-finals-project',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '999a9ae5f885ee2c29b2dc36ba3c8dbf8aa05429',
+        'reference' => 'e55d69bec1a71acb394a8106cc62ce6350fbac7c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -58,7 +58,7 @@
         'tianjose09/ad-finals-project' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '999a9ae5f885ee2c29b2dc36ba3c8dbf8aa05429',
+            'reference' => 'e55d69bec1a71acb394a8106cc62ce6350fbac7c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

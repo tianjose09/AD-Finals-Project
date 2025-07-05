@@ -25,7 +25,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: rootPassword
       MONGO_INITDB_DATABASE: finaldatabase
     ports:
-      - "27018:27017"
+      - "23567:27017"
     volumes:
       - final-project-mongodb:/data/db/mongodb
 
@@ -38,7 +38,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: finaldatabase
     ports:
-      - "5113:5432"
+      - "5112:5432"
     volumes:
       - final-project-postgresql:/data/db/postgresql
 
