@@ -4,6 +4,10 @@ require_once BASE_PATH . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
 $dotenv->load();
 
+if (php_sapi_name() === 'cli') {
+    $_ENV['PG_HOST'] = 'localhost';
+}
+
 $envPath = BASE_PATH . '/.env';
 if (!file_exists($envPath)) {
     die("❌ .env file not found at: $envPath");
