@@ -1,10 +1,26 @@
 {
-    "name": "tianjose09/ad-meeting-calendar",
+    "name": "tianjose09/ad-finals-project",
     "type": "project",
     "authors": [
         {
-            "name": "Khristian Jose Guinto",
+            "name": "Sophia Gabrielle Santiago Calalay",
+            "email": "sgscalalay@gmail.com"
+        },
+        {
+            "name": "Yuki Anenias Emit",
+            "email": "yukianenias@gmail.com"
+        },
+        {
+            "name": "Khristian Jose Dela Paz Guinto",
             "email": "khristianjosedp@gmail.com"
+        },
+        {
+            "name": "Althea Zuleika Sadicon",
+            "email": "sadiconaltheazuleika@gmail.com"
+        },
+        {
+            "name": "Kirk Griffin Fontamillas Tan",
+            "email": "krkgrffntn@gmail.com"
         }
     ],
     "scripts": {
