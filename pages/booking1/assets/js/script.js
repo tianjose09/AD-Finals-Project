@@ -17,3 +17,12 @@ function createStars() {
     starsContainer.appendChild(star);
   }
 }
+window.addEventListener('load', createStars);
+
+function updatePassengers(change) {
+  const input = document.getElementById('passengerCount');
+  let count = parseInt(input.value) || 1;
+  count += change;
+  if (count < 1) count = 1;
+  input.value = count;
+}
