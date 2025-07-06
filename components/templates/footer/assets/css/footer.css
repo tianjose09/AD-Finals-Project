@@ -1,0 +1,146 @@
+body{
+    margin: 0;
+}
+footer {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 20px 0;
+    min-height: 8vh;
+    position: relative;
+    
+    /* Ultra-dark cosmic background */
+    background: 
+        /* Deep space black base */
+        radial-gradient(ellipse at center, 
+            rgba(22, 22, 44, 0.95) 0%, 
+            rgba(15, 15, 44, 0.98) 100%),
+        /* Subtle cosmic purple/blue glow */
+        linear-gradient(135deg, 
+            rgba(60, 30, 120, 0.15) 0%, 
+            rgba(30, 60, 120, 0.1) 100%);
+    
+    /* Stronger vignette effect */
+    box-shadow: 
+        inset 60px 0 90px -40px rgba(0, 0, 0, 0.9), /* Left edge */
+        inset -60px 0 90px -40px rgba(0, 0, 0, 0.9); /* Right edge */
+    
+    /* Glowing center highlight (more subtle) */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            ellipse at center,
+            transparent 60%,
+            rgba(70, 40, 140, 0.08) 100%
+        );
+        pointer-events: none;
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
+    overflow: hidden;
+    border-top: 1px solid rgba(40, 30, 80, 0.3);
+}
+
+#logo {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+#logo img {
+    border-radius: 45px;
+    height: 60px;
+    padding: 3px; /* Creates space for the glow */
+    background: linear-gradient(145deg, #6C4DF6, #d7dee7); /* Gradient rim */
+    box-shadow: 
+        0 0 10px rgba(108, 77, 246, 0.7),
+        0 0 20px rgba(79, 163, 255, 0.5),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+#logo::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #6C4DF6, #ffffff);
+    z-index: 0;
+    opacity: 0.5;
+    filter: blur(8px);
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+#tagline {
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    background: linear-gradient(
+        145deg, 
+        #ffffff 40%, 
+        #d7dee7 60%, 
+        #6C4DF6 80%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 
+        0 0 8px rgba(255, 255, 255, 0.4),
+        0 0 15px rgba(108, 77, 246, 0.2);
+    display: inline-block;
+    padding: 0 8px;
+    letter-spacing: 0.8px;
+    position: relative;
+    margin-bottom: 1px;
+}
+
+/* Optional: Add subtle glow behind text */
+#tagline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 10%, 
+        rgba(108, 77, 246, 0.5) 50%, 
+        transparent 90%);
+    filter: blur(1px);
+}
+
+#tagline {
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#contInfo h3 {
+    margin-bottom: 0px;
+    font-size: 0.7rem;
+    font-weight: lighter;
+    color: rgba(210, 209, 209, 0.8);
+}
+
+#contInfo p {
+    margin: 0;
+    font-size: 0.9rem;
+}
