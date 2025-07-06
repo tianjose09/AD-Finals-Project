@@ -48,3 +48,39 @@
             <input type="date" id="date" />
           </div>
         </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Passengers</label>
+            <div class="passenger-control">
+              <button onclick="updatePassengers(-1)">-</button>
+              <input type="number" id="passengerCount" value="1" min="1" onchange="validatePassengerInput()">
+              <button onclick="updatePassengers(1)">+</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Class</label>
+            <select>
+              <option disabled selected>Class</option>
+              <option>Economy</option>
+              <option>Business Class</option>
+              <option>First Class</option>
+              <option>Galactic Luxury</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="search-btn">Search Flights</button>
+      </div>
+    </div>
+  </main>
+
+  <datalist id="planetList">
+    <option value="Earth"><option value="Mars"><option value="Venus">
+    <option value="Jupiter"><option value="Saturn"><option value="Uranus">
+    <option value="Neptune"><option value="Mercury"><option value="Pluto">
+    <option value="Europa"><option value="Titan"><option value="Ganymede">
+    <option value="Callisto"><option value="Io"><option value="Triton">
+  </datalist>
+
+  
