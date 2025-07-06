@@ -1,0 +1,8 @@
+body {
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #1A1A2E;
+  color: white;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
