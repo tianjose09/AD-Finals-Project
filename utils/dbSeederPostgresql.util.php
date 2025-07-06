@@ -13,6 +13,9 @@ require_once UTILS_PATH . '/envSetter.util.php';
 // Load dummy data
 $users = require_once DUMMIES_PATH . '/users.staticData.php';
 $planets = require_once DUMMIES_PATH . '/planets.staticData.php';
+$flights = require_once DUMMIES_PATH . '/flights.staticData.php';
+$booking = require_once DUMMIES_PATH . '/booking.staticData.php';
+$tickets = require_once DUMMIES_PATH . '/tickets.staticData.php';
 
 // ——— Connect to PostgreSQL ———
 $dsn = "pgsql:host={$pgConfig['host']};port={$pgConfig['port']};dbname={$pgConfig['db']}";
