@@ -26,3 +26,10 @@ function updatePassengers(change) {
   if (count < 1) count = 1;
   input.value = count;
 }
+
+function validatePassengerInput() {
+  const input = document.getElementById('passengerCount');
+  let count = parseInt(input.value) || 1;
+  if (count < 1) count = 1;
+  input.value = count;
+}
