@@ -18,14 +18,14 @@ $pdo = new PDO($dsn, $pgConfig['user'], $pgConfig['pass'], [
 
 echo "✅ Connected to PostgreSQL via PDO\n";
 
-// ——— Apply All Schemas First ———
 $schemas = [
+  'planets.model.sql',
+  'flights.model.sql',
   'users.model.sql',
   'booking.model.sql',
-  'flights.model.sql',
-  'planets.model.sql',
-  'tickets.model.sql',
+  'tickets.model.sql',  
 ];
+
 
 foreach ($schemas as $file) {
   $path = __DIR__ . '/../database/' . $file;
@@ -41,7 +41,7 @@ foreach ($schemas as $file) {
 // ——— Then Truncate the Tables ———
 echo "🧹 Truncating tables…\n";
 // Truncate in FK-safe order (child to parent)
-foreach (['booking', 'flights', 'planets', 'ticekts', 'users'] as $table) {
+foreach (['tickets', 'bookings', 'flights', 'planets', 'users'] as $table) {
   $pdo->exec("TRUNCATE TABLE {$table} RESTART IDENTITY CASCADE;");
 }
 echo "✅ Tables truncated successfully.\n";

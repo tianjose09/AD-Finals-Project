@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS public."users" (
     contact_num VARCHAR(11),
     username VARCHAR(225) NOT NULL UNIQUE,
     role VARCHAR(20) NOT NULL CHECK (role IN ('admin', 'client')),
-    passport_img BYTEA, --for passport images
+    passport_img BYTEA,
     flight_id UUID REFERENCES flights(id)
 );
