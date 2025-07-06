@@ -25,10 +25,10 @@ foreach (['booking', 'flights', 'planets', 'tickets', 'users'] as $table) {
 
 // ✅ Apply updated schemas
 $schemas = [
-  'users.model.sql',
-  'booking.model.sql',
-  'flights.model.sql',
   'planets.model.sql',
+  'users.model.sql',
+  'flights.model.sql',
+  'booking.model.sql',
   'tickets.model.sql',
 ];
 
