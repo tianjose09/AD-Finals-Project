@@ -36,16 +36,14 @@ $stmt = $pdo->prepare("
     contact_num,
     username,
     role,
-    passport_img,
-    flight_id
+    passport_img
   ) VALUES (
     :fullname,
     :password,
     :contact_num,
     :username,
     :role,
-    :passport_img,
-    :flight_id
+    :passport_img
   )
 ");
 
@@ -57,7 +55,6 @@ foreach ($users as $u) {
   $stmt->bindValue(':username', $u['username']);
   $stmt->bindValue(':role', $u['role']);
   $stmt->bindValue(':passport_img', $u['passport_img'], PDO::PARAM_LOB);
-  $stmt->bindValue(':flight_id', $u['flight_id']);
   $stmt->execute();
 }
 
@@ -85,14 +82,12 @@ foreach ($planets as $p) {
 
 $flightStmt = $pdo->prepare("
   INSERT INTO public.\"flights\" (
-    planet_id,
     departure_time,
     return_time,
     capacity,
     price,
     package_type
   ) VALUES (
-    :planet_id,
     :departure_time,
     :return_time,
     :capacity,
@@ -103,7 +98,6 @@ $flightStmt = $pdo->prepare("
 
 foreach ($flights as $f) {
   $flightStmt->execute([
-    ':planet_id' => $f['planet_id'],
     ':departure_time' => $f['departure_time'],
     ':return_time' => $f['return_time'],
     ':capacity' => $f['capacity'],
@@ -115,16 +109,12 @@ foreach ($flights as $f) {
 
 $bookingStmt = $pdo->prepare("
   INSERT INTO public.\"bookings\" (
-    user_id,
-    flight_id,
     travel_date,
     seat_number,
     ticket_code,
     status,
     feedback
   ) VALUES (
-    :user_id,
-    :flight_id,
     :travel_date,
     :seat_number,
     :ticket_code,
@@ -133,10 +123,8 @@ $bookingStmt = $pdo->prepare("
   ) RETURNING id
 ");
 
-foreach ($bookings as $b) {
+foreach ($booking as $b) {
   $bookingStmt->execute([
-    ':user_id' => $b['user_id'],
-    ':flight_id' => $b['flight_id'],
     ':travel_date' => $b['travel_date'],
     ':seat_number' => $b['seat_number'],
     ':ticket_code' => $b['ticket_code'],
@@ -148,15 +136,11 @@ foreach ($bookings as $b) {
 
 $ticketStmt = $pdo->prepare("
   INSERT INTO public.\"tickets\" (
-    booking_id,
-    flight_id,
     flight_number,
     launch_pad,
     gate,
     qr_code
   ) VALUES (
-    :booking_id,
-    :flight_id,
     :flight_number,
     :launch_pad,
     :gate,
@@ -166,8 +150,6 @@ $ticketStmt = $pdo->prepare("
 
 foreach ($tickets as $t) {
   $ticketStmt->execute([
-    ':booking_id' => $t['booking_id'],
-    ':flight_id' => $t['flight_id'],
     ':flight_number' => $t['flight_number'],
     ':launch_pad' => $t['launch_pad'],
     ':gate' => $t['gate'],
