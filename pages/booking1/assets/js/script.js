@@ -33,3 +33,18 @@ function validatePassengerInput() {
   if (count < 1) count = 1;
   input.value = count;
 }
+
+document.getElementById('swapBtn').addEventListener('click', () => {
+  const from = document.getElementById('from');
+  const to = document.getElementById('to');
+  const temp = from.value;
+  from.value = to.value;
+  to.value = temp;
+});
+
+function proceedToBooking() {
+  const confirmBooking = confirm("Do you want to continue to booking?");
+  if (confirmBooking) {
+    window.location.href = "booking.html";
+  }
+}
