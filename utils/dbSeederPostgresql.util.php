@@ -48,16 +48,16 @@ $stmt = $pdo->prepare("
 
 
 foreach ($users as $u) {
-  $stmt->bindValue(':passport_img', $u['passport_img'], PDO::PARAM_LOB); // <-- bind image with PARAM_LOB
-  $stmt->execute([
-    ':fullname' => $u['fullname'],
-    ':password' => password_hash($u['password'], PASSWORD_DEFAULT),
-    ':contact_num' => $u['contact_num'],
-    ':username' => $u['username'],
-    ':role' => $u['role'],
-    ':flight_id' => $u['flight_id'],
-  ]);
+  $stmt->bindValue(':fullname', $u['fullname']);
+  $stmt->bindValue(':password', password_hash($u['password'], PASSWORD_DEFAULT));
+  $stmt->bindValue(':contact_num', $u['contact_num']);
+  $stmt->bindValue(':username', $u['username']);
+  $stmt->bindValue(':role', $u['role']);
+  $stmt->bindValue(':passport_img', $u['passport_img'], PDO::PARAM_LOB);
+  $stmt->bindValue(':flight_id', $u['flight_id']);
+  $stmt->execute();
 }
+
 
 
 $planetStmt = $pdo->prepare("
@@ -73,12 +73,12 @@ $planetStmt = $pdo->prepare("
 ");
 
 foreach ($planets as $p) {
+  $planetStmt->bindValue(':name', $p['name']);
+  $planetStmt->bindValue(':distance_from_earth', $p['distance_from_earth']);
   $planetStmt->bindValue(':planet_img', $p['planet_img'], PDO::PARAM_LOB);
-  $planetStmt->execute([
-    ':name' => $p['name'],
-    ':distance_from_earth' => $p['distance_from_earth'],
-  ]);
+  $planetStmt->execute();
 }
+
 
 $flightStmt = $pdo->prepare("
   INSERT INTO public.\"flights\" (
