@@ -18,3 +18,33 @@
       <div class="nav-item"><div class="nav-icon"><img src="aboutus.png" /></div><span class="nav-text">About Us</span></div>
     </div>
   </nav>
+
+  <div class="stars" id="stars"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <main class="main-content">
+    <div class="booking-wrapper">
+      <img src="bookinghero.png" class="bg-image" alt="Flight UI Background" draggable="false"/>
+      <div class="form-overlay">
+        <div class="from-to-wrapper">
+          <div class="field">
+            <label for="from">From</label>
+            <input type="text" id="from" name="from" placeholder="Select Departure" list="planetList" />
+          </div>
+          <div class="swap-container">
+            <button class="swap" id="swapBtn">⇄</button>
+          </div>
+          <div class="field">
+            <label for="to">To</label>
+            <input type="text" id="to" name="to" placeholder="Select Destination" list="planetList" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="date">Date</label>
+            <input type="date" id="date" />
+          </div>
+        </div>
