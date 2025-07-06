@@ -9,23 +9,11 @@ footer {
     min-height: 8vh;
     position: relative;
     
-    /* Ultra-dark cosmic background */
-    background: 
-        /* Deep space black base */
-        radial-gradient(ellipse at center, 
-            rgba(22, 22, 44, 0.95) 0%, 
-            rgba(15, 15, 44, 0.98) 100%),
-        /* Subtle cosmic purple/blue glow */
-        linear-gradient(135deg, 
-            rgba(60, 30, 120, 0.15) 0%, 
-            rgba(30, 60, 120, 0.1) 100%);
-    
-    /* Stronger vignette effect */
+    background-color: rgba(26, 26, 46, 0.8);
     box-shadow: 
-        inset 60px 0 90px -40px rgba(0, 0, 0, 0.9), /* Left edge */
-        inset -60px 0 90px -40px rgba(0, 0, 0, 0.9); /* Right edge */
-    
-    /* Glowing center highlight (more subtle) */
+        inset 60px 0 90px -40px rgba(0, 0, 0, 0.9),
+        inset -60px 0 90px -40px rgba(0, 0, 0, 0.9);
+ 
     &::after {
         content: '';
         position: absolute;
