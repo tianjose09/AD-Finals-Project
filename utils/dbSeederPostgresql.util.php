@@ -48,16 +48,17 @@ $stmt = $pdo->prepare("
 
 
 foreach ($users as $u) {
+  $stmt->bindValue(':passport_img', $u['passport_img'], PDO::PARAM_LOB); // <-- bind image with PARAM_LOB
   $stmt->execute([
     ':fullname' => $u['fullname'],
     ':password' => password_hash($u['password'], PASSWORD_DEFAULT),
     ':contact_num' => $u['contact_num'],
     ':username' => $u['username'],
     ':role' => $u['role'],
-    ':passport_img' => $u['passport_img'],
     ':flight_id' => $u['flight_id'],
   ]);
 }
+
 
 $planetStmt = $pdo->prepare("
   INSERT INTO public.\"planets\" (
@@ -72,10 +73,10 @@ $planetStmt = $pdo->prepare("
 ");
 
 foreach ($planets as $p) {
+  $planetStmt->bindValue(':planet_img', $p['planet_img'], PDO::PARAM_LOB);
   $planetStmt->execute([
     ':name' => $p['name'],
     ':distance_from_earth' => $p['distance_from_earth'],
-    ':planet_img' => $p['planet_img'], 
   ]);
 }
 
