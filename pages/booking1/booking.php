@@ -83,8 +83,9 @@
     <option value="Callisto"><option value="Io"><option value="Triton">
   </datalist>
 
+  <div class="flights-container">
   <h2 class="flights-header">Available Interplanetary Flights</h2>
-  <table class="flights-table">
+  <table class="flights-table"></table>
     <thead>
       <tr>
         <th>Planet→Planet</th>
@@ -162,6 +163,22 @@
       </tr>
     </tbody>
   </table>
+  <!--FOOTER-->
+    <footer>
+        <div id="foot-logo">
+            <img src="assets/footer/img/TED_LOGOwBG.png" alt="Teddiursa Airlines Logo" draggable="false">
+        </div>
+
+        <div class="foot-text">
+            <div id="foot-tagline">
+                Not Just a Flight. A Leap Into the Universe.
+            </div>
+            <div id="foot-contInfo">
+                <h3>Contact Information:</h3>
+                <p><i>teddairlines@gmail.com  |  0912-343-5352</i></p>
+            </div>
+        </div>
+    </footer>
 
   <script src="scripts.js"></script>
 </body>
