@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS public.flights (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  planet_id INT REFERENCES planets(id),
+  planet_id UUID REFERENCES planets(id),
   departure_time TIMESTAMP,
   return_time TIMESTAMP,
   capacity INT,

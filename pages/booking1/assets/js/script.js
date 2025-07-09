@@ -1,22 +1,34 @@
+// Twinkling stars
 function createStars() {
   const starsContainer = document.getElementById('stars');
-  for (let i = 0; i < 120; i++) {
+  const starsCount = 150;
+  
+  for (let i = 0; i < starsCount; i++) {
     const star = document.createElement('div');
     star.classList.add('star');
+    
+    // Random size between 1-3px
     const size = Math.random() * 2 + 1;
-    star.style.width = size + "px";
-    star.style.height = size + "px";
-    star.style.left = (Math.random() * 100) + "%";
-    star.style.top = (Math.random() * 100) + "%";
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    
+    // Random position
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 100}%`;
+    
+    // Random animation duration and delay
     const duration = Math.random() * 5 + 3;
     const delay = Math.random() * 5;
     const opacity = Math.random() * 0.7 + 0.3;
-    star.style.setProperty('--duration', duration + "s");
+    
+    star.style.setProperty('--duration', `${duration}s`);
     star.style.setProperty('--opacity', opacity);
-    star.style.animationDelay = delay + "s";
+    star.style.animationDelay = `${delay}s`;
+    
     starsContainer.appendChild(star);
   }
 }
+
 window.addEventListener('load', createStars);
 
 function updatePassengers(change) {
@@ -48,3 +60,6 @@ function proceedToBooking() {
     window.location.href = "booking.html";
   }
 }
+
+// Continue with the rest of the `validateForm`, `updateProgressBar`, etc.
+// (Paste the entire content from the `main` branch here as needed.)

@@ -1,15 +1,24 @@
 <?php
 
+function loadImageOrFail(string $filename): string {
+  $path = IMAGES_PATH . '/' . $filename;
+
+  if (!file_exists($path)) {
+    throw new RuntimeException("❌ Image file not found: $path");
+  }
+
+  return file_get_contents($path);
+}
 
 return [
   [
     'fullname' => 'John Doe',
-    'password' => 'Admin@123', 
+    'password' => 'Admin@123',
     'contact_num' => '09171234567',
     'username' => 'kirkgt',
     'role' => 'admin',
-    'passport_img' => file_get_contents(IMAGES_PATH . '/kirk.jpg'),
-    'flight_id' => null, 
+    'passport_img' => loadImageOrFail('kirk.jpg'),
+    'flight_id' => null,
   ],
   [
     'fullname' => 'Tony Smith',
@@ -17,7 +26,7 @@ return [
     'contact_num' => '09180001111',
     'username' => 'tony',
     'role' => 'client',
-    'passport_img' => file_get_contents(IMAGES_PATH . '/tony.jpg'),
+    'passport_img' => loadImageOrFail('tony.jpg'),
     'flight_id' => null,
   ],
   [
@@ -26,7 +35,7 @@ return [
     'contact_num' => '09223334444',
     'username' => 'peter',
     'role' => 'client',
-    'passport_img' => file_get_contents(IMAGES_PATH . '/peter.jpg'),
+    'passport_img' => loadImageOrFail('peter.jpg'),
     'flight_id' => null,
   ],
   [
@@ -35,7 +44,7 @@ return [
     'contact_num' => '09998887777',
     'username' => 'bruce',
     'role' => 'client',
-    'passport_img' => file_get_contents(IMAGES_PATH . '/bruce.jpg'),
+    'passport_img' => loadImageOrFail('bruce.jpg'),
     'flight_id' => null,
   ],
   [
@@ -44,7 +53,7 @@ return [
     'contact_num' => '09179998888',
     'username' => 'clark',
     'role' => 'client',
-    'passport_img' => file_get_contents(IMAGES_PATH . '/clark.jpg'),
+    'passport_img' => loadImageOrFail('clark.jpg'),
     'flight_id' => null,
   ],
 ];
