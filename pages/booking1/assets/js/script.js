@@ -7,16 +7,13 @@ function createStars() {
     const star = document.createElement('div');
     star.classList.add('star');
     
-    // Random size between 1-3px
     const size = Math.random() * 2 + 1;
     star.style.width = `${size}px`;
     star.style.height = `${size}px`;
     
-    // Random position
     star.style.left = `${Math.random() * 100}%`;
     star.style.top = `${Math.random() * 100}%`;
     
-    // Random animation duration and delay
     const duration = Math.random() * 5 + 3;
     const delay = Math.random() * 5;
     const opacity = Math.random() * 0.7 + 0.3;
@@ -28,9 +25,9 @@ function createStars() {
     starsContainer.appendChild(star);
   }
 }
-
 window.addEventListener('load', createStars);
 
+// Passenger controls
 function updatePassengers(change) {
   const input = document.getElementById('passengerCount');
   let count = parseInt(input.value) || 1;
@@ -46,6 +43,7 @@ function validatePassengerInput() {
   input.value = count;
 }
 
+// Swap from/to destinations
 document.getElementById('swapBtn').addEventListener('click', () => {
   const from = document.getElementById('from');
   const to = document.getElementById('to');
@@ -54,12 +52,10 @@ document.getElementById('swapBtn').addEventListener('click', () => {
   to.value = temp;
 });
 
+// Booking confirmation
 function proceedToBooking() {
   const confirmBooking = confirm("Do you want to continue to booking?");
   if (confirmBooking) {
     window.location.href = "booking.html";
   }
 }
-
-// Continue with the rest of the `validateForm`, `updateProgressBar`, etc.
-// (Paste the entire content from the `main` branch here as needed.)
