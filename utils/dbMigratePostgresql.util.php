@@ -25,23 +25,30 @@ foreach (['booking', 'flights', 'planets', 'tickets', 'users'] as $table) {
 
 // ✅ Apply updated schemas
 $schemas = [
+  'planets.model.sql',
+  'flights.model.sql',
   'users.model.sql',
   'booking.model.sql',
-  'flights.model.sql',
-  'planets.model.sql',
   'tickets.model.sql',
 ];
 
 foreach ($schemas as $file) {
   $path = BASE_PATH . '/database/' . $file;
   echo "📄 Applying schema from {$path}…\n";
+
   $sql = file_get_contents($path);
   if ($sql === false) {
     throw new RuntimeException("❌ Could not read {$path}");
-  } else {
-    echo "✅ Creation Success from {$path}\n";
   }
-  $pdo->exec($sql);
+
+  try {
+    $pdo->exec($sql);
+    echo "✅ Creation Success from {$path}\n";
+  } catch (PDOException $e) {
+    echo "❌ ERROR while processing {$file}:\n" . $e->getMessage() . "\n";
+    exit(1); // Stop the script after the first error
+  }
 }
+
 
 echo "🎉 Migration complete!\n";
