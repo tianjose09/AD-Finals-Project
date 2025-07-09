@@ -49,4 +49,3 @@
         window.location.href = "booking.html";
       }
     }
-
