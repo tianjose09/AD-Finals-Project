@@ -53,7 +53,7 @@
     </nav>
 
 
-    <!--ABOUT US-->
+    <!--ABOUT USS-->
     <div class="cont-aboutUs">
         <img src="assets/img/Banner_Aboutus.png" alt="About Us Banner" draggable="false">
 
