@@ -372,3 +372,49 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Passenger Modal -->
+    <div class="modal-overlay" id="editPassengerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">EDIT PASSENGER</h3>
+                <button class="modal-close" onclick="closeModal('editPassengerModal')">×</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" id="editPassengerName" placeholder="Enter passenger's full name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" id="editPassengerEmail" placeholder="Enter passenger's email">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contact Number</label>
+                <input type="tel" class="form-input" id="editPassengerContact" placeholder="Enter contact number">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Birthday</label>
+                <input type="date" class="form-input" id="editPassengerBirthday">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nationality</label>
+                <input type="text" class="form-input" id="editPassengerNationality" placeholder="Enter nationality">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Passport Number</label>
+                <input type="text" class="form-input" id="editPassengerPassport" placeholder="Enter passport number">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Passenger Type</label>
+                <select class="form-input" id="editPassengerType">
+                    <option value="economy">Economy</option>
+                    <option value="business">Business Class</option>
+                    <option value="first">First Class</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('editPassengerModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="updatePassenger()">Update Passenger</button>
+            </div>
+        </div>
+    </div>
