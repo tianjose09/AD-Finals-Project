@@ -54,3 +54,59 @@
             </div>
         </div>
     </nav>
+
+    <div class="admin-container">
+        <h2 class="page-title">Manage Destinations</h2>
+
+        <div class="destinations-grid">
+            <!-- Destination Card 1 -->
+            <div class="destination-card">
+                <img src="images/MARS.png" alt="Mars Colony" class="card-image">
+                <div class="card-content">
+                    <h3 class="planet-name">MARS</h3>
+                    <p class="card-detail">Experience the red planet's breathtaking landscapes in our luxury biodomes.</p>
+                    <p class="card-detail"><strong>Price:</strong> $25,000</p>
+                    <p class="card-detail"><strong>Duration:</strong> 14 Earth days</p>
+                    <p class="card-detail"><strong>Gravity:</strong> 0.38g</p>
+                </div>
+                <button class="action-btn" onclick="toggleMenu(1)">✎</button>
+                <div class="action-menu" id="menu-1">
+                    <div class="menu-item" onclick="openEditModal(1)">Edit Destination</div>
+                    <div class="menu-item" onclick="openDeleteModal(1)">Delete Destination</div>
+                </div>
+            </div>
+
+            <!-- Destination Card 2 -->
+            <div class="destination-card">
+                <img src="images/JUPITER.png" alt="Jupiter View" class="card-image">
+                <div class="card-content">
+                    <h3 class="planet-name">JUPITER</h3>
+                    <p class="card-detail">Witness the gas giant's majestic storms from our orbital observation deck.</p>
+                    <p class="card-detail"><strong>Price:</strong> $42,000</p>
+                    <p class="card-detail"><strong>Duration:</strong> 21 Earth days</p>
+                    <p class="card-detail"><strong>Gravity:</strong> Microgravity</p>
+                </div>
+                <button class="action-btn" onclick="toggleMenu(2)">✎</button>
+                <div class="action-menu" id="menu-2">
+                    <div class="menu-item" onclick="openEditModal(2)">Edit Destination</div>
+                    <div class="menu-item" onclick="openDeleteModal(2)">Delete Destination</div>
+                </div>
+            </div>
+
+            <!-- Destination Card 3 -->
+            <div class="destination-card">
+                <img src="images/SATURN.png" alt="Saturn Rings" class="card-image">
+                <div class="card-content">
+                    <h3 class="planet-name">SATURN</h3>
+                    <p class="card-detail">Fly through the iconic rings in our shielded observation craft.</p>
+                    <p class="card-detail"><strong>Price:</strong> $58,000</p>
+                    <p class="card-detail"><strong>Duration:</strong> 30 Earth days</p>
+                    <p class="card-detail"><strong>Gravity:</strong> Microgravity</p>
+                </div>
+                <button class="action-btn" onclick="toggleMenu(3)">✎</button>
+                <div class="action-menu" id="menu-3">
+                    <div class="menu-item" onclick="openEditModal(3)">Edit Destination</div>
+                    <div class="menu-item" onclick="openDeleteModal(3)">Delete Destination</div>
+                </div>
+            </div>
+        </div>
