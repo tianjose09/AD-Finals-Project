@@ -235,3 +235,78 @@
             </button>
         </div>
     </div>
+    <!-- Add Destination Modal -->
+    <div class="modal-overlay" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">ADD NEW DESTINATION</h3>
+                <button class="modal-close" onclick="closeModal('addModal')">×</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Destination Name</label>
+                <input type="text" class="form-input" placeholder="Enter destination name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea class="form-input" rows="3" placeholder="Enter destination description"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Price</label>
+                <input type="text" class="form-input" placeholder="Enter price">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Duration</label>
+                <input type="text" class="form-input" placeholder="Enter duration">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Gravity</label>
+                <input type="text" class="form-input" placeholder="Enter gravity information">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Image URL</label>
+                <input type="text" class="form-input" placeholder="Enter image URL">
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('addModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="saveDestination()">Save Destination</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Destination Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">EDIT DESTINATION</h3>
+                <button class="modal-close" onclick="closeModal('editModal')">×</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Destination Name</label>
+                <input type="text" class="form-input" id="editName" placeholder="Enter destination name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea class="form-input" id="editDesc" rows="3" placeholder="Enter destination description"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Price</label>
+                <input type="text" class="form-input" id="editPrice" placeholder="Enter price">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Duration</label>
+                <input type="text" class="form-input" id="editDuration" placeholder="Enter duration">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Gravity</label>
+                <input type="text" class="form-input" id="editGravity" placeholder="Enter gravity information">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Image URL</label>
+                <input type="text" class="form-input" id="editImage" placeholder="Enter image URL">
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('editModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="updateDestination()">Update Destination</button>
+            </div>
+        </div>
+    </div>
