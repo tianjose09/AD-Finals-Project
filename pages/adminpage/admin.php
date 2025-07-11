@@ -310,3 +310,20 @@
             </div>
         </div>
     </div>
+<!-- Delete Destination Confirmation Modal -->
+    <div class="modal-overlay confirmation-modal" id="deleteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">CONFIRM DELETION</h3>
+                <button class="modal-close" onclick="closeModal('deleteModal')">×</button>
+            </div>
+            <p class="confirmation-text">
+                Are you sure you want to permanently delete this destination?<br>
+                This action cannot be undone.
+            </p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('deleteModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="confirmDelete()">Delete Destination</button>
+            </div>
+        </div>
+    </div>
