@@ -116,3 +116,26 @@
                 <span>+</span> New Cosmic Destination
             </button>
         </div>
+
+    <!-- Flight Schedule Control Section -->
+        <h2 class="page-title flight-schedule-title">Flight Schedule Control</h2>
+        
+        <form id="scheduleForm">
+            <div class="flight-container">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Destination (Planet/Moon)</label>
+                        <select name="destination" required>
+                            <option value="">Select Destination</option>
+                            <optgroup label="Planets">
+                                <option>Mercury</option>
+                                <option>Venus</option>
+                                <option>Earth</option>
+                                <option>Mars</option>
+                                <option>Jupiter</option>
+                                <option>Saturn</option>
+                                <option>Uranus</option>
+                                <option>Neptune</option>
+                                <option>Moon</option>
+                        </select>
+                    </div>
