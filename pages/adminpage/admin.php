@@ -165,3 +165,8 @@
                     </div>
                 </div>
             </div>
+            <!-- Submit Button OUTSIDE the rounded box -->
+            <div class="submit-container">
+                <button type="submit" class="submit-btn">Update Schedule</button>
+            </div>
+        </form>
