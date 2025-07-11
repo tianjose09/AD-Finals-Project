@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teddiursa Airlines - Admin</title>
+    <title>Admin Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/pages/adminpage/styles.css">
 </head>
 <body>
     <!-- Twinkling Stars Background -->
@@ -21,34 +21,34 @@
     <nav class="navbar">
         <!-- Logo -->
         <div class="logo">
-            <img src="images/LOGO White.png" alt="Teddiursa Airlines Logo" draggable="false">
+            <img src="/assets/img/LOGO White.png" alt="Teddiursa Airlines Logo" draggable="false">
         </div>
         
         <div class="nav-items-container">
             <div class="nav-item">
                 <div class="nav-icon">
-                    <img src="images/account.png" alt="Account" draggable="false">
+                    <img src="/assets/img/account.png" alt="Account" draggable="false">
                 </div>
                 <span class="nav-text">Account</span>
             </div>
             
             <div class="nav-item">
                 <div class="nav-icon">
-                    <img src="images/explore.png" alt="Explore" draggable="false">
+                    <img src="/assets/img/explore.png" alt="Explore" draggable="false">
                 </div>
                 <span class="nav-text">Explore</span>
             </div>
 
             <div class="nav-item">
                 <div class="nav-icon">
-                    <img src="images/book.png" alt="Book a trip" draggable="false">
+                    <img src="/assets/img/book.png" alt="Book a trip" draggable="false">
                 </div>
                 <span class="nav-text">Book a trip</span>
             </div>
 
             <div class="nav-item">
                 <div class="nav-icon">
-                    <img src="images/aboutus.png" alt="About Us" draggable="false">
+                    <img src="/assets/img/aboutus.png" alt="About Us" draggable="false">
                     </div>
                 <span class="nav-text">About Us</span>
             </div>
@@ -61,7 +61,7 @@
         <div class="destinations-grid">
             <!-- Destination Card 1 -->
             <div class="destination-card">
-                <img src="images/MARS.png" alt="Mars Colony" class="card-image">
+                <img src="/assets/img/MARS.png" alt="Mars " class="card-image">
                 <div class="card-content">
                     <h3 class="planet-name">MARS</h3>
                     <p class="card-detail">Experience the red planet's breathtaking landscapes in our luxury biodomes.</p>
@@ -78,7 +78,7 @@
 
             <!-- Destination Card 2 -->
             <div class="destination-card">
-                <img src="images/JUPITER.png" alt="Jupiter View" class="card-image">
+                <img src="/assets/img/JUPITER.png" alt="Jupiter " class="card-image">
                 <div class="card-content">
                     <h3 class="planet-name">JUPITER</h3>
                     <p class="card-detail">Witness the gas giant's majestic storms from our orbital observation deck.</p>
@@ -95,7 +95,7 @@
 
             <!-- Destination Card 3 -->
             <div class="destination-card">
-                <img src="images/SATURN.png" alt="Saturn Rings" class="card-image">
+                <img src="/assets/img/SATURN.png" alt="Saturn " class="card-image">
                 <div class="card-content">
                     <h3 class="planet-name">SATURN</h3>
                     <p class="card-detail">Fly through the iconic rings in our shielded observation craft.</p>
@@ -516,6 +516,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="/pages/adminpage/script.js"></script>
 </body>
 </html>
