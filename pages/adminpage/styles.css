@@ -582,3 +582,193 @@ body {
     margin-bottom: 6rem;
     line-height: 1.6;
 }
+/* Flight Schedule Control - Interstellar Theme */
+.flight-container {
+    background: rgba(16, 16, 42, 0.7);
+    padding: 30px 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(79, 163, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    margin-bottom: 30px;
+}
+
+/* Added this style for the flight schedule title */
+.page-title.flight-schedule-title {
+    margin-top: 100px;
+    text-align: center;
+    display: block;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #4FA3FF;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(79, 163, 255, 0.3);
+    border-radius: 12px;
+    font-size: 14px;
+    color: #E0E0FF;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #FF7DEE;
+    box-shadow: 0 0 10px rgba(255, 125, 238, 0.3);
+}
+
+/* Modified the submit container to center the button */
+.submit-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 40px 0; /* Added margin-bottom */
+    padding: 20px 0;
+}
+
+.submit-btn {
+    padding: 12px 25px;
+    background: linear-gradient(to right, #4FA3FF, #6C4DF6);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(108, 77, 246, 0.4);
+}
+
+.submit-btn:hover {
+    background: linear-gradient(to right, #3e92e6, #5b3df5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(108, 77, 246, 0.6);
+}
+
+optgroup {
+    color: #FF7DEE;
+    font-style: normal;
+}
+
+option {
+    color: #E0E0FF;
+    background-color: #1A1A2E;
+}
+
+/* Passenger Management Styles */
+.passengers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.passenger-card {
+    background: rgba(16, 16, 42, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(79, 163, 255, 0.3);
+    transition: all 0.4s ease;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    padding: 1.5rem;
+}
+
+.passenger-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+        0 15px 35px rgba(79, 163, 255, 0.2),
+        0 0 30px rgba(108, 77, 246, 0.1);
+    border-color: rgba(255, 125, 238, 0.5);
+}
+
+.passenger-card .card-content {
+    position: relative;
+    padding: 0;
+}
+
+.passenger-card .card-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #4FA3FF;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.passenger-card .card-detail {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    color: rgba(224, 224, 255, 0.9);
+    line-height: 1.5;
+}
+
+.passenger-card .card-detail strong {
+    color: #FF7DEE;
+    font-weight: normal;
+}
+
+.passenger-card .action-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    width: auto;
+    height: auto;
+    background: transparent;
+    color: #E0E0FF;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    z-index: 2;
+    padding: 0.2rem;
+}
+
+.passenger-card .action-btn:hover {
+    color: #FF7DEE;
+    transform: scale(1.2);
+}
+
+.passenger-card .action-menu {
+    position: absolute;
+    top: 55px;
+    right: 25px;
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid rgba(79, 163, 255, 0.5);
+    border-radius: 8px;
+    padding: 0.7rem 0;
+    min-width: 150px;
+    display: none;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.passenger-card .action-menu.show {
+    display: block;
+    animation: cosmicFadeIn 0.3s ease-out;
+}
