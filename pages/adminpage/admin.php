@@ -139,3 +139,29 @@
                                 <option>Moon</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input type="time" name="time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Capacity</label>
+                        <input type="number" name="capacity" placeholder="Enter seats" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select name="status" required>
+                            <option>Onboard</option>
+                            <option>Delayed</option>
+                            <option>Cancelled</option>
+                            <option>Scheduled</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
