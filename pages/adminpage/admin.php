@@ -327,3 +327,48 @@
             </div>
         </div>
     </div>
+    <!-- Add Passenger Modal -->
+    <div class="modal-overlay" id="addPassengerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">ADD NEW PASSENGER</h3>
+                <button class="modal-close" onclick="closeModal('addPassengerModal')">×</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" placeholder="Enter passenger's full name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" placeholder="Enter passenger's email">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contact Number</label>
+                <input type="tel" class="form-input" placeholder="Enter contact number">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Birthday</label>
+                <input type="date" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nationality</label>
+                <input type="text" class="form-input" placeholder="Enter nationality">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Passport Number</label>
+                <input type="text" class="form-input" placeholder="Enter passport number">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Passenger Type</label>
+                <select class="form-input">
+                    <option value="economy">Economy</option>
+                    <option value="business">Business Class</option>
+                    <option value="first">First Class</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('addPassengerModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="savePassenger()">Add Passenger</button>
+            </div>
+        </div>
+    </div>
