@@ -110,3 +110,9 @@
                 </div>
             </div>
         </div>
+
+        <div class="add-btn-container">
+            <button class="add-btn" onclick="openAddModal()">
+                <span>+</span> New Cosmic Destination
+            </button>
+        </div>
