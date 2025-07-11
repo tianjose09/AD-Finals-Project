@@ -499,3 +499,23 @@
             </table>
         </div>
     </div>
+    <!--FOOTER-->
+    <footer>
+        <div id="foot-logo">
+            <img src="images/LOGO Transparent.png" alt="Teddiursa Airlines Logo" draggable="false">
+        </div>
+
+        <div class="foot-text">
+            <div id="foot-tagline">
+                Not Just a Flight. A Leap Into the Universe.
+            </div>
+            <div id="foot-contInfo">
+                <h3>Contact Information:</h3>
+                <p><i>teddairlines@gmail.com  |  0912-343-5352</i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
