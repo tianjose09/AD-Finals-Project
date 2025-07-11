@@ -418,3 +418,21 @@
             </div>
         </div>
     </div>
+    <!-- Delete Passenger Confirmation Modal -->
+    <div class="modal-overlay confirmation-modal" id="deletePassengerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">CONFIRM PASSENGER DELETION</h3>
+                <button class="modal-close" onclick="closeModal('deletePassengerModal')">×</button>
+            </div>
+            <p class="confirmation-text">
+                Are you sure you want to permanently delete this passenger record?<br>
+                All associated data will be removed and this action cannot be undone.
+            </p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('deletePassengerModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="confirmPassengerDelete()">Delete Passenger</button>
+            </div>
+        </div>
+    </div>
+
