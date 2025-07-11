@@ -225,3 +225,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="action-buttons-container">
+            <button class="action-btn-large secondary-btn" onclick="openModal('allPassengersModal')">
+                <span></span> View All Passengers
+            </button>
+            <button class="action-btn-large" onclick="openPassengerAddModal()">
+                <span></span> Add New Passenger
+            </button>
+        </div>
+    </div>
