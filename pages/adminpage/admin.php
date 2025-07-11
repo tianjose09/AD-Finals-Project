@@ -436,3 +436,66 @@
         </div>
     </div>
 
+<!-- All Passengers Modal -->
+    <div class="modal-overlay all-passengers-modal" id="allPassengersModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">ALL PASSENGERS</h3>
+                <button class="modal-close" onclick="closeModal('allPassengersModal')">×</button>
+            </div>
+            <table class="passengers-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>JOHN SMITH</td>
+                        <td><span class="type-indicator type-business">BUSINESS CLASS</span></td>
+                        <td>john.smith@example.com</td>
+                        <td>+1 (555) 123-4567</td>
+                    </tr>
+                    <tr>
+                        <td>MARIA GARCIA</td>
+                        <td><span class="type-indicator type-economy">ECONOMY</span></td>
+                        <td>maria.garcia@example.com</td>
+                        <td>+34 600 123 456</td>
+                    </tr>
+                    <tr>
+                        <td>LI WEI</td>
+                        <td><span class="type-indicator type-first">FIRST CLASS</span></td>
+                        <td>li.wei@example.com</td>
+                        <td>+86 138 1234 5678</td>
+                    </tr>
+                    <tr>
+                        <td>EMMA JOHNSON</td>
+                        <td><span class="type-indicator type-business">BUSINESS CLASS</span></td>
+                        <td>emma.j@example.com</td>
+                        <td>+44 7700 900123</td>
+                    </tr>
+                    <tr>
+                        <td>AHMED KHAN</td>
+                        <td><span class="type-indicator type-economy">ECONOMY</span></td>
+                        <td>ahmed.k@example.com</td>
+                        <td>+971 50 123 4567</td>
+                    </tr>
+                    <tr>
+                        <td>SOFIA MÜLLER</td>
+                        <td><span class="type-indicator type-first">FIRST CLASS</span></td>
+                        <td>sofia.m@example.com</td>
+                        <td>+49 151 12345678</td>
+                    </tr>
+                    <tr>
+                        <td>JAMES WILSON</td>
+                        <td><span class="type-indicator type-economy">ECONOMY</span></td>
+                        <td>james.w@example.com</td>
+                        <td>+61 412 345 678</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
