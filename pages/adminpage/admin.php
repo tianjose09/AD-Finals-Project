@@ -170,3 +170,58 @@
                 <button type="submit" class="submit-btn">Update Schedule</button>
             </div>
         </form>
+<!-- Passenger Management Section -->
+        <h2 class="page-title">Passenger Management</h2>
+
+        <div class="passengers-grid">
+            <!-- Passenger Card 1 -->
+            <div class="passenger-card">
+                <div class="card-content">
+                    <h3 class="card-title">JOHN SMITH <span class="type-indicator type-business">BUSINESS CLASS</span></h3>
+                    <p class="card-detail"><strong>Email:</strong> john.smith@example.com</p>
+                    <p class="card-detail"><strong>Contact:</strong> +1 (555) 123-4567</p>
+                    <p class="card-detail"><strong>Birthday:</strong> 05/15/1985</p>
+                    <p class="card-detail"><strong>Nationality:</strong> United States</p>
+                    <p class="card-detail"><strong>Passport:</strong> US12345678</p>
+                </div>
+                <button class="action-btn" onclick="togglePassengerMenu(1)">⋮</button>
+                <div class="action-menu" id="passenger-menu-1">
+                    <div class="menu-item" onclick="openPassengerEditModal(1)">Edit Passenger</div>
+                    <div class="menu-item" onclick="openPassengerDeleteModal(1)">Delete Passenger</div>
+                </div>
+            </div>
+
+            <!-- Passenger Card 2 -->
+            <div class="passenger-card">
+                <div class="card-content">
+                    <h3 class="card-title">MARIA GARCIA <span class="type-indicator type-economy">ECONOMY</span></h3>
+                    <p class="card-detail"><strong>Email:</strong> maria.garcia@example.com</p>
+                    <p class="card-detail"><strong>Contact:</strong> +34 600 123 456</p>
+                    <p class="card-detail"><strong>Birthday:</strong> 11/22/1990</p>
+                    <p class="card-detail"><strong>Nationality:</strong> Spain</p>
+                    <p class="card-detail"><strong>Passport:</strong> ES98765432</p>
+                </div>
+                <button class="action-btn" onclick="togglePassengerMenu(2)">⋮</button>
+                <div class="action-menu" id="passenger-menu-2">
+                    <div class="menu-item" onclick="openPassengerEditModal(2)">Edit Passenger</div>
+                    <div class="menu-item" onclick="openPassengerDeleteModal(2)">Delete Passenger</div>
+                </div>
+            </div>
+
+            <!-- Passenger Card 3 -->
+            <div class="passenger-card">
+                <div class="card-content">
+                    <h3 class="card-title">LI WEI <span class="type-indicator type-first">FIRST CLASS</span></h3>
+                    <p class="card-detail"><strong>Email:</strong> li.wei@example.com</p>
+                    <p class="card-detail"><strong>Contact:</strong> +86 138 1234 5678</p>
+                    <p class="card-detail"><strong>Birthday:</strong> 03/08/2015</p>
+                    <p class="card-detail"><strong>Nationality:</strong> China</p>
+                    <p class="card-detail"><strong>Passport:</strong> CN87654321</p>
+                </div>
+                <button class="action-btn" onclick="togglePassengerMenu(3)">⋮</button>
+                <div class="action-menu" id="passenger-menu-3">
+                    <div class="menu-item" onclick="openPassengerEditModal(3)">Edit Passenger</div>
+                    <div class="menu-item" onclick="openPassengerDeleteModal(3)">Delete Passenger</div>
+                </div>
+            </div>
+        </div>
