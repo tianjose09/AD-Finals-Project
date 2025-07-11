@@ -393,3 +393,52 @@ body {
 .menu-item:hover::before {
     opacity: 1;
 }
+/* Supernova Add Button */
+.add-btn-container {
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #6C4DF6 0%, #FF7DEE 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(108, 77, 246, 0.4);
+}
+
+.add-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 25px rgba(108, 77, 246, 0.6),
+        0 0 20px rgba(255, 125, 238, 0.4);
+    letter-spacing: 2px;
+}
+
+.add-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0) 60%);
+    transform: rotate(30deg);
+    transition: all 0.5s ease;
+}
+
+.add-btn:hover::before {
+    left: 100%;
+}
