@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/pages/login/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
 </head>
 <body>
     <div class="corner-star" style="top: 20px; left: 20px; animation-delay: 0s;"></div>
@@ -46,6 +47,6 @@
         </div>
     </div>
 
-    <script src="/assets/js/script.js"></script>
+    <script src="/pages/login/js/script.js"></script>
 </body>
 </html>
