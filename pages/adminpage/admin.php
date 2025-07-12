@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/pages/adminpage/styles.css">
+    <link rel="stylesheet" href="/pages/adminpage/css/styles.css">
 </head>
 <body>
     <!-- Twinkling Stars Background -->
@@ -516,6 +516,6 @@
         </div>
     </footer>
 
-    <script src="/pages/adminpage/script.js"></script>
+    <script src="/pages/adminpage/js/script.js"></script>
 </body>
 </html>
