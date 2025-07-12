@@ -7,6 +7,7 @@
     <title>Admin Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/pages/adminpage/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
 </head>
 <body>
     <!-- Twinkling Stars Background -->
