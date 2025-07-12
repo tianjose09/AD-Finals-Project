@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rocket Loading Page</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Teddiursa Airlines</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
+    <link rel="stylesheet" href="/pages/loading page/css/style.css" />
 </head>
 <body>
     <div class="stars" id="stars"></div>
@@ -17,6 +18,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="/pages/loading page/js/script.js"></script>
 </body>
 </html>
