@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Teddiursa Airlines</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/pages/booking1/assets/css/styles.css">
+  <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
 </head>
 <body>
 
@@ -180,6 +181,6 @@
         </div>
     </footer>
 
-  <script src="scripts.js"></script>
+  <script src="/pages/booking1/assets/js/script.js"></script>
 </body>
 </html>
