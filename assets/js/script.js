@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (result.success) {
             alert(`Welcome ${result.fullname}! Redirecting to ${result.role} dashboard...`);
-            window.location.href = result.role === 'admin' ? '/pages/admin/dashboard.php' : '/pages/client/home.php';
+            window.location.href = result.role === 'admin' ? '/pages/adminpage/admin.php' : '/pages/ClientMain/ClientMain.php';
         } else {
             alert(result.message);
         }

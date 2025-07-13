@@ -50,6 +50,7 @@
   margin-left: 100px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 #header img {
@@ -282,4 +283,93 @@
 .cont-attire img{
     height: 40rem;
     width: auto;
+}
+
+ .account-item {
+            position: relative;
+        }
+
+        .account-dropdown {
+            position: absolute;
+            left: 100px;
+            top: 0;
+            width: 240px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(10px);
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .account-item.active .account-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .account-item.active .nav-text {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .account-header {
+            background: linear-gradient(135deg, #6C4DF6 0%, #4d2fcf 100%);
+            padding: 18px;
+            color: white;
+        }
+
+        .account-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .account-email {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .account-divider {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.08);
+            margin: 0;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            color: #6C4DF6;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .logout-btn:hover {
+            background: rgba(108, 77, 246, 0.08);
+        }
+
+        .logout-icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        #explore-section {
+    scroll-margin-top: 100px; /* adjust based on navbar height */
 }

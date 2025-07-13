@@ -8,3 +8,5 @@ CREATE TABLE IF NOT EXISTS public."users" (
     passport_img BYTEA,
     flight_id UUID REFERENCES flights(id)
 );
+
+
