@@ -4,10 +4,11 @@
 /* ---------- DATABASE CONNECTION ---------- */
 function connectDB(): PDO
 {
-    $host     = 'postgresql';
-    $port     = '5432';
+
+    $host     = 'host.docker.internal';
+    $port     = '5112';
     $dbname   = 'finaldatabase';
-    $user     = 'username';
+    $user     = 'user';
     $password = 'password';
 
     $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
