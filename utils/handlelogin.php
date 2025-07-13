@@ -4,6 +4,7 @@
 /* ---------- DATABASE CONNECTION ---------- */
 function connectDB(): PDO
 {
+
     $host     = 'host.docker.internal';
     $port     = '5112';
     $dbname   = 'finaldatabase';

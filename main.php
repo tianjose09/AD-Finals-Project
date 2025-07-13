@@ -42,6 +42,7 @@
             
             <div class="register-link">
                 Don't have an account? <a href="/pages/signup/signup.php">Register</a>
+
             </div>
         </div>
     </div>
