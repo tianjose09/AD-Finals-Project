@@ -43,10 +43,10 @@
                 <input type="password" id="password" placeholder="Create a password">
             </div>
             
-            <button class="signup-btn">Sign Up</button>
+            <button type="button" class="signup-btn">Sign Up</button>
             
             <div class="login-link">
-                Already have an account? <a href="login.html">Login</a>
+                Already have an account? <a href="login-btn">Login</a>
             </div>
         </div>
     </div>
