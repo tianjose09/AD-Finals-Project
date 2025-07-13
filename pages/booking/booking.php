@@ -17,6 +17,6 @@
         <!-- [Rest of your HTML content remains exactly the same] -->
     </div>
 
-    <script src="script.js"></script>
+    <script src="/pages/booking/assets/js/script.js"></script>
 </body>
 </html>

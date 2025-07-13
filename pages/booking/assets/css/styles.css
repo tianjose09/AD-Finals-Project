@@ -1,4 +1,4 @@
-
+/* Base Styles */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: #1A1A2E;
@@ -13,6 +13,7 @@ body {
     position: relative;
 }
 
+/* Background Elements */
 .stars {
     position: fixed;
     top: 0;
@@ -97,23 +98,34 @@ body {
     padding: 28px 32px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     background: linear-gradient(90deg, rgba(108, 77, 246, 0.1) 0%, rgba(79, 163, 255, 0.05) 100%);
+    text-align: center;
 }
 
 .form-title {
-    color: #4FA3FF;
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 700;
     margin: 0;
     letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #6C4DF6 0%, #FF7DEE 50%, #4FA3FF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 /* Progress Bar */
+.progress-container {
+    position: relative;
+    margin: 20px 32px;
+}
+
 .progress-bar {
     height: 4px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 2px;
-    margin: 20px 32px;
     overflow: hidden;
+    position: relative;
+    cursor: pointer;
 }
 
 .progress-fill {
@@ -124,7 +136,6 @@ body {
     border-radius: 2px;
 }
 
-/* Progress Steps */
 .progress-steps {
     display: flex;
     padding: 0 32px;
@@ -149,6 +160,7 @@ body {
     align-items: center;
     z-index: 2;
     flex: 1;
+    cursor: pointer;
 }
 
 .step-circle {
@@ -238,6 +250,7 @@ input[type="text"],
 input[type="date"],
 input[type="email"],
 input[type="tel"],
+input[type="number"],
 select {
     width: 100%;
     padding: 12px 5px;
@@ -455,6 +468,35 @@ input::placeholder {
     color: #FF7DEE;
     margin-top: 0;
     margin-bottom: 12px;
+}
+
+/* Cash Payment Styles */
+.payment-amount {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.amount-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.amount-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+.amount-value {
+    color: white;
+    font-weight: 500;
+}
+
+.change-value {
+    color: #6C4DF6;
+    font-weight: 600;
 }
 
 /* Success Checkmark */
