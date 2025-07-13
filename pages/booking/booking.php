@@ -19,9 +19,12 @@
         </div>
 
         <!-- Progress Bar -->
-        <div class="progress-bar">
-            <div class="progress-fill" id="progress-fill"></div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
         </div>
+
 
         <!-- Progress Steps -->
         <div class="progress-steps">
