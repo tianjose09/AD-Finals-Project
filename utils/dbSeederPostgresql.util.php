@@ -86,19 +86,23 @@ $planetStmt = $pdo->prepare("
   INSERT INTO public.\"planets\" (
     name,
     distance_from_earth,
-    planet_img
+    description,
+    price
   ) VALUES (
     :name,
     :distance_from_earth,
-    :planet_img
+    :description,
+    :price
   )
 ");
 
 foreach ($planets as $p) {
-  $planetStmt->bindValue(':name', $p['name']);
-  $planetStmt->bindValue(':distance_from_earth', $p['distance_from_earth']);
-  $planetStmt->bindValue(':planet_img', $p['planet_img'], PDO::PARAM_LOB);
-  $planetStmt->execute();
+  $planetStmt->execute([
+    ':name' => $p['name'],
+    ':distance_from_earth' => $p['distance_from_earth'],
+    ':description' => $p['description'],
+    ':price' => $p['price'],
+  ]);
 }
 
 $flightStmt = $pdo->prepare("
