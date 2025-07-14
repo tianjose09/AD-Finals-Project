@@ -10,4 +10,5 @@ define('ERRORS_PATH', BASE_PATH . '/errors');
 define('HANDLERS_PATH', BASE_PATH . '/handlers');
 define('DUMMIES_PATH', BASE_PATH . '/staticDatas/dummies');
 define('IMAGES_PATH', BASE_PATH . '/assets/img');
+define('LANDING_PATH', BASE_PATH);
 chdir(BASE_PATH);

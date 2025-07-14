@@ -1,0 +1,118 @@
+.cont-aboutUs{
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding-left: 120px;
+    box-sizing: border-box;
+    margin-bottom: 3rem;
+}
+    .cont-aboutUs img{
+        height:37rem;
+    }
+
+    #au-text h2{
+        font-size: 1.5rem;
+        font-weight: 600;
+        font-family: 'Times New Roman', Times, serif;
+        background: linear-gradient(
+            145deg,
+            #ffffff 40%,
+            #d7dee7 60%,
+            #6C4DF6 80%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow:
+            0 0 8px rgba(255, 255, 255, 0.4),
+            0 0 15px rgba(108, 77, 246, 0.2);
+        display: inline-block;
+        padding: 0 8px;
+        letter-spacing: 0.8px;
+        position: relative;
+        margin-bottom: 50px;
+    }
+    #au-text p{
+        font-size: 1.2rem;
+    }
+
+
+/*DIVIDER*/
+.dvdr img{
+    height: 6.5rem;
+    width: auto;
+    margin-left: -1.5rem;
+}
+
+/*TEAM*/
+.team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.team h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    background: linear-gradient(
+        145deg,
+        #ffffff 40%,
+        #d7dee7 60%,
+        #6C4DF6 80%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.4),
+        0 0 15px rgba(108, 77, 246, 0.2);
+    display: inline-block;
+    padding: 0 8px;
+    letter-spacing: 0.8px;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.team-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+#calalay, #emit, #guinto {
+    flex: 0 0 calc(33.333% - 2rem);
+    max-width: 300px;
+}
+
+#sadicon, #tan {
+    flex: 0 0 calc(50% - 2rem);
+    max-width: 400px;
+}
+
+.team img {
+    width: auto;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: -1rem;
+}
+
+.team h3 {
+    margin-bottom: -1rem;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.team p {
+    color: #d7dee7;
+}
+
