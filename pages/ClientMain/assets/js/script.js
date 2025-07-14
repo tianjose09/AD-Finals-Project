@@ -121,6 +121,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.logo img');   // or `.logo`
+    if (logo) {
+        logo.style.cursor = 'pointer';                  // optional – shows it’s clickable
+        logo.addEventListener('click', () => {
+            window.location.href = '/pages/ClientMain/ClientMain.php';
+        });
+    }
+});
+
 // Scroll to Explore section
 const exploreNav = document.getElementById('explore-nav');
 if (exploreNav) {
