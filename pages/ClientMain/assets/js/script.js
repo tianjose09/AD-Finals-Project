@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const bookNav = document.getElementById('book-nav');
     if (bookNav) {
         bookNav.addEventListener('click', function () {
-            window.location.href = '/pages/booking/booking.php';
+            window.location.href = '/pages/booking1/booking.php';
         });
     }
 });
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const bookBtn = document.getElementById('btn-book');
     if (bookBtn) {
         bookBtn.addEventListener('click', function () {
-            window.location.href = '/pages/booking/booking.php';
+            window.location.href = '/pages/booking1/booking.php';
         });
     }
 });
