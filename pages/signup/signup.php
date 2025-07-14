@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +15,7 @@
     <div class="signup-wrapper">
         <div class="logo-container">
             <div class="logo">
-                <img src="LOGO Transparent.png" alt="Logo">
+                <img src="/assets/img/LOGO Transparent.png" alt="Logo">
             </div>
         </div>
         

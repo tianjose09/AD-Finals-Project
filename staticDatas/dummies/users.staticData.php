@@ -1,15 +1,5 @@
 <?php
 
-function loadImageOrFail(string $filename): string {
-  $path = IMAGES_PATH . '/' . $filename;
-
-  if (!file_exists($path)) {
-    throw new RuntimeException("❌ Image file not found: $path");
-  }
-
-  return file_get_contents($path);
-}
-
 return [
   [
     'fullname' => 'John Doe',
@@ -17,8 +7,13 @@ return [
     'contact_num' => '09171234567',
     'username' => 'kirkgt',
     'role' => 'admin',
-    'passport_img' => loadImageOrFail('kirk.jpg'),
     'flight_id' => null,
+    'passport_image' => [
+      'filename' => 'kirk.jpg',
+      'filepath' => '/assets/img/kirk.jpg',
+      'mimetype' => 'image/jpeg',
+      'size_bytes' => filesize(IMAGES_PATH . '/kirk.jpg'),
+    ],
   ],
   [
     'fullname' => 'Tony Smith',
@@ -26,8 +21,13 @@ return [
     'contact_num' => '09180001111',
     'username' => 'tony',
     'role' => 'client',
-    'passport_img' => loadImageOrFail('tony.jpg'),
     'flight_id' => null,
+    'passport_image' => [
+      'filename' => 'tony.jpg',
+      'filepath' => '/assets/img/tony.jpg',
+      'mimetype' => 'image/jpeg',
+      'size_bytes' => filesize(IMAGES_PATH . '/tony.jpg'),
+    ],
   ],
   [
     'fullname' => 'Peter Gayle',
@@ -35,8 +35,13 @@ return [
     'contact_num' => '09223334444',
     'username' => 'peter',
     'role' => 'client',
-    'passport_img' => loadImageOrFail('peter.jpg'),
     'flight_id' => null,
+    'passport_image' => [
+      'filename' => 'peter.jpg',
+      'filepath' => '/assets/img/peter.jpg',
+      'mimetype' => 'image/jpeg',
+      'size_bytes' => filesize(IMAGES_PATH . '/peter.jpg'),
+    ],
   ],
   [
     'fullname' => 'Bruce Clarks',
@@ -44,8 +49,13 @@ return [
     'contact_num' => '09998887777',
     'username' => 'bruce',
     'role' => 'client',
-    'passport_img' => loadImageOrFail('bruce.jpg'),
     'flight_id' => null,
+    'passport_image' => [
+      'filename' => 'bruce.jpg',
+      'filepath' => '/assets/img/bruce.jpg',
+      'mimetype' => 'image/jpeg',
+      'size_bytes' => filesize(IMAGES_PATH . '/bruce.jpg'),
+    ],
   ],
   [
     'fullname' => 'Clark Johnson',
@@ -53,7 +63,12 @@ return [
     'contact_num' => '09179998888',
     'username' => 'clark',
     'role' => 'client',
-    'passport_img' => loadImageOrFail('clark.jpg'),
     'flight_id' => null,
+    'passport_image' => [
+      'filename' => 'clark.jpg',
+      'filepath' => '/assets/img/clark.jpg',
+      'mimetype' => 'image/jpeg',
+      'size_bytes' => filesize(IMAGES_PATH . '/clark.jpg'),
+    ],
   ],
 ];
