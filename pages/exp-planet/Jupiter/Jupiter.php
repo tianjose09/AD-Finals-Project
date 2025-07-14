@@ -7,68 +7,20 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore: Jupiter</title>
 
-    <link rel="stylesheet" href="assets/navbar/css/navbar.css">
+    <link rel="stylesheet" href="/components/templates/navbar/assets/css/navbar.css">
+    <link rel="stylesheet" href="/components/templates/footer/assets/css/footer.css">
+
     <link rel="stylesheet" href="assets/css/bg.css">
-    <link rel="stylesheet" href="assets/footer/css/footer.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
 
 </head>
 <body>
    
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <!-- Logo -->
-        <div class="logo">
-            <img src="assets/navbar/img/TED_LOGO_White.png" alt="Teddiursa Airlines Logo" draggable="false">
-        </div>
-        
-        <div class="nav-item account-item">
-                <div class="nav-icon">
-                    <img src="assets/navbar/img/Profile.png" alt="Account" draggable="false">
-                </div>
-                <span class="nav-text">Account</span>
-        <div class="account-dropdown">
-                    <div class="account-header">
-                        
-                        <div class="account-name"><?= htmlspecialchars($user['fullname'] ?? 'Client') ?></div>
-                        
-
-
-                    </div>
-                    <div class="account-divider"></div>
-                    <button class="logout-btn">
-                        <svg class="logout-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17 16L21 12M21 12L17 8M21 12H7M13 16V17C13 18.6569 11.6569 20 10 20H6C4.34315 20 3 18.6569 3 17V7C3 5.34315 4.34315 4 6 4H10C11.6569 4 13 5.34315 13 7V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        LOG OUT
-                    </button>
-                </div>
-            </div>
-            
-            <div class="nav-item" id="explore-nav">
-                <div class="nav-icon">
-                    <img src="assets/navbar/img/Explore.png" alt="Explore" draggable="false">
-                </div>
-                <span class="nav-text">Explore</span>
-            </div>
-
-            <div class="nav-item" id="book-nav">
-    <div class="nav-icon">
-        <img src="assets/navbar/img/Book.png" alt="Book a trip" draggable="false">
-    </div>
-    <span class="nav-text">Book a trip</span>
-</div>
-
-
-            <div class="nav-item" id="about-nav">
-    <div class="nav-icon">
-        <img src="assets/navbar/img/AboutUs.png" alt="About Us" draggable="false">
-    </div>
-    <span class="nav-text">About Us</span>
-</div>
-    </nav>
-
+    <!--NAVBAR-->
+    <?php
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/navbar/navbar.template.php';
+    ?>
 
     <!--EXPLORE-->
     <div class="cont-explr">
@@ -101,21 +53,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
 
 
     <!--FOOTER-->
-    <footer>
-        <div id="foot-logo">
-            <img src="assets/footer/img/TED_LOGOwBG.png" alt="Teddiursa Airlines Logo" draggable="false">
-        </div>
-
-        <div class="foot-text">
-            <div id="foot-tagline">
-                Not Just a Flight. A Leap Into the Universe.
-            </div>
-            <div id="foot-contInfo">
-                <h3>Contact Information:</h3>
-                <p><i>teddairlines@gmail.com  |  0912-343-5352</i></p>
-            </div>
-        </div>
-    </footer>
+    <?php
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/footer/footer.template.php';
+    ?>
     <!--BACKGROUND-->
     <div class="stars" id="stars"></div>
     <div class="blob blob-1"></div>

@@ -11,7 +11,7 @@
 <body>
     <footer>
     <div id="logo">
-        <img src="assets/img/TED_LOGOwBG.png" alt="Teddiursa Airlines Logo" draggable="false">
+        <img src="/components/templates/footer/assets/img/TED_LOGOwBG.png" alt="Teddiursa Airlines Logo" draggable="false">
     </div>
 
     <div class="text">
