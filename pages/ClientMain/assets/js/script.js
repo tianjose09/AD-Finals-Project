@@ -96,32 +96,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-            const accountItem = document.querySelector('.account-item');
-            
-    
-            accountItem.addEventListener('click', function(e) {
-                e.stopPropagation();
-                this.classList.toggle('active');
-            });
-       
-            document.addEventListener('click', function(e) {
-                if (!accountItem.contains(e.target)) {
-                    accountItem.classList.remove('active');
-                }
-            });
-            
-            // Handle logout button click
-            const logoutBtn = document.querySelector('.logout-btn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', function() {
-                    window.location.href = '/main.php?logout=1';
-                    alert('Logging out...');
-                });
-            }
+document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.logo img');   // or `.logo`
+    if (logo) {
+        logo.style.cursor = 'pointer';                  // optional – shows it’s clickable
+        logo.addEventListener('click', () => {
+            window.location.href = '/pages/ClientMain/ClientMain.php';
         });
-
-// Scroll to Explore section
+    }
+});
+    // Scroll to Explore section
 const exploreNav = document.getElementById('explore-nav');
 if (exploreNav) {
     exploreNav.addEventListener('click', () => {
