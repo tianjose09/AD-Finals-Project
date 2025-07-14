@@ -41,6 +41,7 @@
 
             <button class="login-btn" onclick="window.location.href='/pages/ClientMain/ClientMain.php'">Login</button>
 
+
             <div class="register-link">
                 Don't have an account? <a href="/pages/signup/signup.php">Register</a>
             </div>
@@ -48,5 +49,6 @@
     </div>
 
     <script src="/pages/login/js/script.js"></script>
+    // checking for QA
 </body>
 </html>
