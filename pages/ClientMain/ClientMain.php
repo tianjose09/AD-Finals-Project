@@ -12,7 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
 
     <link rel="stylesheet" href="/components/templates/navbar/assets/css/navbar.css">
     <link rel="stylesheet" href="/components/templates/footer/assets/css/footer.css">
-    
+
     <link rel="stylesheet" href="assets/css/bg.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
@@ -107,9 +107,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
         <div id="fun-text">FUN FACTS!</div>
 
         <div id="fun-image">
-            <div id="ff1"><img src="assets/img/FunFacts (1).png" alt="Fun Fact #1" draggable="false"></div>
-            <div id="ff2"><img src="assets/img/FunFacts (2).png" alt="Fun Fact #2" draggable="false"></div>
-            <div id="ff3"><img src="assets/img/FunFacts (3).png" alt="Fun Fact #3" draggable="false"></div>
+            <div id="ff1"><img src="/pages/ClientMain/assets/img/FunFacts (1).png" alt="Fun Fact #1" draggable="false"></div>
+            <div id="ff2"><img src="/pages/ClientMain/assets/img/FunFacts (2).png" alt="Fun Fact #2" draggable="false"></div>
+            <div id="ff3"><img src="/pages/ClientMain/assets/img/FunFacts (3).png" alt="Fun Fact #3" draggable="false"></div>
         </div>
     </div>
 
@@ -132,6 +132,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
     <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/footer/footer.template.php';
     ?>
+    
     <!--BACKGROUND-->
     <div class="stars" id="stars"></div>
     <div class="blob blob-1"></div>
