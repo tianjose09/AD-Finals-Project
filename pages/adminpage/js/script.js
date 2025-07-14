@@ -1,70 +1,175 @@
-// Create twinkling stars
-function createStars() {
-    const starsContainer = document.getElementById('stars');
-    const starsCount = 200;
-    
-    for (let i = 0; i < starsCount; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        
-        // Random size between 1 and 3px
-        const size = Math.random() * 2 + 1;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        
-        // Random position
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        
-        // Random opacity (between 0.3 and 0.8)
-        const opacity = Math.random() * 0.5 + 0.3;
-        star.style.setProperty('--opacity', opacity);
-        
-        // Random animation duration (between 2 and 5 seconds)
-        const duration = Math.random() * 3 + 2;
-        star.style.setProperty('--duration', `${duration}s`);
-        
-        // Random delay (between 0 and 5 seconds)
-        const delay = Math.random() * 5;
-        star.style.animationDelay = `${delay}s`;
-        
-        starsContainer.appendChild(star);
-    }
-}
+  // Create twinkling stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 200;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random size between 1 and 3px
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Random opacity (between 0.3 and 0.8)
+                const opacity = Math.random() * 0.5 + 0.3;
+                star.style.setProperty('--opacity', opacity);
+                
+                // Random animation duration (between 2 and 5 seconds)
+                const duration = Math.random() * 3 + 2;
+                star.style.setProperty('--duration', `${duration}s`);
+                
+                // Random delay (between 0 and 5 seconds)
+                const delay = Math.random() * 5;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
 
-// Call the function when the page loads
-window.addEventListener('load', createStars);
+        // Carousel functionality
+        let currentSlide = 0;
+        const carousel = document.getElementById('carousel');
+        const cards = document.querySelectorAll('.destination-card');
+        const dotsContainer = document.getElementById('dots-container');
+        const totalSlides = Math.ceil(cards.length / 3); // Showing 3 cards at a time
+
+        // Initialize dots
+        function initDots() {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Update dots
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Go to specific slide
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            const offset = -currentSlide * 100;
+            carousel.style.transform = `translateX(${offset}%)`;
+            updateDots();
+        }
+
+        // Next slide
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+            } else {
+                currentSlide = 0;
+            }
+            goToSlide(currentSlide);
+        }
+
+        // Previous slide
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+            } else {
+                currentSlide = totalSlides - 1;
+            }
+            goToSlide(currentSlide);
+        }
+
+        // Call the function when the page loads
+        window.addEventListener('load', function() {
+    createStars();
+    initDots();
+    
+    // Set up auto-rotation for the carousel
+    let carouselInterval = setInterval(nextSlide, 5000);
+    
+    // Pause auto-rotation when hovering over carousel
+    const carouselWrapper = document.querySelector('.destinations-carousel');
+    carouselWrapper.addEventListener('mouseenter', () => {
+        clearInterval(carouselInterval);
+    });
+    
+    carouselWrapper.addEventListener('mouseleave', () => {
+        carouselInterval = setInterval(nextSlide, 5000);
+    });
+});
 
 // Current destination being edited/deleted
 let currentDestinationId = null;
 const destinationData = {
     1: {
-        name: "MARS COLONY",
-        description: "Experience the red planet's breathtaking landscapes in our luxury biodomes.",
-        price: "$25,000",
-        duration: "14 Earth days",
-        gravity: "0.38g",
-        image: "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=800"
+        name: "MERCURY",
+        description: "Explore the closest planet to the Sun with our heat-resistant observation pods.",
+        price: "$35,000",
+        distance: "91 million km"
     },
     2: {
-        name: "JUPITER ORBIT",
-        description: "Witness the gas giant's majestic storms from our orbital observation deck.",
-        price: "$42,000",
-        duration: "21 Earth days",
-        gravity: "Microgravity",
-        image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800"
+        name: "VENUS",
+        description: "Float above the acidic clouds in our specialized atmospheric stations.",
+        price: "$38,000",
+        distance: "41 million km"
     },
     3: {
-        name: "SATURN RINGS",
+        name: "EARTH",
+        description: "Rediscover your home planet from our exclusive orbital resorts.",
+        price: "$15,000",
+        distance: "0 km"
+    },
+    4: {
+        name: "MARS",
+        description: "Experience the red planet's breathtaking landscapes in our luxury biodomes.",
+        price: "$25,000",
+        distance: "78 million km"
+    },
+    5: {
+        name: "JUPITER",
+        description: "Witness the gas giant's majestic storms from our orbital observation deck.",
+        price: "$42,000",
+        distance: "628 million km"
+    },
+    6: {
+        name: "SATURN",
         description: "Fly through the iconic rings in our shielded observation craft.",
         price: "$58,000",
-        duration: "30 Earth days",
-        gravity: "Microgravity",
-        image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=800"
+        distance: "1.2 billion km"
+    },
+    7: {
+        name: "URANUS",
+        description: "Visit the ice giant and witness its unique sideways rotation.",
+        price: "$65,000",
+        distance: "2.6 billion km"
+    },
+    8: {
+        name: "NEPTUNE",
+        description: "Experience the deep blue winds of our solar system's outermost planet.",
+        price: "$75,000",
+        distance: "4.3 billion km"
+    },
+    9: {
+        name: "MOON",
+        description: "Our closest celestial neighbor with stunning Earthrises and low-gravity fun.",
+        price: "$12,000",
+        distance: "384,400 km"
     }
 };
 
-// Current passenger being edited/deleted
+// Current passenger being edited
 let currentPassengerId = null;
 const passengerData = {
     1: {
@@ -108,6 +213,7 @@ function toggleMenu(id) {
     // Toggle the selected menu
     const menu = document.getElementById('menu-' + id);
     menu.classList.toggle('show');
+    currentDestinationId = id;
 }
 
 // Toggle action menu visibility for passengers
@@ -122,11 +228,13 @@ function togglePassengerMenu(id) {
     // Toggle the selected menu
     const menu = document.getElementById('passenger-menu-' + id);
     menu.classList.toggle('show');
+    currentPassengerId = id;
 }
 
 // Close menus when clicking elsewhere
 document.addEventListener('click', function(e) {
-    if (!e.target.classList.contains('action-btn')) {
+    if (!e.target.classList.contains('action-btn') && 
+        !e.target.closest('.action-menu')) {
         document.querySelectorAll('.action-menu').forEach(menu => {
             menu.classList.remove('show');
         });
@@ -159,9 +267,7 @@ function openEditModal(id) {
     document.getElementById('editName').value = dest.name;
     document.getElementById('editDesc').value = dest.description;
     document.getElementById('editPrice').value = dest.price;
-    document.getElementById('editDuration').value = dest.duration;
-    document.getElementById('editGravity').value = dest.gravity;
-    document.getElementById('editImage').value = dest.image;
+    document.getElementById('editDistance').value = dest.distance;
     
     openModal('editModal');
 }
@@ -181,49 +287,85 @@ function openPassengerEditModal(id) {
     openModal('editPassengerModal');
 }
 
-function openDeleteModal(id) {
-    currentDestinationId = id;
-    openModal('deleteModal');
-}
-
-function openPassengerDeleteModal(id) {
-    currentPassengerId = id;
-    openModal('deletePassengerModal');
-}
-
-function saveDestination() {
-    alert("New destination saved to database");
-    closeModal('addModal');
-}
-
-function savePassenger() {
-    alert("New passenger added successfully");
-    closeModal('addPassengerModal');
-}
-
 function updateDestination() {
-    alert(`Destination ${currentDestinationId} updated successfully`);
+    // Get updated values from form
+    const name = document.getElementById('editName').value;
+    const description = document.getElementById('editDesc').value;
+    const price = document.getElementById('editPrice').value;
+    const distance = document.getElementById('editDuration').value;
+    
+    // Update the destination data
+    destinationData[currentDestinationId] = {
+        ...destinationData[currentDestinationId],
+        name,
+        description,
+        price,
+        distance
+    };
+    
+    // In a real app, you would send this to the server here
+    alert(`Destination ${name} updated successfully!`);
     closeModal('editModal');
 }
 
 function updatePassenger() {
-    alert(`Passenger ${currentPassengerId} updated successfully`);
+    // Get updated values from form
+    const name = document.getElementById('editPassengerName').value;
+    const email = document.getElementById('editPassengerEmail').value;
+    const contact = document.getElementById('editPassengerContact').value;
+    const birthday = document.getElementById('editPassengerBirthday').value;
+    const nationality = document.getElementById('editPassengerNationality').value;
+    const passport = document.getElementById('editPassengerPassport').value;
+    const type = document.getElementById('editPassengerType').value;
+    
+    // Update the passenger data
+    passengerData[currentPassengerId] = {
+        name,
+        email,
+        contact,
+        birthday,
+        nationality,
+        passport,
+        type
+    };
+    
+    // In a real app, you would send this to the server here
+    alert(`Passenger ${name} updated successfully!`);
     closeModal('editPassengerModal');
+    
+    // Refresh the UI (in a real app, you might want to update just the changed card)
+    location.reload();
 }
 
-function confirmDelete() {
-    alert(`Destination ${currentDestinationId} permanently deleted`);
-    closeModal('deleteModal');
-}
-
-function confirmPassengerDelete() {
-    alert(`Passenger ${currentPassengerId} permanently deleted`);
-    closeModal('deletePassengerModal');
+function savePassenger() {
+    // Get values from form
+    const inputs = document.querySelectorAll('#addPassengerModal .form-input');
+    const name = inputs[0].value;
+    
+    // In a real app, you would collect all form data and send to server
+    alert(`New passenger ${name} added successfully!`);
+    closeModal('addPassengerModal');
+    
+    // Refresh the UI (in a real app, you might want to append the new passenger)
+    location.reload();
 }
 
 // Flight Schedule Form Submission
-document.getElementById("scheduleForm").addEventListener("submit", function (e) {
+document.getElementById("scheduleForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    alert("Flight schedule updated successfully!");
-    // Place your actual update logic here
+    
+    // Get form data
+    const formData = new FormData(e.target);
+    const destination = formData.get('destination');
+    
+    // In a real app, you would send this to the server
+    alert(`Flight schedule to ${destination} updated successfully!`);
+    
+    // Reset form
+    e.target.reset();
+});
+
+// Initialize the carousel on window resize
+window.addEventListener('resize', function() {
+    goToSlide(currentSlide);
 });
