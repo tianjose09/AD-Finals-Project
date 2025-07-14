@@ -1,6 +1,6 @@
 <?php
 $requiredRole = 'admin';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/adminpage.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
