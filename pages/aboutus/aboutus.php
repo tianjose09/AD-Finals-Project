@@ -1,3 +1,9 @@
+<?php
+$requiredRole = ['client', 'admin']; // or 'admin' depending on who should access it
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,6 +94,7 @@
 
     <script src="assets/js/bg.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="/components/templates/navbar/assets/js/navbar.js"></script>
 </body>
 
 </html>
