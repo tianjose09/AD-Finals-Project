@@ -9,8 +9,7 @@
 <body>
 
   <nav class="navbar">
-    <div class="logo">
-      <img src="LOGO White.png" alt="Teddiursa Airlines Logo" />
+    <div class="/assets/img/LOGO White.png" alt="Teddiursa Airlines Logo" />
     </div>
     <div class="nav-items-container">
       <div class="nav-item"><div class="nav-icon"><img src="account.png" /></div><span class="nav-text">Account</span></div>
