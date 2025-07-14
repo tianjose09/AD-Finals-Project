@@ -8,3 +8,5 @@ CREATE TABLE IF NOT EXISTS public."users" (
     passport_image_id uuid REFERENCES public."images"(id),
     flight_id UUID REFERENCES flights(id)
 );
+
+
