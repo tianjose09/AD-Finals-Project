@@ -11,34 +11,34 @@
     <nav class="navbar">
         <!-- Logo -->
         <div class="logo">
-            <img src="assets/img/TED_LOGO_White.png" alt="Teddiursa Airlines Logo" draggable="false">
+            <img src="/components/templates/navbar/assets/img/TED_LOGO_White.png" Teddiursa Airlines Logo" draggable="false">
         </div>
         
         <div class="nav-items-container">
             <div class="nav-item">
                 <div class="nav-icon">
-                    <img src="assets/img/Profile.png" alt="Account" draggable="false">
+                    <img src="/components/templates/navbar/assets/img/Profile.png" alt="Account" draggable="false">
                 </div>
                 <span class="nav-text">Account</span>
             </div>
             
             <div class="nav-item">
                 <div class="nav-icon">
-                    <img src="assets/img/Explore.png" alt="Explore" draggable="false">
+                    <img src="/components/templates/navbar/assets/img/Explore.png" alt="Explore" draggable="false">
                 </div>
                 <span class="nav-text">Explore</span>
             </div>
 
             <div class="nav-item">
                 <div class="nav-icon">
-                    <img src="assets/img/Book.png" alt="Book a trip" draggable="false">
+                    <img src="/components/templates/navbar/assets/img/Book.png" alt="Book a trip" draggable="false">
                 </div>
                 <span class="nav-text">Book a trip</span>
             </div>
 
             <div class="nav-item">
                 <div class="nav-icon">
-                    <img src="assets/img/AboutUs.png" alt="About Us" draggable="false">
+                    <img src="/components/templates/navbar/assets/img/AboutUs.png" alt="About Us" draggable="false">
                 </div>
                 <span class="nav-text">About Us</span>
             </div>
