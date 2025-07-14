@@ -13,12 +13,12 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
     <nav class="navbar">
         <!-- Logo -->
         <div class="logo">
-            <img src="assets/navbar/img/TED_LOGO_White.png" alt="Teddiursa Airlines Logo" draggable="false">
+            <img src="/components/templates/navbar/assets/img/TED_LOGO_White.png" alt="Teddiursa Airlines Logo" draggable="false">
         </div>
         
         <div class="nav-item account-item">
                 <div class="nav-icon">
-                    <img src="assets/navbar/img/Profile.png" alt="Account" draggable="false">
+                    <img src="/components/templates/navbar/assets/img/Profile.png" alt="Account" draggable="false">
                 </div>
                 <span class="nav-text">Account</span>
         <div class="account-dropdown">
@@ -41,14 +41,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
             
             <div class="nav-item" id="explore-nav">
                 <div class="nav-icon">
-                    <img src="assets/navbar/img/Explore.png" alt="Explore" draggable="false">
+                    <img src="/components/templates/navbar/assets/img/Explore.png" alt="Explore" draggable="false">
                 </div>
                 <span class="nav-text">Explore</span>
             </div>
 
             <div class="nav-item" id="book-nav">
     <div class="nav-icon">
-        <img src="assets/navbar/img/Book.png" alt="Book a trip" draggable="false">
+        <img src="/components/templates/navbar/assets/img/Book.png" alt="Book a trip" draggable="false">
     </div>
     <span class="nav-text">Book a trip</span>
 </div>
@@ -56,7 +56,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
 
             <div class="nav-item" id="about-nav">
     <div class="nav-icon">
-        <img src="assets/navbar/img/AboutUs.png" alt="About Us" draggable="false">
+        <img src="/components/templates/navbar/assets/img/AboutUs.png" alt="About Us" draggable="false">
     </div>
     <span class="nav-text">About Us</span>
 </div>
