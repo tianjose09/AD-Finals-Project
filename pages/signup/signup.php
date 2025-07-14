@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passenger Details</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Signup</title>
+    <link rel="stylesheet" href="/pages/signup/assets/css/styles.css">
 </head>
 <body>
     <!-- Background Elements -->
@@ -239,6 +239,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="/pages/signup/assets/js/scripts.js"></script>
 </body>
 </html>
