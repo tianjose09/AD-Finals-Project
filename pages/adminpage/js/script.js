@@ -227,3 +227,68 @@ document.getElementById("scheduleForm").addEventListener("submit", function (e) 
     alert("Flight schedule updated successfully!");
     // Place your actual update logic here
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            const accountItem = document.querySelector('.account-item');
+            
+    
+            accountItem.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+            });
+       
+            document.addEventListener('click', function(e) {
+                if (!accountItem.contains(e.target)) {
+                    accountItem.classList.remove('active');
+                }
+            });
+            
+            // Handle logout button click
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    window.location.href = '/main.php';
+                    alert('Logging out...');
+                    // window.location.href = '/logout';
+                });
+            }
+        });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.logo img');   // or `.logo`
+    if (logo) {
+        logo.style.cursor = 'pointer';                  // optional – shows it’s clickable
+        logo.addEventListener('click', () => {
+            window.location.href = '/pages/adminpage/admin.php';
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const exploreBtn = document.getElementById('nav-explore');
+    const destSection = document.getElementById('destinations-section');
+
+    if (exploreBtn && destSection) {
+        exploreBtn.style.cursor = 'pointer';                // optional: show it’s clickable
+        exploreBtn.addEventListener('click', () => {
+            // Smooth‑scroll to the Manage Destinations section
+            destSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    /* --- Book a trip → Flight Schedule Control --- */
+    const bookBtn     = document.getElementById('nav-book');
+    const flightTitle = document.getElementById('flight-schedule-section');
+
+    if (bookBtn && flightTitle) {
+        bookBtn.style.cursor = 'pointer';                  // optional – shows it’s clickable
+        bookBtn.addEventListener('click', () => {
+            flightTitle.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+});
+
+

@@ -95,3 +95,68 @@ document.addEventListener('DOMContentLoaded', function() {
         moveToSlide(currentIndex);
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+            const accountItem = document.querySelector('.account-item');
+            
+    
+            accountItem.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+            });
+       
+            document.addEventListener('click', function(e) {
+                if (!accountItem.contains(e.target)) {
+                    accountItem.classList.remove('active');
+                }
+            });
+            
+            // Handle logout button click
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    window.location.href = '/main.php?logout=1';
+                    alert('Logging out...');
+                });
+            }
+        });
+
+// Scroll to Explore section
+const exploreNav = document.getElementById('explore-nav');
+if (exploreNav) {
+    exploreNav.addEventListener('click', () => {
+        const exploreSection = document.getElementById('explore-section');
+        if (exploreSection) {
+            exploreSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const bookNav = document.getElementById('book-nav');
+    if (bookNav) {
+        bookNav.addEventListener('click', function () {
+            window.location.href = '/pages/booking1/booking.php';
+        });
+    }
+});
+
+// Scroll or redirect to About Us page
+const aboutNav = document.getElementById('about-nav');
+if (aboutNav) {
+    aboutNav.addEventListener('click', () => {
+        window.location.href = '/pages/aboutus/aboutus.php';
+    });
+}
+
+// Redirect to booking page when #header is clicked
+document.addEventListener('DOMContentLoaded', function () {
+    const bookBtn = document.getElementById('btn-book');
+    if (bookBtn) {
+        bookBtn.addEventListener('click', function () {
+            window.location.href = '/pages/booking1/booking.php';
+        });
+    }
+});
+
+
