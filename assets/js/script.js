@@ -24,3 +24,35 @@ document.addEventListener('DOMContentLoaded', function() {
         body.appendChild(star);
     }
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Twinkling stars logic...
+
+    const loginBtn = document.querySelector('.login-btn');
+
+    loginBtn.addEventListener('click', async () => {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+
+        const res = await fetch('/utils/handlelogin.php', {
+
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        const result = await res.json();
+
+        if (result.success) {
+            alert(`Welcome ${result.fullname}! Redirecting to ${result.role} dashboard...`);
+            window.location.href = result.role === 'admin' ? '/pages/adminpage/admin.php' : '/pages/ClientMain/ClientMain.php';
+        } else {
+            alert(result.message);
+        }
+    });
+});
