@@ -1,4 +1,3 @@
-// Twinkling stars
 function createStars() {
     const starsContainer = document.getElementById('stars');
     const starsCount = 150;
@@ -28,9 +27,6 @@ function createStars() {
         starsContainer.appendChild(star);
     }
 }
-
-// Call the function when the page loads
-window.addEventListener('load', createStars);
 
 // Form Validation
 function validateForm() {
@@ -81,24 +77,26 @@ function validateForm() {
     
     // Validate payment section
     if (document.getElementById('payment-section').classList.contains('active')) {
-        const paymentFields = ['card-number', 'expiry-date', 'cvv'];
-        let paymentValid = true;
+        const amountPaid = parseFloat(document.getElementById('amount-paid').value);
+        const totalAmount = 1250.00; // Fixed amount for this demo
         
-        if (document.getElementById('credit-card-method').classList.contains('active')) {
-            paymentFields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                const group = document.getElementById(`${fieldId}-group`);
-                
-                if (!field.value.trim()) {
-                    group.classList.add('error');
-                    paymentValid = false;
-                } else {
-                    group.classList.remove('error');
-                }
-            });
+        if (isNaN(amountPaid)) {
+            document.getElementById('amount-group').classList.add('error');
+            document.getElementById('amount-group').querySelector('.error-message').textContent = 'Please enter a valid amount';
+            isValid = false;
+        } else if (amountPaid < totalAmount) {
+            document.getElementById('amount-group').classList.add('error');
+            document.getElementById('amount-group').querySelector('.error-message').textContent = 'Amount paid is less than total due';
+            isValid = false;
+        } else {
+            document.getElementById('amount-group').classList.remove('error');
+            // Update displayed amounts
+            const change = amountPaid - totalAmount;
+            document.getElementById('display-paid').textContent = `$${amountPaid.toFixed(2)}`;
+            document.getElementById('change-amount').textContent = `$${change.toFixed(2)}`;
         }
         
-        document.getElementById('pay-now-btn').disabled = !paymentValid;
+        document.getElementById('pay-now-btn').disabled = !isValid;
         
         // Update progress bar
         updateProgressBar();
@@ -136,21 +134,11 @@ function updateProgressBar() {
     } else if (document.getElementById('payment-section').classList.contains('active')) {
         progress = 50;
         
-        // If credit card is selected and fields are filled, increase progress
-        if (document.getElementById('credit-card-method').classList.contains('active')) {
-            const paymentFields = ['card-number', 'expiry-date', 'cvv'];
-            let paymentFilled = 0;
-            
-            paymentFields.forEach(fieldId => {
-                if (document.getElementById(fieldId).value.trim()) {
-                    paymentFilled++;
-                }
-            });
-            
-            progress += (paymentFilled / paymentFields.length) * 50;
-        } else {
-            // For other payment methods, assume they're complete
-            progress = 100;
+        // If amount is filled and valid, increase progress
+        const amountPaid = parseFloat(document.getElementById('amount-paid').value);
+        if (!isNaN(amountPaid)) {
+            progress += (amountPaid / 1250) * 50;
+            if (progress > 100) progress = 100;
         }
     } else if (document.getElementById('confirmation-section').classList.contains('active')) {
         progress = 100;
@@ -159,78 +147,151 @@ function updateProgressBar() {
     progressFill.style.width = `${progress}%`;
 }
 
-// Add event listeners for form validation
-document.querySelectorAll('input, select').forEach(element => {
-    element.addEventListener('input', () => {
-        validateForm();
-    });
-});
-
-document.querySelectorAll('input[type="radio"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-        validateForm();
-    });
-});
-
-// Payment method selection
-const paymentMethods = document.querySelectorAll('.payment-method');
-
-paymentMethods.forEach(method => {
-    method.addEventListener('click', function() {
-        paymentMethods.forEach(m => m.classList.remove('active'));
-        this.classList.add('active');
-        validateForm();
-    });
-});
-
-// Navigation between sections
-document.getElementById('next-to-payment').addEventListener('click', function() {
-    if (validateForm()) {
-        document.getElementById('profiling-section').classList.remove('active');
-        document.getElementById('payment-section').classList.add('active');
-        
-        // Update progress steps
-        document.querySelectorAll('.step')[1].classList.remove('active');
-        document.querySelectorAll('.step')[1].classList.add('completed');
-        document.querySelectorAll('.step')[2].classList.add('active');
-        
-        // Update progress bar
-        updateProgressBar();
-    }
-});
-
-document.getElementById('back-to-profiling').addEventListener('click', function() {
-    document.getElementById('payment-section').classList.remove('active');
-    document.getElementById('profiling-section').classList.add('active');
+// Navigate to specific step
+function navigateToStep(stepNumber) {
+    // Don't allow navigation to steps that haven't been completed yet
+    const currentStep = getCurrentStep();
+    if (stepNumber > currentStep) return;
     
-    // Update progress steps
-    document.querySelectorAll('.step')[1].classList.add('active');
-    document.querySelectorAll('.step')[1].classList.remove('completed');
-    document.querySelectorAll('.step')[2].classList.remove('active');
+    // Hide all sections
+    document.querySelectorAll('.form-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Update step indicators
+    document.querySelectorAll('.step').forEach(step => {
+        step.classList.remove('active');
+        if (parseInt(step.dataset.step) < stepNumber) {
+            step.classList.add('completed');
+        } else if (parseInt(step.dataset.step) === stepNumber) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('completed');
+        }
+    });
+    
+    // Show the selected section
+    if (stepNumber === 2) {
+        document.getElementById('profiling-section').classList.add('active');
+    } else if (stepNumber === 3) {
+        document.getElementById('payment-section').classList.add('active');
+    } else if (stepNumber === 4) {
+        document.getElementById('confirmation-section').classList.add('active');
+        
+        // Fill confirmation details if we're going to confirmation
+        if (stepNumber === 4) {
+            const fullName = document.getElementById('full-name').value;
+            const firstName = fullName.split(' ')[0];
+            document.getElementById('confirmed-first-name').textContent = firstName;
+            document.getElementById('confirmed-name').textContent = fullName;
+            document.getElementById('confirmed-email').textContent = document.getElementById('email').value;
+            document.getElementById('confirmed-gender').textContent = document.querySelector('input[name="gender"]:checked').value;
+            document.getElementById('confirmed-nationality').textContent = document.getElementById('nationality').value;
+            document.getElementById('confirmed-phone').textContent = document.getElementById('phone').value;
+            document.getElementById('confirmed-passport').textContent = document.getElementById('passport').value;
+            
+            // Payment details
+            const amountPaid = parseFloat(document.getElementById('amount-paid').value);
+            const totalAmount = 1250.00;
+            const change = amountPaid - totalAmount;
+            document.getElementById('confirmed-amount').textContent = `$${amountPaid.toFixed(2)}`;
+            document.getElementById('confirmed-change').textContent = `$${change.toFixed(2)}`;
+            
+            // Generate random booking reference
+            document.getElementById('booking-ref').textContent = Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000);
+        }
+    }
     
     // Update progress bar
     updateProgressBar();
-});
+}
 
-// Complete payment
-document.getElementById('pay-now-btn').addEventListener('click', function() {
-    if (validateForm()) {
-        document.getElementById('payment-section').classList.remove('active');
-        document.getElementById('confirmation-section').classList.add('active');
-        
-        // Update progress steps
-        document.querySelectorAll('.step')[2].classList.remove('active');
-        document.querySelectorAll('.step')[2].classList.add('completed');
-        document.querySelectorAll('.step')[3].classList.add('active');
-        
-        // Update progress bar
-        updateProgressBar();
-        
-        // Fill confirmation details
-        document.getElementById('confirmed-name').textContent = document.getElementById('full-name').value;
-        document.getElementById('confirmed-email').textContent = document.getElementById('email').value;
-    }
-});
+// Get current step number
+function getCurrentStep() {
+    if (document.getElementById('profiling-section').classList.contains('active')) return 2;
+    if (document.getElementById('payment-section').classList.contains('active')) return 3;
+    if (document.getElementById('confirmation-section').classList.contains('active')) return 4;
+    return 1;
+}
 
-// Initialize progress bar
-updateProgressBar();
+// Calculate step from click position on progress bar
+function getStepFromClick(event) {
+    const progressBar = document.getElementById('progress-bar');
+    const rect = progressBar.getBoundingClientRect();
+    const clickPosition = event.clientX - rect.left;
+    const percentage = (clickPosition / rect.width) * 100;
+    
+    if (percentage < 25) return 1;
+    if (percentage < 50) return 2;
+    if (percentage < 75) return 3;
+    return 4;
+}
+
+// Initialize the application
+function init() {
+    // Create stars when page loads
+    createStars();
+    
+    // Add event listeners for form validation
+    document.querySelectorAll('input, select').forEach(element => {
+        element.addEventListener('input', () => {
+            validateForm();
+        });
+    });
+    
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            validateForm();
+        });
+    });
+    
+    // Real-time update for cash payment display
+    document.getElementById('amount-paid').addEventListener('input', function() {
+        const amountPaid = parseFloat(this.value) || 0;
+        const totalAmount = 1250.00;
+        const change = amountPaid - totalAmount;
+        
+        document.getElementById('display-paid').textContent = `$${amountPaid.toFixed(2)}`;
+        document.getElementById('change-amount').textContent = `$${change.toFixed(2)}`;
+        
+        validateForm();
+    });
+    
+    // Navigation between sections
+    document.getElementById('next-to-payment').addEventListener('click', function() {
+        if (validateForm()) {
+            navigateToStep(3);
+        }
+    });
+    
+    document.getElementById('back-to-profiling').addEventListener('click', function() {
+        navigateToStep(2);
+    });
+    
+    // Complete payment
+    document.getElementById('pay-now-btn').addEventListener('click', function() {
+        if (validateForm()) {
+            navigateToStep(4);
+        }
+    });
+    
+    // Make progress bar clickable
+    document.getElementById('progress-bar').addEventListener('click', function(event) {
+        const step = getStepFromClick(event);
+        navigateToStep(step);
+    });
+    
+    // Make step indicators clickable
+    document.querySelectorAll('.step').forEach(step => {
+        step.addEventListener('click', function() {
+            const stepNumber = parseInt(this.dataset.step);
+            navigateToStep(stepNumber);
+        });
+    });
+    
+    // Initialize progress bar
+    updateProgressBar();
+}
+
+// Start the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', init);

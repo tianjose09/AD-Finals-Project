@@ -2,69 +2,137 @@
 function createStars() {
     const starsContainer = document.getElementById('stars');
     const starsCount = 200;
-    
+
     for (let i = 0; i < starsCount; i++) {
         const star = document.createElement('div');
         star.className = 'star';
-        
-        // Random size between 1 and 3px
+
         const size = Math.random() * 2 + 1;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
-        
-        // Random position
+
         star.style.left = `${Math.random() * 100}%`;
         star.style.top = `${Math.random() * 100}%`;
-        
-        // Random opacity (between 0.3 and 0.8)
+
         const opacity = Math.random() * 0.5 + 0.3;
         star.style.setProperty('--opacity', opacity);
-        
-        // Random animation duration (between 2 and 5 seconds)
+
         const duration = Math.random() * 3 + 2;
         star.style.setProperty('--duration', `${duration}s`);
-        
-        // Random delay (between 0 and 5 seconds)
+
         const delay = Math.random() * 5;
         star.style.animationDelay = `${delay}s`;
-        
+
         starsContainer.appendChild(star);
     }
 }
 
-// Call the function when the page loads
-window.addEventListener('load', createStars);
+// Carousel
+let currentSlide = 0;
+const carousel = document.getElementById('carousel');
+const cards = document.querySelectorAll('.destination-card');
+const dotsContainer = document.getElementById('dots-container');
+const totalSlides = Math.ceil(cards.length / 3);
 
-// Current destination being edited/deleted
+function initDots() {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+}
+
+function updateDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+}
+
+function goToSlide(slideIndex) {
+    currentSlide = slideIndex;
+    const offset = -currentSlide * 100;
+    carousel.style.transform = `translateX(${offset}%)`;
+    updateDots();
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    goToSlide(currentSlide);
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    goToSlide(currentSlide);
+}
+
+window.addEventListener('load', function () {
+    createStars();
+    initDots();
+    let carouselInterval = setInterval(nextSlide, 5000);
+
+    const carouselWrapper = document.querySelector('.destinations-carousel');
+    carouselWrapper.addEventListener('mouseenter', () => clearInterval(carouselInterval));
+    carouselWrapper.addEventListener('mouseleave', () => {
+        carouselInterval = setInterval(nextSlide, 5000);
+    });
+});
+
+window.addEventListener('resize', () => goToSlide(currentSlide));
+
+/* --- DESTINATIONS --- */
 let currentDestinationId = null;
 const destinationData = {
     1: {
-        name: "MARS COLONY",
-        description: "Experience the red planet's breathtaking landscapes in our luxury biodomes.",
-        price: "$25,000",
-        duration: "14 Earth days",
-        gravity: "0.38g",
-        image: "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=800"
+        name: "MERCURY",
+        description: "Explore the closest planet to the Sun with our heat-resistant observation pods.",
+        price: "$35,000",
+        distance: "91 million km"
     },
-    2: {
-        name: "JUPITER ORBIT",
-        description: "Witness the gas giant's majestic storms from our orbital observation deck.",
-        price: "$42,000",
-        duration: "21 Earth days",
-        gravity: "Microgravity",
-        image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800"
-    },
-    3: {
-        name: "SATURN RINGS",
-        description: "Fly through the iconic rings in our shielded observation craft.",
-        price: "$58,000",
-        duration: "30 Earth days",
-        gravity: "Microgravity",
-        image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=800"
+    // ...
+    9: {
+        name: "MOON",
+        description: "Our closest celestial neighbor with stunning Earthrises and low-gravity fun.",
+        price: "$12,000",
+        distance: "384,400 km"
     }
 };
 
-// Current passenger being edited/deleted
+function toggleMenu(id) {
+    document.querySelectorAll('.action-menu').forEach(menu => {
+        if (!menu.id.startsWith('passenger-menu-') && menu.id !== 'menu-' + id) {
+            menu.classList.remove('show');
+        }
+    });
+    document.getElementById('menu-' + id).classList.toggle('show');
+    currentDestinationId = id;
+}
+
+function openEditModal(id) {
+    currentDestinationId = id;
+    const dest = destinationData[id];
+    document.getElementById('editName').value = dest.name;
+    document.getElementById('editDesc').value = dest.description;
+    document.getElementById('editPrice').value = dest.price;
+    document.getElementById('editDistance').value = dest.distance;
+    openModal('editModal');
+}
+
+function updateDestination() {
+    const name = document.getElementById('editName').value;
+    const description = document.getElementById('editDesc').value;
+    const price = document.getElementById('editPrice').value;
+    const distance = document.getElementById('editDistance').value;
+
+    destinationData[currentDestinationId] = { name, description, price, distance };
+    alert(`Destination ${name} updated successfully!`);
+    closeModal('editModal');
+}
+
+/* --- PASSENGERS --- */
 let currentPassengerId = null;
 const passengerData = {
     1: {
@@ -75,65 +143,49 @@ const passengerData = {
         nationality: "United States",
         passport: "US12345678",
         type: "business"
-    },
-    2: {
-        name: "MARIA GARCIA",
-        email: "maria.garcia@example.com",
-        contact: "+34 600 123 456",
-        birthday: "1990-11-22",
-        nationality: "Spain",
-        passport: "ES98765432",
-        type: "economy"
-    },
-    3: {
-        name: "LI WEI",
-        email: "li.wei@example.com",
-        contact: "+86 138 1234 5678",
-        birthday: "2015-03-08",
-        nationality: "China",
-        passport: "CN87654321",
-        type: "first"
     }
+    // ...
 };
 
-// Toggle action menu visibility for destinations
-function toggleMenu(id) {
-    // Hide all menus first
-    document.querySelectorAll('.action-menu').forEach(menu => {
-        if (!menu.id.startsWith('passenger-menu-') && menu.id !== 'menu-' + id) {
-            menu.classList.remove('show');
-        }
-    });
-    
-    // Toggle the selected menu
-    const menu = document.getElementById('menu-' + id);
-    menu.classList.toggle('show');
-}
-
-// Toggle action menu visibility for passengers
 function togglePassengerMenu(id) {
-    // Hide all menus first
     document.querySelectorAll('.action-menu').forEach(menu => {
         if (menu.id !== 'passenger-menu-' + id) {
             menu.classList.remove('show');
         }
     });
-    
-    // Toggle the selected menu
-    const menu = document.getElementById('passenger-menu-' + id);
-    menu.classList.toggle('show');
+    document.getElementById('passenger-menu-' + id).classList.toggle('show');
+    currentPassengerId = id;
 }
 
-// Close menus when clicking elsewhere
-document.addEventListener('click', function(e) {
-    if (!e.target.classList.contains('action-btn')) {
-        document.querySelectorAll('.action-menu').forEach(menu => {
-            menu.classList.remove('show');
-        });
-    }
-});
+function openPassengerEditModal(id) {
+    currentPassengerId = id;
+    const p = passengerData[id];
+    document.getElementById('editPassengerName').value = p.name;
+    document.getElementById('editPassengerEmail').value = p.email;
+    document.getElementById('editPassengerContact').value = p.contact;
+    document.getElementById('editPassengerBirthday').value = p.birthday;
+    document.getElementById('editPassengerNationality').value = p.nationality;
+    document.getElementById('editPassengerPassport').value = p.passport;
+    document.getElementById('editPassengerType').value = p.type;
+    openModal('editPassengerModal');
+}
 
-// Modal functions
+function updatePassenger() {
+    const name = document.getElementById('editPassengerName').value;
+    const email = document.getElementById('editPassengerEmail').value;
+    const contact = document.getElementById('editPassengerContact').value;
+    const birthday = document.getElementById('editPassengerBirthday').value;
+    const nationality = document.getElementById('editPassengerNationality').value;
+    const passport = document.getElementById('editPassengerPassport').value;
+    const type = document.getElementById('editPassengerType').value;
+
+    passengerData[currentPassengerId] = { name, email, contact, birthday, nationality, passport, type };
+    alert(`Passenger ${name} updated successfully!`);
+    closeModal('editPassengerModal');
+    location.reload();
+}
+
+/* --- Modal Management --- */
 function openModal(modalId) {
     document.getElementById(modalId).classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -144,151 +196,54 @@ function closeModal(modalId) {
     document.body.style.overflow = 'auto';
 }
 
-function openAddModal() {
-    openModal('addModal');
-}
-
 function openPassengerAddModal() {
     openModal('addPassengerModal');
 }
 
-function openEditModal(id) {
-    currentDestinationId = id;
-    const dest = destinationData[id];
-    
-    document.getElementById('editName').value = dest.name;
-    document.getElementById('editDesc').value = dest.description;
-    document.getElementById('editPrice').value = dest.price;
-    document.getElementById('editDuration').value = dest.duration;
-    document.getElementById('editGravity').value = dest.gravity;
-    document.getElementById('editImage').value = dest.image;
-    
-    openModal('editModal');
-}
-
-function openPassengerEditModal(id) {
-    currentPassengerId = id;
-    const passenger = passengerData[id];
-    
-    document.getElementById('editPassengerName').value = passenger.name;
-    document.getElementById('editPassengerEmail').value = passenger.email;
-    document.getElementById('editPassengerContact').value = passenger.contact;
-    document.getElementById('editPassengerBirthday').value = passenger.birthday;
-    document.getElementById('editPassengerNationality').value = passenger.nationality;
-    document.getElementById('editPassengerPassport').value = passenger.passport;
-    document.getElementById('editPassengerType').value = passenger.type;
-    
-    openModal('editPassengerModal');
-}
-
-function openDeleteModal(id) {
-    currentDestinationId = id;
-    openModal('deleteModal');
-}
-
-function openPassengerDeleteModal(id) {
-    currentPassengerId = id;
-    openModal('deletePassengerModal');
-}
-
-function saveDestination() {
-    alert("New destination saved to database");
-    closeModal('addModal');
-}
-
-function savePassenger() {
-    alert("New passenger added successfully");
-    closeModal('addPassengerModal');
-}
-
-function updateDestination() {
-    alert(`Destination ${currentDestinationId} updated successfully`);
-    closeModal('editModal');
-}
-
-function updatePassenger() {
-    alert(`Passenger ${currentPassengerId} updated successfully`);
-    closeModal('editPassengerModal');
-}
-
-function confirmDelete() {
-    alert(`Destination ${currentDestinationId} permanently deleted`);
-    closeModal('deleteModal');
-}
-
-function confirmPassengerDelete() {
-    alert(`Passenger ${currentPassengerId} permanently deleted`);
-    closeModal('deletePassengerModal');
-}
-
-// Flight Schedule Form Submission
+/* --- Form Submission --- */
 document.getElementById("scheduleForm").addEventListener("submit", function (e) {
     e.preventDefault();
-    alert("Flight schedule updated successfully!");
-    // Place your actual update logic here
+    const formData = new FormData(e.target);
+    const destination = formData.get('destination');
+    alert(`Flight schedule to ${destination} updated successfully!`);
+    e.target.reset();
 });
 
+/* --- Extra UI Behaviors from main branch --- */
+document.addEventListener('DOMContentLoaded', function () {
+    const accountItem = document.querySelector('.account-item');
+    accountItem?.addEventListener('click', function (e) {
+        e.stopPropagation();
+        this.classList.toggle('active');
+    });
 
-document.addEventListener('DOMContentLoaded', function() {
-            const accountItem = document.querySelector('.account-item');
-            
-    
-            accountItem.addEventListener('click', function(e) {
-                e.stopPropagation();
-                this.classList.toggle('active');
-            });
-       
-            document.addEventListener('click', function(e) {
-                if (!accountItem.contains(e.target)) {
-                    accountItem.classList.remove('active');
-                }
-            });
-            
-            // Handle logout button click
-            const logoutBtn = document.querySelector('.logout-btn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', function() {
-                    window.location.href = '/main.php';
-                    alert('Logging out...');
-                    // window.location.href = '/logout';
-                });
-            }
-        });
+    document.addEventListener('click', function (e) {
+        if (!accountItem.contains(e.target)) {
+            accountItem.classList.remove('active');
+        }
+    });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const logo = document.querySelector('.logo img');   // or `.logo`
-    if (logo) {
-        logo.style.cursor = 'pointer';                  // optional – shows it’s clickable
-        logo.addEventListener('click', () => {
-            window.location.href = '/pages/adminpage/admin.php';
-        });
+    document.querySelector('.logout-btn')?.addEventListener('click', () => {
+        alert('Logging out...');
+        window.location.href = '/main.php';
+    });
+
+    document.querySelector('.logo img')?.addEventListener('click', () => {
+        window.location.href = '/pages/adminpage/admin.php';
+    });
+
+    document.getElementById('nav-explore')?.addEventListener('click', () => {
+        document.getElementById('destinations-section')?.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('nav-book')?.addEventListener('click', () => {
+        document.getElementById('flight-schedule-section')?.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// Close menus on outside click
+document.addEventListener('click', function (e) {
+    if (!e.target.classList.contains('action-btn') && !e.target.closest('.action-menu')) {
+        document.querySelectorAll('.action-menu').forEach(menu => menu.classList.remove('show'));
     }
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-    const exploreBtn = document.getElementById('nav-explore');
-    const destSection = document.getElementById('destinations-section');
-
-    if (exploreBtn && destSection) {
-        exploreBtn.style.cursor = 'pointer';                // optional: show it’s clickable
-        exploreBtn.addEventListener('click', () => {
-            // Smooth‑scroll to the Manage Destinations section
-            destSection.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    /* --- Book a trip → Flight Schedule Control --- */
-    const bookBtn     = document.getElementById('nav-book');
-    const flightTitle = document.getElementById('flight-schedule-section');
-
-    if (bookBtn && flightTitle) {
-        bookBtn.style.cursor = 'pointer';                  // optional – shows it’s clickable
-        bookBtn.addEventListener('click', () => {
-            flightTitle.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-});
-
-
