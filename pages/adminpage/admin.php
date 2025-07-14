@@ -1,3 +1,7 @@
+<?php
+$requiredRole = 'admin';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/adminpage.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +26,12 @@
     <!-- NAVBAR -->
     <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/navbar/navbar.template.php'; ?>
 
-    <div class="admin-container">
+    <div class="admin-container" id="destinations-section">
         <h2 class="page-title">Manage Destinations</h2>
 
         <!-- Destinations Carousel -->
         <div class="destinations-carousel">
             <div class="carousel-container" id="carousel">
-                <!-- Repeat destination cards -->
                 <!-- Example: Mercury -->
                 <div class="destination-card">
                     <div class="card-content">
@@ -37,22 +40,18 @@
                         <p class="card-detail"><strong>Price:</strong> $35,000</p>
                         <p class="card-detail"><strong>Distance:</strong> 91 million km</p>
                     </div>
-                    <button class="action-btn" onclick="toggleMenu(1)">✎</button>
+                    <button class="action-btn" onclick="toggleMenu(1)">\u270E</button>
                     <div class="action-menu" id="menu-1">
                         <div class="menu-item" onclick="openEditModal(1)">Edit Destination</div>
                     </div>
                 </div>
-
-                <!-- Repeat for other planets (Venus to Moon) -->
-                <!-- ... [Omitted for brevity – your original content remains unchanged here] ... -->
-
             </div>
-
             <div class="carousel-dots" id="dots-container"></div>
         </div>
 
         <!-- Flight Schedule Control -->
-        <h2 class="page-title flight-schedule-title">Flight Schedule Control</h2>
+        <h2 class="page-title flight-schedule-title" id="flight-schedule-section">Flight Schedule Control</h2>
+
         <form id="scheduleForm">
             <div class="flight-container">
                 <div class="form-row">
@@ -109,8 +108,6 @@
         <!-- Passenger Management -->
         <h2 class="page-title">Passenger Management</h2>
         <div class="passengers-grid">
-            <!-- Passenger Cards -->
-            <!-- Example: Passenger 1 -->
             <div class="passenger-card">
                 <div class="card-content">
                     <h3 class="card-title">JOHN SMITH <span class="type-indicator type-business">BUSINESS CLASS</span></h3>
@@ -120,17 +117,13 @@
                     <p class="card-detail"><strong>Nationality:</strong> United States</p>
                     <p class="card-detail"><strong>Passport:</strong> US12345678</p>
                 </div>
-                <button class="action-btn" onclick="togglePassengerMenu(1)">⋮</button>
+                <button class="action-btn" onclick="togglePassengerMenu(1)">\u22EE</button>
                 <div class="action-menu" id="passenger-menu-1">
                     <div class="menu-item" onclick="openPassengerEditModal(1)">Edit Passenger</div>
                 </div>
             </div>
-
-            <!-- Repeat for Passenger 2, 3, etc. -->
-            <!-- ... -->
         </div>
 
-        <!-- Passenger Actions -->
         <div class="action-buttons-container">
             <button class="action-btn-large secondary-btn" onclick="openModal('allPassengersModal')">
                 <span></span> View All Passengers
@@ -145,7 +138,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">EDIT DESTINATION</h3>
-                    <button class="modal-close" onclick="closeModal('editModal')">×</button>
+                    <button class="modal-close" onclick="closeModal('editModal')">\u00D7</button>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Destination Name</label>
@@ -175,7 +168,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">ADD NEW PASSENGER</h3>
-                    <button class="modal-close" onclick="closeModal('addPassengerModal')">×</button>
+                    <button class="modal-close" onclick="closeModal('addPassengerModal')">\u00D7</button>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Full Name</label>

@@ -1,4 +1,6 @@
 <?php
+// utils/dbSeederPostgresql.util.php
+
 declare(strict_types=1);
 
 require 'vendor/autoload.php';
@@ -18,54 +20,88 @@ $pdo = new PDO($dsn, $pgConfig['user'], $pgConfig['pass'], [
 
 echo "✅ Connected to PostgreSQL via PDO\n";
 
-echo "🌱 Seeding users and images…\n";
+// Truncate tables to avoid duplicates
+echo "🧹 Truncating tables...\n";
+$pdo->exec('
+  TRUNCATE TABLE public."bookings",
+                  public."tickets",
+                  public."users",
+                  public."images",
+                  public."flights",
+                  public."planets"
+  RESTART IDENTITY CASCADE
+');
 
-$userStmt = $pdo->prepare("
-  INSERT INTO public.\"users\" (
-    fullname,
-    password,
-    contact_num,
-    username,
-    role,
-    flight_id
+$planetStmt = $pdo->prepare("
+  INSERT INTO public.\"planets\" (
+    name,
+    distance_from_earth,
+    price,
+    description
   ) VALUES (
-    :fullname,
-    :password,
-    :contact_num,
-    :username,
-    :role,
-    :flight_id
-  ) RETURNING id
+    :name,
+    :distance_from_earth,
+    :price,
+    :description
+  ) RETURNING id, name
 ");
 
-$imageStmt = $pdo->prepare("
-  INSERT INTO public.\"images\" (
-    filename,
-    filepath,
-    mimetype,
-    size_bytes
-  ) VALUES (
-    :filename,
-    :filepath,
-    :mimetype,
-    :size_bytes
-  ) RETURNING id
-");
+$planetMap = [];
+echo "🚀 Seeding planets…\n";
 
-$updateUserPassportStmt = $pdo->prepare("
-  UPDATE public.\"users\" SET passport_image_id = :image_id WHERE id = :user_id
-");
+foreach ($planets as $p) {
+  $planetStmt->execute([
+    ':name' => $p['name'],
+    ':distance_from_earth' => $p['distance_from_earth'],
+    ':price' => $p['price'],
+    ':description' => $p['description'],
+  ]);
+  $result = $planetStmt->fetch(PDO::FETCH_ASSOC);
+  $planetMap[$result['name']] = $result['id'];
+}
 
+
+// 2. Seed flights and build flight map
+$flightStmt = $pdo->prepare("INSERT INTO public.\"flights\" (planet_id, departure_time, return_time, capacity, price, package_type) VALUES (:planet_id, :departure_time, :return_time, :capacity, :price, :package_type) RETURNING id, package_type");
+$flightMap = [];
+echo "✈️ Seeding flights...\n";
+foreach ($flights as $f) {
+  $planetId = $planetMap[$f['planet_name'] ?? 'Mars'] ?? null;
+  $flightStmt->execute([
+    ':planet_id' => $planetId,
+    ':departure_time' => $f['departure_time'],
+    ':return_time' => $f['return_time'],
+    ':capacity' => $f['capacity'],
+    ':price' => $f['price'],
+    ':package_type' => $f['package_type'],
+  ]);
+  $result = $flightStmt->fetch(PDO::FETCH_ASSOC);
+  $flightMap[$result['package_type']] = $result['id'];
+}
+
+// 3. Seed users and image associations
+$userStmt = $pdo->prepare("INSERT INTO public.\"users\" (fullname, password, contact_num, username, role, flight_id) VALUES (:fullname, :password, :contact_num, :username, :role, :flight_id) RETURNING id, username");
+$imageStmt = $pdo->prepare("INSERT INTO public.\"images\" (filename, filepath, mimetype, size_bytes) VALUES (:filename, :filepath, :mimetype, :size_bytes) RETURNING id");
+$updateUserPassportStmt = $pdo->prepare("UPDATE public.\"users\" SET passport_image_id = :image_id WHERE id = :user_id");
+
+$userMap = [];
+echo "🌿 Seeding users and images...\n";
 foreach ($users as $u) {
+  $flightId = ($u['role'] === 'admin')
+    ? $flightMap['Galactic Pass']
+    : $flightMap[array_rand($flightMap)];
+
   $userStmt->execute([
     ':fullname' => $u['fullname'],
     ':password' => password_hash($u['password'], PASSWORD_DEFAULT),
     ':contact_num' => $u['contact_num'],
     ':username' => $u['username'],
     ':role' => $u['role'],
-    ':flight_id' => $u['flight_id'],
+    ':flight_id' => $flightId,
   ]);
-  $userId = $userStmt->fetchColumn();
+  $userResult = $userStmt->fetch(PDO::FETCH_ASSOC);
+  $userId = $userResult['id'];
+  $userMap[$userResult['username']] = $userId;
 
   $passport = $u['passport_image'];
   $imageStmt->execute([
@@ -82,93 +118,36 @@ foreach ($users as $u) {
   ]);
 }
 
-$planetStmt = $pdo->prepare("
-  INSERT INTO public.\"planets\" (
-    name,
-    distance_from_earth,
-    planet_img
-  ) VALUES (
-    :name,
-    :distance_from_earth,
-    :planet_img
-  )
-");
-
-foreach ($planets as $p) {
-  $planetStmt->bindValue(':name', $p['name']);
-  $planetStmt->bindValue(':distance_from_earth', $p['distance_from_earth']);
-  $planetStmt->bindValue(':planet_img', $p['planet_img'], PDO::PARAM_LOB);
-  $planetStmt->execute();
-}
-
-$flightStmt = $pdo->prepare("
-  INSERT INTO public.\"flights\" (
-    departure_time,
-    return_time,
-    capacity,
-    price,
-    package_type
-  ) VALUES (
-    :departure_time,
-    :return_time,
-    :capacity,
-    :price,
-    :package_type
-  )
-");
-
-foreach ($flights as $f) {
-  $flightStmt->execute([
-    ':departure_time' => $f['departure_time'],
-    ':return_time' => $f['return_time'],
-    ':capacity' => $f['capacity'],
-    ':price' => $f['price'],
-    ':package_type' => $f['package_type'],
-  ]);
-}
-
-$bookingStmt = $pdo->prepare("
-  INSERT INTO public.\"bookings\" (
-    travel_date,
-    seat_number,
-    ticket_code,
-    status,
-    feedback
-  ) VALUES (
-    :travel_date,
-    :seat_number,
-    :ticket_code,
-    :status,
-    :feedback
-  )
-");
-
-foreach ($booking as $b) {
+// 4. Seed bookings
+$bookingStmt = $pdo->prepare("INSERT INTO public.\"bookings\" (user_id, flight_id, travel_date, seat_number, ticket_code, status, feedback) VALUES (:user_id, :flight_id, :travel_date, :seat_number, :ticket_code, :status, :feedback) RETURNING id");
+$bookingIds = [];
+echo "🚊 Seeding bookings...\n";
+$flightIds = array_values($flightMap);
+$userIds = array_values($userMap);
+foreach ($booking as $index => $b) {
+  $userId = $userIds[$index % count($userIds)];
+  $flightId = $flightIds[$index % count($flightIds)];
   $bookingStmt->execute([
+    ':user_id' => $userId,
+    ':flight_id' => $flightId,
     ':travel_date' => $b['travel_date'],
     ':seat_number' => $b['seat_number'],
     ':ticket_code' => $b['ticket_code'],
     ':status' => $b['status'],
     ':feedback' => $b['feedback'],
   ]);
+  $bookingIds[] = $bookingStmt->fetchColumn();
 }
 
-$ticketStmt = $pdo->prepare("
-  INSERT INTO public.\"tickets\" (
-    flight_number,
-    launch_pad,
-    gate,
-    qr_code
-  ) VALUES (
-    :flight_number,
-    :launch_pad,
-    :gate,
-    :qr_code
-  )
-");
-
-foreach ($tickets as $t) {
+// 5. Seed tickets
+$ticketStmt = $pdo->prepare("INSERT INTO public.\"tickets\" (booking_id, flight_id, flight_number, launch_pad, gate, qr_code) VALUES (:booking_id, :flight_id, :flight_number, :launch_pad, :gate, :qr_code)");
+echo "🎟️ Seeding tickets...\n";
+foreach ($tickets as $i => $t) {
+  $bookingId = $bookingIds[$i % count($bookingIds)];
+  $flightId = $flightIds[$i % count($flightIds)];
   $ticketStmt->execute([
+    ':booking_id' => $bookingId,
+    ':flight_id' => $flightId,
     ':flight_number' => $t['flight_number'],
     ':launch_pad' => $t['launch_pad'],
     ':gate' => $t['gate'],

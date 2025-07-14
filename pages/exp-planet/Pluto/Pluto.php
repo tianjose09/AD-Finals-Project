@@ -1,57 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$requiredRole = 'client';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore: Pluto</title>
 
-    <link rel="stylesheet" href="assets/navbar/css/navbar.css">
+    <link rel="stylesheet" href="/components/templates/navbar/assets/css/navbar.css">
+    <link rel="stylesheet" href="/components/templates/footer/assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/bg.css">
-    <link rel="stylesheet" href="assets/footer/css/footer.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
 
 </head>
 <body>
-   
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <!-- Logo -->
-        <div class="logo">
-            <img src="assets/navbar/img/TED_LOGO_White.png" alt="Teddiursa Airlines Logo" draggable="false">
-        </div>
-        
-        <div class="nav-items-container">
-            <div class="nav-item">
-                <div class="nav-icon">
-                    <img src="assets/navbar/img/Profile.png" alt="Account" draggable="false">
-                </div>
-                <span class="nav-text">Account</span>
-            </div>
-            
-            <div class="nav-item">
-                <div class="nav-icon">
-                    <img src="assets/navbar/img/Explore.png" alt="Explore" draggable="false">
-                </div>
-                <span class="nav-text">Explore</span>
-            </div>
-
-            <div class="nav-item">
-                <div class="nav-icon">
-                    <img src="assets/navbar/img/Book.png" alt="Book a trip" draggable="false">
-                </div>
-                <span class="nav-text">Book a trip</span>
-            </div>
-
-            <div class="nav-item">
-                <div class="nav-icon">
-                    <img src="assets/navbar/img/AboutUs.png" alt="About Us" draggable="false">
-                </div>
-                <span class="nav-text">About Us</span>
-            </div>
-        </div>
-    </nav>
-
+    <!--NAVBAR-->
+    <?php
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/navbar/navbar.template.php';
+    ?>
 
     <!--EXPLORE-->
     <div class="cont-explr">
@@ -84,21 +51,10 @@
 
 
     <!--FOOTER-->
-    <footer>
-        <div id="foot-logo">
-            <img src="assets/footer/img/TED_LOGOwBG.png" alt="Teddiursa Airlines Logo" draggable="false">
-        </div>
-
-        <div class="foot-text">
-            <div id="foot-tagline">
-                Not Just a Flight. A Leap Into the Universe.
-            </div>
-            <div id="foot-contInfo">
-                <h3>Contact Information:</h3>
-                <p><i>teddairlines@gmail.com  |  0912-343-5352</i></p>
-            </div>
-        </div>
-    </footer>
+    <?php
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/footer/footer.template.php';
+    ?>
+    
     <!--BACKGROUND-->
     <div class="stars" id="stars"></div>
     <div class="blob blob-1"></div>

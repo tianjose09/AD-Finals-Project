@@ -7,17 +7,9 @@ if (!isset($_SESSION['user'])) {
 }
 
 // Optional role check
-if (isset($requiredRole)) {
-    $userRole = $_SESSION['user']['role'];
-
-    $allowed = is_array($requiredRole)
-        ? in_array($userRole, $requiredRole, true)
-        : $userRole === $requiredRole;
-
-    if (!$allowed) {
-        header("Location: /main.php");
-        exit;
-    }
+if (isset($requiredRole) && $_SESSION['user']['role'] !== $requiredRole) {
+    header("Location: /main.php");
+    exit;
 }
 
 $user = $_SESSION['user'];
