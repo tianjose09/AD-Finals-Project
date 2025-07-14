@@ -23,7 +23,8 @@ $schemas = [
   'flights.model.sql',
   'users.model.sql',
   'booking.model.sql',
-  'tickets.model.sql',  
+  'tickets.model.sql',
+  'images.model.sql'
 ];
 
 
@@ -41,7 +42,7 @@ foreach ($schemas as $file) {
 // ——— Then Truncate the Tables ———
 echo "🧹 Truncating tables…\n";
 // Truncate in FK-safe order (child to parent)
-foreach (['tickets', 'bookings', 'flights', 'planets', 'users'] as $table) {
+foreach (['images','tickets', 'bookings', 'flights', 'planets', 'users'] as $table) {
   $pdo->exec("TRUNCATE TABLE {$table} RESTART IDENTITY CASCADE;");
 }
 echo "✅ Tables truncated successfully.\n";
