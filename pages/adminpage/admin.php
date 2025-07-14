@@ -1,6 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$requiredRole = 'admin';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/adminpage.php';
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,43 +21,60 @@
 
     <!-- NAVBAR -->
     <nav class="navbar">
-        <!-- Logo -->
+
         <div class="logo">
-            <img src="/assets/img/LOGO White.png" alt="Teddiursa Airlines Logo" draggable="false">
+            <img src="assets/navbar/img/TED_LOGO_White.png" alt="Teddiursa Airlines Logo" draggable="false">
         </div>
         
         <div class="nav-items-container">
-            <div class="nav-item">
+   
+            <div class="nav-item account-item">
                 <div class="nav-icon">
-                    <img src="/assets/img/account.png" alt="Account" draggable="false">
+                    <img src="assets/navbar/img/Profile.png" alt="Account" draggable="false">
                 </div>
                 <span class="nav-text">Account</span>
+                
+ 
+                <div class="account-dropdown">
+                    <div class="account-header">
+                        <div class="account-name"><?= htmlspecialchars($user['fullname'] ?? 'Admin') ?></div>
+                    </div>
+                    <div class="account-divider"></div>
+                    <button class="logout-btn">
+                        <svg class="logout-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 16L21 12M21 12L17 8M21 12H7M13 16V17C13 18.6569 11.6569 20 10 20H6C4.34315 20 3 18.6569 3 17V7C3 5.34315 4.34315 4 6 4H10C11.6569 4 13 5.34315 13 7V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        LOG OUT
+                    </button>
+                </div>
             </div>
             
-            <div class="nav-item">
+    
+            <div class="nav-item" id="nav-explore">
                 <div class="nav-icon">
-                    <img src="/assets/img/explore.png" alt="Explore" draggable="false">
+                    <img src="assets/navbar/img/Explore.png" alt="Explore" draggable="false">
                 </div>
-                <span class="nav-text">Explore</span>
+                    <span class="nav-text">Explore</span>
             </div>
 
-            <div class="nav-item">
+
+            <div class="nav-item" id="nav-book">
                 <div class="nav-icon">
-                    <img src="/assets/img/book.png" alt="Book a trip" draggable="false">
+                    <img src="assets/navbar/img/Book.png" alt="Book a trip" draggable="false">
                 </div>
                 <span class="nav-text">Book a trip</span>
             </div>
 
-            <div class="nav-item">
+            <div class="nav-item" a href="/pages/aboutus/aboutus.php">
                 <div class="nav-icon">
-                    <img src="/assets/img/aboutus.png" alt="About Us" draggable="false">
-                    </div>
+                    <img src="assets/navbar/img/AboutUs.png" alt="About Us" draggable="false">
+                </div>
                 <span class="nav-text">About Us</span>
             </div>
         </div>
     </nav>
 
-    <div class="admin-container">
+    <div class="admin-container" id="destinations-section">
         <h2 class="page-title">Manage Destinations</h2>
 
         <div class="destinations-grid">
@@ -112,14 +130,9 @@
             </div>
         </div>
 
-        <div class="add-btn-container">
-            <button class="add-btn" onclick="openAddModal()">
-                <span>+</span> New Cosmic Destination
-            </button>
-        </div>
 
     <!-- Flight Schedule Control Section -->
-        <h2 class="page-title flight-schedule-title">Flight Schedule Control</h2>
+        <h2 class="page-title flight-schedule-title" id="flight-schedule-section">Flight Schedule Control</h2>
         
         <form id="scheduleForm">
             <div class="flight-container">
