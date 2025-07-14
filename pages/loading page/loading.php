@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/pages/loading page/css/style.css" />
 </head>
 <body>
+    <!-- Twinkle stars -->
     <div class="stars" id="stars"></div>
 
     <div class="loading-container">
