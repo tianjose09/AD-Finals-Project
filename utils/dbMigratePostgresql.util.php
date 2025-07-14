@@ -18,7 +18,7 @@ echo "✅ Connected to PostgreSQL via PDO\n";
 
 // ✅ Drop old tables
 echo "🧨 Dropping old tables…\n";
-foreach (['images','booking', 'flights', 'planets', 'tickets', 'users'] as $table) {
+foreach (['booking', 'images', 'flights', 'planets', 'tickets', 'users'] as $table) {
   $pdo->exec("DROP TABLE IF EXISTS {$table} CASCADE;");
   echo "❌ Dropped table: {$table}\n";
 }
@@ -27,10 +27,10 @@ foreach (['images','booking', 'flights', 'planets', 'tickets', 'users'] as $tabl
 $schemas = [
   'planets.model.sql',
   'flights.model.sql',
+  'images.model.sql',
   'users.model.sql',
   'booking.model.sql',
   'tickets.model.sql',
-  'images.model.sql'
 ];
 
 foreach ($schemas as $file) {
