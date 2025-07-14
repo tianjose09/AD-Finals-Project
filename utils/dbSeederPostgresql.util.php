@@ -32,19 +32,34 @@ $pdo->exec('
   RESTART IDENTITY CASCADE
 ');
 
-// 1. Seed planets and build planet map
-$planetStmt = $pdo->prepare("INSERT INTO public.\"planets\" (name, distance_from_earth, planet_img) VALUES (:name, :distance_from_earth, :planet_img) RETURNING id, name");
+$planetStmt = $pdo->prepare("
+  INSERT INTO public.\"planets\" (
+    name,
+    distance_from_earth,
+    price,
+    description
+  ) VALUES (
+    :name,
+    :distance_from_earth,
+    :price,
+    :description
+  ) RETURNING id, name
+");
+
 $planetMap = [];
-echo "🚐 Seeding planets...\n";
+echo "🚀 Seeding planets…\n";
+
 foreach ($planets as $p) {
   $planetStmt->execute([
     ':name' => $p['name'],
     ':distance_from_earth' => $p['distance_from_earth'],
-    ':planet_img' => $p['planet_img'] ?? null,
+    ':price' => $p['price'],
+    ':description' => $p['description'],
   ]);
   $result = $planetStmt->fetch(PDO::FETCH_ASSOC);
   $planetMap[$result['name']] = $result['id'];
 }
+
 
 // 2. Seed flights and build flight map
 $flightStmt = $pdo->prepare("INSERT INTO public.\"flights\" (planet_id, departure_time, return_time, capacity, price, package_type) VALUES (:planet_id, :departure_time, :return_time, :capacity, :price, :package_type) RETURNING id, package_type");
