@@ -1,0 +1,167 @@
+/* Base Styles */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #1A1A2E;
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Background Elements */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: var(--opacity); }
+        }
+
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            background: #6C4DF6;
+            top: -100px;
+            left: -100px;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: #FF7DEE;
+            bottom: -150px;
+            right: -100px;
+            animation: float 20s infinite ease-in-out reverse;
+        }
+
+        .blob-3 {
+            width: 250px;
+            height: 250px;
+            background: #4FA3FF;
+            top: 50%;
+            right: 10%;
+            animation: float 18s infinite ease-in-out 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(50px, 50px); }
+            50% { transform: translate(0, 100px); }
+            75% { transform: translate(-50px, 50px); }
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 100px;
+            background-color: rgba(26, 26, 46, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            border-right: 1px solid rgba(108, 77, 246, 0.1);
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+        
+        .logo img {
+            width: 60px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 90px;
+        }
+
+        .nav-items-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .nav-item {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 10px 0;
+            border-radius: 8px;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(108, 77, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: none !important;
+        }
+        
+        .nav-text {
+            opacity: 0;
+            position: absolute;
+            left: 70px;
+            white-space: nowrap;
+            background-color: #6C4DF6;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item:hover .nav-text {
+            opacity: 1;
+        }
