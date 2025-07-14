@@ -21,10 +21,10 @@ echo "✅ Connected to PostgreSQL via PDO\n";
 $schemas = [
   'planets.model.sql',
   'flights.model.sql',
+  'images.model.sql',
   'users.model.sql',
   'booking.model.sql',
   'tickets.model.sql',
-  'images.model.sql'
 ];
 
 
