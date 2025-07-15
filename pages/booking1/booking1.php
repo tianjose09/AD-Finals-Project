@@ -6,7 +6,7 @@
   <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
   <link rel="stylesheet" href="/components/templates/navbar/assets/css/navbar.css">
   <link rel="stylesheet" href="/components/templates/footer/assets/css/footer.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/pages/booking1/assets/css/styles.css">
 </head>
 <body>
   <!--NAVBAR-->
@@ -21,7 +21,7 @@
 
   <main class="main-content">
     <div class="booking-wrapper">
-      <img src="bookinghero.png" class="bg-image" alt="Flight UI Background" draggable="false"/>
+      <img src="/assets/img/bookinghero.png" class="bg-image" alt="Flight UI Background" draggable="false"/>
       <div class="form-overlay">
         <div class="from-to-wrapper">
           <div class="field">
@@ -94,7 +94,7 @@
       <tbody>
         <tr>
           <td>Earth → Mars</td>
-          <td>15 Nov 2023 15:45 → 16 Nov 2023 08:30</td>
+          <td>15 Nov 2025 15:45 → 16 Nov 2025 08:30</td>
           <td>16h 45m</td>
           <td>TA-7842</td>
           <td>$1,299</td>
@@ -102,7 +102,7 @@
         </tr>
         <tr>
           <td>Venus → Earth</td>
-          <td>18 Nov 2023 07:15 → 18 Nov 2023 22:30</td>
+          <td>18 Nov 2025 07:15 → 18 Nov 2025 22:30</td>
           <td>15h 15m</td>
           <td>TA-4521</td>
           <td>$1,899</td>
@@ -110,7 +110,7 @@
         </tr>
         <tr>
           <td>Jupiter → Saturn</td>
-          <td>19 Nov 2023 12:00 → 20 Nov 2023 18:45</td>
+          <td>19 Nov 2025 12:00 → 20 Nov 2025 18:45</td>
           <td>30h 45m</td>
           <td>TA-9823</td>
           <td>$4,299</td>
@@ -118,7 +118,7 @@
         </tr>
         <tr>
           <td>Earth → Pluto</td>
-          <td>20 Nov 2023 06:30 → 22 Nov 2023 09:15</td>
+          <td>20 Nov 2025 06:30 → 22 Nov 2025 09:15</td>
           <td>50h 45m</td>
           <td>TA-5678</td>
           <td>$5,999</td>
@@ -126,7 +126,7 @@
         </tr>
         <tr>
           <td>Mercury → Venus</td>
-          <td>21 Nov 2023 14:20 → 21 Nov 2023 20:45</td>
+          <td>21 Nov 2025 14:20 → 21 Nov 2025 20:45</td>
           <td>6h 25m</td>
           <td>TA-3456</td>
           <td>$999</td>
@@ -134,7 +134,7 @@
         </tr>
         <tr>
           <td>Uranus → Neptune</td>
-          <td>22 Nov 2023 08:15 → 23 Nov 2023 11:30</td>
+          <td>22 Nov 2025 08:15 → 23 Nov 2025 11:30</td>
           <td>27h 15m</td>
           <td>TA-7890</td>
           <td>$3,799</td>
@@ -142,7 +142,7 @@
         </tr>
         <tr>
           <td>Mars → Earth</td>
-          <td>26 Nov 2023 11:15 → 27 Nov 2023 03:30</td>
+          <td>26 Nov 2025 11:15 → 27 Nov 2025 03:30</td>
           <td>16h 15m</td>
           <td>TA-4567</td>
           <td>$2,899</td>
@@ -150,7 +150,7 @@
         </tr>
         <tr>
           <td>Earth → Moon</td>
-          <td>27 Nov 2023 13:45 → 28 Nov 2023 21:15</td>
+          <td>27 Nov 2025 13:45 → 28 Nov 2025 21:15</td>
           <td>31h 30m</td>
           <td>TA-8901</td>
           <td>$4,199</td>
@@ -164,6 +164,6 @@
   include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/footer/footer.template.php';
   ?>
 
-  <script src="script.js"></script>
+  <script src="/pages/booking1/assets/js/script.js"></script>
 </body>
 </html>
