@@ -56,16 +56,19 @@ $flightStmt = $pdo->prepare("
     departure_time,
     return_time,
     price,
-    flight_number
+    flight_number,
+    destination
   ) VALUES (
     :departure_planet_id,
     :arrival_planet_id,
     :departure_time,
     :return_time,
     :price,
-    :flight_number
+    :flight_number,
+    :destination
   ) RETURNING id, flight_number
 ");
+
 
 
 $flightMap = [];
@@ -89,7 +92,9 @@ foreach ($flights as $f) {
     ':return_time' => $f['return_time'],
     ':price' => $f['price'],
     ':flight_number' => $f['flight_number'],
+    ':destination' => $f['destination'],
 ]);
+
 
     $result = $flightStmt->fetch(PDO::FETCH_ASSOC);
     $flightMap[$result['flight_number']] = $result['id'];
