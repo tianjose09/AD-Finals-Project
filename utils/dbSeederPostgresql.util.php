@@ -50,30 +50,23 @@ foreach ($planets as $p) {
 
 // 2. Seed flights and build flight map
 $flightStmt = $pdo->prepare("
-      INSERT INTO public.flights (
-    departure_planet_id, 
-    arrival_planet_id, 
-    departure_time, 
-    return_time, 
-    capacity, 
-    base_price, 
-    flight_number, 
-    launch_pad, 
-    gate,
-    class
+  INSERT INTO public.flights (
+    departure_planet_id,
+    arrival_planet_id,
+    departure_time,
+    return_time,
+    price,
+    flight_number
   ) VALUES (
-    :departure_planet_id, 
-    :arrival_planet_id, 
-    :departure_time, 
-    :return_time, 
-    :capacity, 
-    :base_price, 
-    :flight_number, 
-    :launch_pad, 
-    :gate,
-    :class
-  )RETURNING id, flight_number
+    :departure_planet_id,
+    :arrival_planet_id,
+    :departure_time,
+    :return_time,
+    :price,
+    :flight_number
+  ) RETURNING id, flight_number
 ");
+
 
 $flightMap = [];
 echo "✈️ Seeding flights...\n";
@@ -94,12 +87,8 @@ foreach ($flights as $f) {
     ':arrival_planet_id' => $planetMap[$arrivalName],
     ':departure_time' => $f['departure_time'],
     ':return_time' => $f['return_time'],
-    ':capacity' => $f['capacity'],
-    ':base_price' => $f['base_price'],
+    ':price' => $f['price'],
     ':flight_number' => $f['flight_number'],
-    ':launch_pad' => $f['launch_pad'],
-    ':gate' => $f['gate'],
-    ':class' => $f['class'],
 ]);
 
     $result = $flightStmt->fetch(PDO::FETCH_ASSOC);
