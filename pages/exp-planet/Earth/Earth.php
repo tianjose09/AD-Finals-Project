@@ -34,9 +34,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
     <div id="box-explr">
         <div class="carousel-container">
             <div class="carousel-slide">
-                <img src="assets/img/EARTH (1).png" draggable="false">
-                <img src="assets/img/EARTH (2).png" draggable="false">
-                <img src="assets/img/EARTH (3).png" draggable="false">
+                <img src="assets/img/EARTH-1.png" draggable="false">
+                <img src="assets/img/EARTH-2.png" draggable="false">
+                <img src="assets/img/EARTH-3.png" draggable="false">
             </div>
             <button class="carousel-btn prev-btn">&lt;</button>
             <button class="carousel-btn next-btn">&gt;</button>
