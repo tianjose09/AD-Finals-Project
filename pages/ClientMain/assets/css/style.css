@@ -234,17 +234,17 @@
         height: 20rem;
         width: auto;
         border-radius: 8px;
-        margin-left: 150px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
+        margin-left: 90px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
         
     }
     #ff1 img, #ff2 img {
         height: 25rem;
         width: auto;
         border-radius: 8px;
-        margin-left: 150px;
+        margin-left: 90px;
         position: relative;
         display: flex;
         flex-direction: column;
