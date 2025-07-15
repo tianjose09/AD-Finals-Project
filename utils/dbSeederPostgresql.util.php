@@ -139,7 +139,7 @@ foreach ($booking as $index => $b) {
   $bookingIds[] = $bookingStmt->fetchColumn();
 }
 
-// 5. Seed tickets
+// 5. Seed tickets for database
 $ticketStmt = $pdo->prepare("INSERT INTO public.\"tickets\" (booking_id, flight_id, flight_number, launch_pad, gate, qr_code) VALUES (:booking_id, :flight_id, :flight_number, :launch_pad, :gate, :qr_code)");
 echo "🎟️ Seeding tickets...\n";
 foreach ($tickets as $i => $t) {
