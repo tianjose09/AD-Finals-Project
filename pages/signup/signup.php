@@ -17,7 +17,7 @@
     <div class="signup-wrapper">
         <div class="logo-container">
             <div class="logo">
-                <img src="/assets/img/LOGO Transparent.png" alt="Logo">
+                <img src="/assets/img/LOGO-Transparent.png" alt="Logo">
             </div>
         </div>
         
