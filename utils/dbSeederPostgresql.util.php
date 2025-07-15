@@ -50,48 +50,74 @@ foreach ($planets as $p) {
 
 // 2. Seed flights and build flight map
 $flightStmt = $pdo->prepare("
-    INSERT INTO public.flights (
-        departure_planet_id, 
-        arrival_planet_id, 
-        departure_time, 
-        return_time, 
-        capacity, 
-        base_price, 
-        flight_number, 
-        launch_pad, 
-        gate
-    ) VALUES (
-        :departure_planet_id, 
-        :arrival_planet_id, 
-        :departure_time, 
-        :return_time, 
-        :capacity, 
-        :base_price, 
-        :flight_number, 
-        :launch_pad, 
-        :gate
-    ) RETURNING id, flight_number
+      INSERT INTO public.flights (
+    departure_planet_id, 
+    arrival_planet_id, 
+    departure_time, 
+    return_time, 
+    capacity, 
+    base_price, 
+    flight_number, 
+    launch_pad, 
+    gate,
+    class
+  ) VALUES (
+    :departure_planet_id, 
+    :arrival_planet_id, 
+    :departure_time, 
+    :return_time, 
+    :capacity, 
+    :base_price, 
+    :flight_number, 
+    :launch_pad, 
+    :gate,
+    :class
+  )RETURNING id, flight_number
 ");
+
 $flightMap = [];
 echo "✈️ Seeding flights...\n";
 foreach ($flights as $f) {
+    $departureName = $f['departure_planet'];
+    $arrivalName = $f['arrival_planet'];
+
+    // Check if the planets exist in planetMap
+    if (!isset($planetMap[$departureName])) {
+        throw new Exception("❌ Unknown departure planet: $departureName");
+    }
+    if (!isset($planetMap[$arrivalName])) {
+        throw new Exception("❌ Unknown arrival planet: $arrivalName");
+    }
+
     $flightStmt->execute([
-        ':departure_planet_id' => $planetMap[$f['departure_planet']] ?? null,
-        ':arrival_planet_id' => $planetMap[$f['arrival_planet']] ?? null,
-        ':departure_time' => $f['departure_time'],
-        ':return_time' => $f['return_time'],
-        ':capacity' => $f['capacity'],
-        ':base_price' => $f['base_price'],
-        ':flight_number' => $f['flight_number'],
-        ':launch_pad' => $f['launch_pad'],
-        ':gate' => $f['gate'],
-    ]);
+    ':departure_planet_id' => $planetMap[$departureName],
+    ':arrival_planet_id' => $planetMap[$arrivalName],
+    ':departure_time' => $f['departure_time'],
+    ':return_time' => $f['return_time'],
+    ':capacity' => $f['capacity'],
+    ':base_price' => $f['base_price'],
+    ':flight_number' => $f['flight_number'],
+    ':launch_pad' => $f['launch_pad'],
+    ':gate' => $f['gate'],
+    ':class' => $f['class'],
+]);
+
     $result = $flightStmt->fetch(PDO::FETCH_ASSOC);
     $flightMap[$result['flight_number']] = $result['id'];
 }
 
 // 3. Seed users and image associations
-$userStmt = $pdo->prepare("INSERT INTO public.\"users\" (fullname, password, contact_num, username, role, flight_id) VALUES (:fullname, :password, :contact_num, :username, :role, :flight_id) RETURNING id, username");
+$userStmt = $pdo->prepare("INSERT INTO public.\"users\" (
+  fullname, password, contact_num, username, role, flight_id,
+  date_of_birth, gender, nationality, email, emergency_contact,
+  passport_number, passport_expiry, passport_issuing_country
+) VALUES (
+  :fullname, :password, :contact_num, :username, :role, :flight_id,
+  :date_of_birth, :gender, :nationality, :email, :emergency_contact,
+  :passport_number, :passport_expiry, :passport_issuing_country
+) RETURNING id, username");
+
+
 $imageStmt = $pdo->prepare("INSERT INTO public.\"images\" (filename, filepath, mimetype, size_bytes) VALUES (:filename, :filepath, :mimetype, :size_bytes) RETURNING id");
 $updateUserPassportStmt = $pdo->prepare("UPDATE public.\"users\" SET passport_image_id = :image_id WHERE id = :user_id");
 
@@ -102,13 +128,22 @@ $flightId = $flightMap[array_rand($flightMap)];
 
 
   $userStmt->execute([
-    ':fullname' => $u['fullname'],
-    ':password' => password_hash($u['password'], PASSWORD_DEFAULT),
-    ':contact_num' => $u['contact_num'],
-    ':username' => $u['username'],
-    ':role' => $u['role'],
-    ':flight_id' => $flightId,
-  ]);
+  ':fullname' => $u['fullname'],
+  ':password' => password_hash($u['password'], PASSWORD_DEFAULT),
+  ':contact_num' => $u['contact_num'],
+  ':username' => $u['username'],
+  ':role' => $u['role'],
+  ':flight_id' => $flightId,
+  ':date_of_birth' => $u['date_of_birth'],
+  ':gender' => $u['gender'],
+  ':nationality' => $u['nationality'],
+  ':email' => $u['email'],
+  ':emergency_contact' => $u['emergency_contact'],
+  ':passport_number' => $u['passport_number'],
+  ':passport_expiry' => $u['passport_expiry'],
+  ':passport_issuing_country' => $u['passport_issuing_country'],
+]);
+
   $userResult = $userStmt->fetch(PDO::FETCH_ASSOC);
   $userId = $userResult['id'];
   $userMap[$userResult['username']] = $userId;

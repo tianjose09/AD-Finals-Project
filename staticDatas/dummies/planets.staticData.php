@@ -3,6 +3,12 @@
 
 return [
   [
+    'name' => 'Earth',
+    'distance_from_earth' => 0,
+    'description' => 'Our home planet, Earth supports diverse life and is the origin of all known space missions.',
+    'price' => 0
+  ],
+  [
     'name' => 'Moon',
     'distance_from_earth' => 384400 / 9.461e+12, // ≈ 0.000000041
     'description' => 'Only natural satellite of Earth, the Moon influences tides and is the site of the first human space landing; its surface is covered in craters and dusty plains.',
