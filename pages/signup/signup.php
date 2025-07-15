@@ -6,6 +6,7 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="/pages/signup/assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
 </head>
 <body>
     <div class="blob blob-1"></div>
