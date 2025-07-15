@@ -32,51 +32,62 @@ $pdo->exec('
   RESTART IDENTITY CASCADE
 ');
 
-$planetStmt = $pdo->prepare("
-  INSERT INTO public.\"planets\" (
-    name,
-    distance_from_earth,
-    price,
-    description
-  ) VALUES (
-    :name,
-    :distance_from_earth,
-    :price,
-    :description
-  ) RETURNING id, name
-");
-
+// Insert planets
+$planetStmt = $pdo->prepare("INSERT INTO public.planets (name, description, distance_from_earth, image_url) VALUES (:name, :description, :distance_from_earth, :image_url) RETURNING id, name");
 $planetMap = [];
-echo "🚀 Seeding planets…\n";
-
+echo "🚀 Seeding planets...\n";
 foreach ($planets as $p) {
-  $planetStmt->execute([
-    ':name' => $p['name'],
-    ':distance_from_earth' => $p['distance_from_earth'],
-    ':price' => $p['price'],
-    ':description' => $p['description'],
-  ]);
-  $result = $planetStmt->fetch(PDO::FETCH_ASSOC);
-  $planetMap[$result['name']] = $result['id'];
+    $planetStmt->execute([
+        ':name' => $p['name'],
+        ':description' => $p['description'],
+        ':distance_from_earth' => floatval(str_replace([',', ' km'], '', (string) $p['distance_from_earth'])),
+        ':image_url' => $p['image_url'] ?? null
+    ]);
+    $result = $planetStmt->fetch(PDO::FETCH_ASSOC);
+    $planetMap[$result['name']] = $result['id'];
 }
 
 
 // 2. Seed flights and build flight map
-$flightStmt = $pdo->prepare("INSERT INTO public.\"flights\" (planet_id, departure_time, return_time, capacity, price, package_type) VALUES (:planet_id, :departure_time, :return_time, :capacity, :price, :package_type) RETURNING id, package_type");
+$flightStmt = $pdo->prepare("
+    INSERT INTO public.flights (
+        departure_planet_id, 
+        arrival_planet_id, 
+        departure_time, 
+        return_time, 
+        capacity, 
+        base_price, 
+        flight_number, 
+        launch_pad, 
+        gate
+    ) VALUES (
+        :departure_planet_id, 
+        :arrival_planet_id, 
+        :departure_time, 
+        :return_time, 
+        :capacity, 
+        :base_price, 
+        :flight_number, 
+        :launch_pad, 
+        :gate
+    ) RETURNING id, flight_number
+");
 $flightMap = [];
 echo "✈️ Seeding flights...\n";
 foreach ($flights as $f) {
-  $planetId = $planetMap[$f['planet_name'] ?? 'Mars'] ?? null;
-  $flightStmt->execute([
-    ':planet_id' => $planetId,
-    ':departure_time' => $f['departure_time'],
-    ':return_time' => $f['return_time'],
-    ':capacity' => $f['capacity'],
-    ':price' => $f['price'],
-    ':package_type' => $f['package_type'],
-  ]);
-  $result = $flightStmt->fetch(PDO::FETCH_ASSOC);
-  $flightMap[$result['package_type']] = $result['id'];
+    $flightStmt->execute([
+        ':departure_planet_id' => $planetMap[$f['departure_planet']] ?? null,
+        ':arrival_planet_id' => $planetMap[$f['arrival_planet']] ?? null,
+        ':departure_time' => $f['departure_time'],
+        ':return_time' => $f['return_time'],
+        ':capacity' => $f['capacity'],
+        ':base_price' => $f['base_price'],
+        ':flight_number' => $f['flight_number'],
+        ':launch_pad' => $f['launch_pad'],
+        ':gate' => $f['gate'],
+    ]);
+    $result = $flightStmt->fetch(PDO::FETCH_ASSOC);
+    $flightMap[$result['flight_number']] = $result['id'];
 }
 
 // 3. Seed users and image associations
@@ -87,9 +98,8 @@ $updateUserPassportStmt = $pdo->prepare("UPDATE public.\"users\" SET passport_im
 $userMap = [];
 echo "🌿 Seeding users and images...\n";
 foreach ($users as $u) {
-  $flightId = ($u['role'] === 'admin')
-    ? $flightMap['Galactic Pass']
-    : $flightMap[array_rand($flightMap)];
+$flightId = $flightMap[array_rand($flightMap)];
+
 
   $userStmt->execute([
     ':fullname' => $u['fullname'],
