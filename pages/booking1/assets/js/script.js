@@ -1,31 +1,24 @@
-// Twinkling stars
+// Twinkle Stars
+
 function createStars() {
   const starsContainer = document.getElementById('stars');
-  const starsCount = 150;
-  
-  for (let i = 0; i < starsCount; i++) {
+  for (let i = 0; i < 120; i++) {
     const star = document.createElement('div');
     star.classList.add('star');
-    
     const size = Math.random() * 2 + 1;
-    star.style.width = `${size}px`;
-    star.style.height = `${size}px`;
-    
-    star.style.left = `${Math.random() * 100}%`;
-    star.style.top = `${Math.random() * 100}%`;
-    
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = (Math.random() * 100) + "%";
+    star.style.top = (Math.random() * 100) + "%";
     const duration = Math.random() * 5 + 3;
     const delay = Math.random() * 5;
     const opacity = Math.random() * 0.7 + 0.3;
-    
-    star.style.setProperty('--duration', `${duration}s`);
+    star.style.setProperty('--duration', duration + "s");
     star.style.setProperty('--opacity', opacity);
-    star.style.animationDelay = `${delay}s`;
-    
+    star.style.animationDelay = delay + "s";
     starsContainer.appendChild(star);
   }
 }
-window.addEventListener('load', createStars);
 
 // Passenger controls
 function updatePassengers(change) {
@@ -43,19 +36,43 @@ function validatePassengerInput() {
   input.value = count;
 }
 
-// Swap from/to destinations
-document.getElementById('swapBtn').addEventListener('click', () => {
+// Swap locations
+function swapLocations() {
   const from = document.getElementById('from');
   const to = document.getElementById('to');
   const temp = from.value;
   from.value = to.value;
   to.value = temp;
-});
+}
 
-// Booking confirmation
+// Proceed to booking
 function proceedToBooking() {
   const confirmBooking = confirm("Do you want to continue to booking?");
   if (confirmBooking) {
     window.location.href = "booking.html";
   }
 }
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', () => {
+  createStars();
+  
+  // Passenger controls
+  document.getElementById('decreasePassengers').addEventListener('click', () => updatePassengers(-1));
+  document.getElementById('increasePassengers').addEventListener('click', () => updatePassengers(1));
+  document.getElementById('passengerCount').addEventListener('change', validatePassengerInput);
+  
+  // Swap button
+  document.getElementById('swapBtn').addEventListener('click', swapLocations);
+  
+  // Search button
+  document.getElementById('searchBtn').addEventListener('click', () => {
+    // Add search functionality here
+    console.log("Searching flights...");
+  });
+  
+  // Select buttons
+  document.querySelectorAll('.select-btn').forEach(button => {
+    button.addEventListener('click', proceedToBooking);
+  });
+});
