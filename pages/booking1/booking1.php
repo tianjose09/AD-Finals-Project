@@ -13,7 +13,7 @@
   <?php
   include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/navbar/navbar.template.php';
   ?>
-
+  <!--Blobs-->
   <div class="stars" id="stars"></div>
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
