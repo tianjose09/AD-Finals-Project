@@ -1,5 +1,4 @@
-/* Cosmic Reset */
-        * {
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -80,6 +79,8 @@
             -webkit-text-fill-color: transparent;
             font-family: 'Times New Roman', serif;
         }
+        
+        
         .admin-text {
             position: relative;
             z-index: 2;
@@ -514,7 +515,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Confirmation Modal */
         .confirmation-modal .modal-content {
             text-align: center;
         }
@@ -524,7 +524,6 @@
             line-height: 1.6;
         }
 
-        /* Flight Schedule Control - Interstellar Theme */
         .flight-container {
             background: rgba(16, 16, 42, 0.7);
             padding: 30px 40px;
@@ -534,6 +533,7 @@
             backdrop-filter: blur(5px);
             margin-bottom: 30px;
         }
+
         .page-title.flight-schedule-title {
             margin-top: 100px;
             text-align: center;
@@ -579,13 +579,14 @@
             box-shadow: 0 0 10px rgba(255, 125, 238, 0.3);
         }
 
-        /* Modified the submit container to center the button */
+       
         .submit-container {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0 40px 0; /* Added margin-bottom */
-            padding: 20px 0;
-        }
+        display: flex;
+        justify-content: center;
+        gap: 1rem; 
+        margin: 20px 0 40px 0;
+        padding: 20px 0;
+    }
 
         .submit-btn {
             padding: 12px 25px;
@@ -843,9 +844,11 @@
             .passengers-grid {
                 grid-template-columns: 1fr;
             }
+            
             .destination-card {
                 flex: 0 0 calc(100% - 1.33rem);
             }
+            
             .carousel-nav {
                 margin-top: 10px;
             }
