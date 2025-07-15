@@ -40,7 +40,7 @@ foreach ($planets as $p) {
     $planetStmt->execute([
         ':name' => $p['name'],
         ':description' => $p['description'],
-        ':distance_from_earth' => floatval(str_replace([',', ' km'], '', $p['distance_from_earth'])),
+        ':distance_from_earth' => floatval(str_replace([',', ' km'], '', (string) $p['distance_from_earth'])),
         ':image_url' => $p['image_url'] ?? null
     ]);
     $result = $planetStmt->fetch(PDO::FETCH_ASSOC);
