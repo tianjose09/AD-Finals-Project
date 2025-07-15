@@ -11,6 +11,7 @@
     <!-- Twinkle stars -->
     <div class="stars" id="stars"></div>
 
+      <!-- Loading -->
     <div class="loading-container">
         <div class="rocket">🚀</div>
         <div class="loading-text">Preparing for launch...</div>
