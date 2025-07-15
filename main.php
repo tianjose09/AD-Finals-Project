@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/assets/img/TED_LOGOwoBG.png">
+    
 </head>
 <body>
     <div class="corner-star" style="top: 20px; left: 20px; animation-delay: 0s;"></div>
@@ -22,7 +23,7 @@
     <div class="login-wrapper">
         <div class="logo-container">
             <div class="logo">
-                <img src="/assets/img/LOGO Transparent.png" alt="Logo">
+                <img src="/assets/img/LOGO-Transparent.png" alt="Logo">
             </div>
         </div>
 
