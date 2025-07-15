@@ -21,7 +21,7 @@
 
   <main class="main-content">
     <div class="booking-wrapper">
-      <img src="bookinghero.png" class="bg-image" alt="Flight UI Background" draggable="false"/>
+      <img src="/assets/img/bookinghero.png" class="bg-image" alt="Flight UI Background" draggable="false"/>
       <div class="form-overlay">
         <div class="from-to-wrapper">
         
