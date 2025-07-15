@@ -1,3 +1,8 @@
+<?php
+$requiredRole = ['client', 'admin'];
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

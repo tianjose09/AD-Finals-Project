@@ -1,3 +1,9 @@
+<?php
+$requiredRole = 'admin';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -472,5 +478,6 @@
     </div>
 
     <script src="/pages/adminpage/js/script.js"></script>
+    <script src="/components/templates/navbar/assets/js/navbar.js"></script>
 </body>
 </html>

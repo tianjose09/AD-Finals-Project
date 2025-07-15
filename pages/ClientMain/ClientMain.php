@@ -1,5 +1,5 @@
 <?php
-$requiredRole = 'client';
+$requiredRole = ['client', 'admin'];
 include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
 ?>
 
