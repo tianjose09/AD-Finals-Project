@@ -16,6 +16,7 @@ for (let i = 0; i < 100; i++) {
 
     starsContainer.appendChild(star);
 }
+// Loading Text
 
 const loadingTexts = [
     "Fueling the engines...",
