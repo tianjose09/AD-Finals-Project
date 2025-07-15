@@ -2,22 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Teddiursa Airlines</title>
-  <link rel="stylesheet" href="/pages/booking1/assets/css/styles.css">
+  <title>Teddiursa Airlines - Booking</title>
   <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
+  <link rel="stylesheet" href="/components/templates/navbar/assets/css/navbar.css">
+  <link rel="stylesheet" href="/components/templates/footer/assets/css/footer.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <nav class="navbar">
-    <div class="/assets/img/LOGO White.png" alt="Teddiursa Airlines Logo" />
-    </div>
-    <div class="nav-items-container">
-      <div class="nav-item"><div class="nav-icon"><img src="account.png" /></div><span class="nav-text">Account</span></div>
-      <div class="nav-item"><div class="nav-icon"><img src="explore.png" /></div><span class="nav-text">Explore</span></div>
-      <div class="nav-item"><div class="nav-icon"><img src="book.png" /></div><span class="nav-text">Book a trip</span></div>
-      <div class="nav-item"><div class="nav-icon"><img src="aboutus.png" /></div><span class="nav-text">About Us</span></div>
-    </div>
-  </nav>
+  <!--NAVBAR-->
+  <?php
+  include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/navbar/navbar.template.php';
+  ?>
 
   <div class="stars" id="stars"></div>
   <div class="blob blob-1"></div>
@@ -53,14 +48,14 @@
           <div class="field">
             <label>Passengers</label>
             <div class="passenger-control">
-              <button onclick="updatePassengers(-1)">-</button>
-              <input type="number" id="passengerCount" value="1" min="1" onchange="validatePassengerInput()">
-              <button onclick="updatePassengers(1)">+</button>
+              <button id="decreasePassengers">-</button>
+              <input type="number" id="passengerCount" value="1" min="1">
+              <button id="increasePassengers">+</button>
             </div>
           </div>
           <div class="field">
             <label>Class</label>
-            <select>
+            <select id="flightClass">
               <option disabled selected>Class</option>
               <option>Economy</option>
               <option>Business Class</option>
@@ -70,7 +65,7 @@
           </div>
         </div>
 
-        <button class="search-btn">Search Flights</button>
+        <button class="search-btn" id="searchBtn">Search Flights</button>
       </div>
     </div>
   </main>
@@ -84,102 +79,91 @@
   </datalist>
 
   <div class="flights-container">
-  <h2 class="flights-header">Available Interplanetary Flights</h2>
-  <table class="flights-table"></table>
-    <thead>
-      <tr>
-        <th>Planet→Planet</th>
-        <th>Departure→Arrival</th>
-        <th>Duration</th>
-        <th>Flight#</th>
-        <th>Price</th>
-        <th>Select</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Earth → Mars</td>
-        <td>15 Nov 2023 15:45 → 16 Nov 2023 08:30</td>
-        <td>16h 45m</td>
-        <td>TA-7842</td>
-        <td>$1,299</td>
-        <td><button class="select-btn" onclick="proceedToBooking()">Select</button></td>
-      </tr>
-      <tr>
-        <td>Venus → Earth</td>
-        <td>18 Nov 2023 07:15 → 18 Nov 2023 22:30</td>
-        <td>15h 15m</td>
-        <td>TA-4521</td>
-        <td>$1,899</td>
-        <td><button class="select-btn" onclick="proceedToBooking()">Select</button></td>
-      </tr>
-      <tr>
-        <td>Jupiter → Saturn</td>
-        <td>19 Nov 2023 12:00 → 20 Nov 2023 18:45</td>
-        <td>30h 45m</td>
-        <td>TA-9823</td>
-        <td>$4,299</td>
-        <td><button class="select-btn" onclick="proceedToBooking()">Select</button></td>
-      </tr>
-      <tr>
-        <td>Earth → Pluto</td>
-        <td>20 Nov 2023 06:30 → 22 Nov 2023 09:15</td>
-        <td>50h 45m</td>
-        <td>TA-5678</td>
-        <td>$5,999</td>
-        <td><button class="select-btn" onclick="proceedToBooking()">Select</button></td>
-      </tr>
-      <tr>
-        <td>Mercury → Venus</td>
-        <td>21 Nov 2023 14:20 → 21 Nov 2023 20:45</td>
-        <td>6h 25m</td>
-        <td>TA-3456</td>
-        <td>$999</td>
-        <td><button class="select-btn" onclick="proceedToBooking()">Select</button></td>
-      </tr>
-      <tr>
-        <td>Uranus → Neptune</td>
-        <td>22 Nov 2023 08:15 → 23 Nov 2023 11:30</td>
-        <td>27h 15m</td>
-        <td>TA-7890</td>
-        <td>$3,799</td>
-        <td><button class="select-btn" onclick="proceedToBooking()">Select</button></td>
-      </tr>
-      <tr>
-        <td>Mars → Earth</td>
-        <td>26 Nov 2023 11:15 → 27 Nov 2023 03:30</td>
-        <td>16h 15m</td>
-        <td>TA-4567</td>
-        <td>$2,899</td>
-        <td><button class="select-btn" onclick="proceedToBooking()">Select</button></td>
-      </tr>
-      <tr>
-        <td>Earth → Moon</td>
-        <td>27 Nov 2023 13:45 → 28 Nov 2023 21:15</td>
-        <td>31h 30m</td>
-        <td>TA-8901</td>
-        <td>$4,199</td>
-        <td><button class="select-btn" onclick="proceedToBooking()">Select</button></td>
-      </tr>
-    </tbody>
-  </table>
+    <h2 class="flights-header">Available Interplanetary Flights</h2>
+    <table class="flights-table">
+      <thead>
+        <tr>
+          <th>Planet→Planet</th>
+          <th>Departure→Arrival</th>
+          <th>Duration</th>
+          <th>Flight#</th>
+          <th>Price</th>
+          <th>Select</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Earth → Mars</td>
+          <td>15 Nov 2023 15:45 → 16 Nov 2023 08:30</td>
+          <td>16h 45m</td>
+          <td>TA-7842</td>
+          <td>$1,299</td>
+          <td><button class="select-btn">Select</button></td>
+        </tr>
+        <tr>
+          <td>Venus → Earth</td>
+          <td>18 Nov 2023 07:15 → 18 Nov 2023 22:30</td>
+          <td>15h 15m</td>
+          <td>TA-4521</td>
+          <td>$1,899</td>
+          <td><button class="select-btn">Select</button></td>
+        </tr>
+        <tr>
+          <td>Jupiter → Saturn</td>
+          <td>19 Nov 2023 12:00 → 20 Nov 2023 18:45</td>
+          <td>30h 45m</td>
+          <td>TA-9823</td>
+          <td>$4,299</td>
+          <td><button class="select-btn">Select</button></td>
+        </tr>
+        <tr>
+          <td>Earth → Pluto</td>
+          <td>20 Nov 2023 06:30 → 22 Nov 2023 09:15</td>
+          <td>50h 45m</td>
+          <td>TA-5678</td>
+          <td>$5,999</td>
+          <td><button class="select-btn">Select</button></td>
+        </tr>
+        <tr>
+          <td>Mercury → Venus</td>
+          <td>21 Nov 2023 14:20 → 21 Nov 2023 20:45</td>
+          <td>6h 25m</td>
+          <td>TA-3456</td>
+          <td>$999</td>
+          <td><button class="select-btn">Select</button></td>
+        </tr>
+        <tr>
+          <td>Uranus → Neptune</td>
+          <td>22 Nov 2023 08:15 → 23 Nov 2023 11:30</td>
+          <td>27h 15m</td>
+          <td>TA-7890</td>
+          <td>$3,799</td>
+          <td><button class="select-btn">Select</button></td>
+        </tr>
+        <tr>
+          <td>Mars → Earth</td>
+          <td>26 Nov 2023 11:15 → 27 Nov 2023 03:30</td>
+          <td>16h 15m</td>
+          <td>TA-4567</td>
+          <td>$2,899</td>
+          <td><button class="select-btn">Select</button></td>
+        </tr>
+        <tr>
+          <td>Earth → Moon</td>
+          <td>27 Nov 2023 13:45 → 28 Nov 2023 21:15</td>
+          <td>31h 30m</td>
+          <td>TA-8901</td>
+          <td>$4,199</td>
+          <td><button class="select-btn">Select</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <!--FOOTER-->
-    <footer>
-        <div id="foot-logo">
-            <img src="assets/footer/img/TED_LOGOwBG.png" alt="Teddiursa Airlines Logo" draggable="false">
-        </div>
+  <?php
+  include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/footer/footer.template.php';
+  ?>
 
-        <div class="foot-text">
-            <div id="foot-tagline">
-                Not Just a Flight. A Leap Into the Universe.
-            </div>
-            <div id="foot-contInfo">
-                <h3>Contact Information:</h3>
-                <p><i>teddairlines@gmail.com  |  0912-343-5352</i></p>
-            </div>
-        </div>
-    </footer>
-
-  <script src="/pages/booking1/assets/js/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
