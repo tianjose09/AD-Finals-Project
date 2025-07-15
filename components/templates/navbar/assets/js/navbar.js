@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const bookBtn = document.getElementById('btn-book');
     if (bookBtn) {
         bookBtn.addEventListener('click', function () {
-            window.location.href = '/pages/booking1/booking.php';
+            window.location.href = '/pages/booking1/booking1.php';
         });
     }
 });
