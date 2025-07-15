@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS public.flights (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  destination VARCHAR(255) NOT NULL,
   departure_planet_id UUID REFERENCES planets(id),
   arrival_planet_id UUID REFERENCES planets(id),
   departure_time TIMESTAMP NOT NULL,
