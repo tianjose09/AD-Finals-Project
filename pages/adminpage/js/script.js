@@ -1,4 +1,4 @@
-function createStars() {
+ function createStars() {
             const starsContainer = document.getElementById('stars');
             const starsCount = 200;
             
@@ -155,6 +155,12 @@ const destinationData = {
         distance: "4.3 billion km"
     },
     8: {
+    name: "PLUTO",
+    description: "A distant dwarf planet at the edge of our solar system, offering breathtaking views of the Kuiper Belt and a truly isolated getaway.",
+    price: "$12,000",
+    distance: "5.9 billion km"
+},
+    9: {
         name: "MOON",
         description: "Our closest celestial neighbor with stunning Earthrises and low-gravity fun.",
         price: "$12,000",
@@ -275,8 +281,8 @@ function updateDestination() {
     const name = document.getElementById('editName').value;
     const description = document.getElementById('editDesc').value;
     const price = document.getElementById('editPrice').value;
-    const distance = document.getElementById('editDuration').value;
-    
+    const distance = document.getElementById('editDistance').value;
+
     // Update the destination data
     destinationData[currentDestinationId] = {
         ...destinationData[currentDestinationId],
@@ -329,7 +335,7 @@ function updatePassenger() {
         birthday,
         nationality,
         passport,
-        type
+        
     };
     
     // In a real app, you would send this to the server here
