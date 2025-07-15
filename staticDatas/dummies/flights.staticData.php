@@ -11,6 +11,7 @@ return [
         'flight_number' => 'FX-001',
         'launch_pad' => 'Pad 39A',
         'gate' => 'A1',
+        'class' => 'economy',
     ],
     [
         'departure_planet' => 'Earth',
@@ -22,6 +23,7 @@ return [
         'flight_number' => 'FX-002',
         'launch_pad' => 'Pad 39B',
         'gate' => 'B2',
+        'class' => 'business',
     ],
     [
         'departure_planet' => 'Earth',
@@ -33,5 +35,6 @@ return [
         'flight_number' => 'FX-003',
         'launch_pad' => 'Pad 40',
         'gate' => 'C3',
+        'class' => 'galactic',
     ],
 ];

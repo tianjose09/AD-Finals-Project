@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS public.flights (
   flight_number VARCHAR(20) NOT NULL UNIQUE,
   launch_pad VARCHAR(50),
   gate VARCHAR(10),
+  class VARCHAR(30) NOT NULL CHECK (class IN ('economy', 'business', 'first', 'galactic')),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
