@@ -1,3 +1,5 @@
+// Twinkle Stars
+
 function createStars() {
   const starsContainer = document.getElementById('stars');
   for (let i = 0; i < 120; i++) {
