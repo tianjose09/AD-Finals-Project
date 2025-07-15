@@ -235,9 +235,9 @@
         width: auto;
         border-radius: 8px;
         margin-left: 150px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
+        position: relative;
+        display: flex;
+        flex-direction: column;
         
     }
     #ff1 img, #ff2 img {
