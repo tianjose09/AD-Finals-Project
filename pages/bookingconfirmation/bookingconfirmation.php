@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passenger Details</title>
-    <link rel="stylesheet" href="/pages/bookingconfirmation/assets/css/styles.css">
+    <link rel="stylesheet" href="/pages/booking/assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="assets/img/TED_LOGOwoBG.png">
 </head>
 <body>
@@ -92,7 +92,7 @@
                 
                 <div class="form-group" id="phone-group">
                     <label>Phone Number</label>
-                    <input type="tel" placeholder="09XXXXXXXXX" id="phone">
+                    <input type="tel" placeholder="+639XXXXXXXXX" id="phone">
                     <div class="error-message">Please enter a valid phone number</div>
                 </div>
                 
@@ -240,6 +240,6 @@
         </div>
     </div>
 
-    <script src="/pages/bookingconfirmation/assets/js/script.js></script>
+    <script src="/pages/booking/assets/js/script.js></script>
 </body>
 </html>
