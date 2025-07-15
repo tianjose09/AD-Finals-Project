@@ -142,7 +142,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
 
     <script src="assets/js/bg.js"></script>
     <script src="assets/js/script.js"></script>
-    <script src="/components/templates/navbar/assets/js/navbar.js"></script>
 </body>
 
 </html>
