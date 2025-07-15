@@ -50,27 +50,29 @@ foreach ($planets as $p) {
 
 // 2. Seed flights and build flight map
 $flightStmt = $pdo->prepare("
-    INSERT INTO public.flights (
-        departure_planet_id, 
-        arrival_planet_id, 
-        departure_time, 
-        return_time, 
-        capacity, 
-        base_price, 
-        flight_number, 
-        launch_pad, 
-        gate
-    ) VALUES (
-        :departure_planet_id, 
-        :arrival_planet_id, 
-        :departure_time, 
-        :return_time, 
-        :capacity, 
-        :base_price, 
-        :flight_number, 
-        :launch_pad, 
-        :gate
-    ) RETURNING id, flight_number
+      INSERT INTO public.flights (
+    departure_planet_id, 
+    arrival_planet_id, 
+    departure_time, 
+    return_time, 
+    capacity, 
+    base_price, 
+    flight_number, 
+    launch_pad, 
+    gate,
+    class
+  ) VALUES (
+    :departure_planet_id, 
+    :arrival_planet_id, 
+    :departure_time, 
+    :return_time, 
+    :capacity, 
+    :base_price, 
+    :flight_number, 
+    :launch_pad, 
+    :gate,
+    :class
+  )RETURNING id, flight_number
 ");
 
 $flightMap = [];
@@ -88,16 +90,17 @@ foreach ($flights as $f) {
     }
 
     $flightStmt->execute([
-        ':departure_planet_id' => $planetMap[$departureName],
-        ':arrival_planet_id' => $planetMap[$arrivalName],
-        ':departure_time' => $f['departure_time'],
-        ':return_time' => $f['return_time'],
-        ':capacity' => $f['capacity'],
-        ':base_price' => $f['base_price'],
-        ':flight_number' => $f['flight_number'],
-        ':launch_pad' => $f['launch_pad'],
-        ':gate' => $f['gate'],
-    ]);
+    ':departure_planet_id' => $planetMap[$departureName],
+    ':arrival_planet_id' => $planetMap[$arrivalName],
+    ':departure_time' => $f['departure_time'],
+    ':return_time' => $f['return_time'],
+    ':capacity' => $f['capacity'],
+    ':base_price' => $f['base_price'],
+    ':flight_number' => $f['flight_number'],
+    ':launch_pad' => $f['launch_pad'],
+    ':gate' => $f['gate'],
+    ':class' => $f['class'],
+]);
 
     $result = $flightStmt->fetch(PDO::FETCH_ASSOC);
     $flightMap[$result['flight_number']] = $result['id'];
