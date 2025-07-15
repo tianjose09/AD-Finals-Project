@@ -378,3 +378,87 @@ document.getElementById("scheduleForm").addEventListener("submit", function(e) {
 window.addEventListener('resize', function() {
     goToSlide(currentSlide);
 });
+
+
+
+
+
+
+
+function updateDestination() {
+    const priceInput = document.getElementById('editPrice').value;
+    const numericPrice = parseFloat(priceInput.replace(/[^\d.]/g, ''));
+
+    if (isNaN(numericPrice)) {
+        alert('Please enter a valid price.');
+        return;
+    }
+
+    const destinationName = destinationData[currentDestinationId].name;
+
+    fetch('/utils/handleflight.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: destinationName,
+            price: numericPrice
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(`₱${numericPrice.toLocaleString()} for ${destinationName} updated successfully!`);
+            destinationData[currentDestinationId].price = `₱${numericPrice.toLocaleString()}`;
+            closeModal('editModal');
+            location.reload();
+        } else {
+            alert('Failed to update price.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while updating price.');
+    });
+}
+
+function formatPHP(price) {
+    return `₱${Number(price).toLocaleString()}`;
+}
+
+
+
+
+
+async function sendFlightRequest(mode) {
+    const form = document.getElementById("scheduleForm");
+    const destination = form.destination.value;
+    const date = form.date.value;
+    const time = form.time.value;
+
+    if (!destination || !date || !time) {
+        alert("Please complete all fields.");
+        return;
+    }
+
+    const response = await fetch("/utils/handleflight.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode, destination, date, time })
+    });
+
+    const result = await response.json();
+    alert(result.message);
+}
+
+document.querySelector('.create-btn').addEventListener('click', () => {
+    sendFlightRequest("create");
+});
+document.querySelector('.delete-btn').addEventListener('click', () => {
+    sendFlightRequest("delete");
+});
+document.querySelector('.update-btn').addEventListener('click', (e) => {
+    e.preventDefault();
+    sendFlightRequest("update");
+});

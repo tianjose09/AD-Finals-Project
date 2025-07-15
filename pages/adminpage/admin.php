@@ -288,7 +288,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
             </div>
             <div class="form-group">
                 <label class="form-label">Price</label>
-                <input type="text" class="form-input" id="editPrice" placeholder="Enter price">
+                <input type="text" class="form-input" id="editPrice" placeholder="₱" value="₱">
             </div>
             <div class="form-group">
                 <label class="form-label">Distance</label>
