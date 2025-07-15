@@ -1,9 +1,14 @@
 CREATE TABLE IF NOT EXISTS public.flights (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  planet_id UUID REFERENCES planets(id),
-  departure_time TIMESTAMP,
-  return_time TIMESTAMP,
-  capacity INT,
-  price NUMERIC(10,2),
-  package_type VARCHAR(20) CHECK (package_type IN ('Basic', 'VIP', 'Galactic Pass'))
+  departure_planet_id UUID REFERENCES planets(id),
+  arrival_planet_id UUID REFERENCES planets(id),
+  departure_time TIMESTAMP NOT NULL,
+  return_time TIMESTAMP NOT NULL,
+  capacity INT NOT NULL,
+  base_price NUMERIC(10,2) NOT NULL,
+  flight_number VARCHAR(20) NOT NULL UNIQUE,
+  launch_pad VARCHAR(50),
+  gate VARCHAR(10),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
