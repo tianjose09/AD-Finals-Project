@@ -1,16 +1,16 @@
+let selectedPlanetPrice = 0; // This will store the flight price
+
 async function submitTicketToDatabase() {
-    const fullName = document.getElementById('confirmed-name')?.textContent || '';
-    const gender = document.getElementById('confirmed-gender')?.textContent || '';
-    const nationality = document.getElementById('confirmed-nationality')?.textContent || '';
-
-    const phone = document.getElementById('confirmed-phone')?.textContent || '';
-    const passport = document.getElementById('confirmed-passport')?.textContent || '';
+    const fullName = document.getElementById('full-name')?.value || '';
+    const gender = document.querySelector('input[name="gender"]:checked')?.value || '';
+    const nationality = document.getElementById('nationality')?.value || '';
+    const phone = document.getElementById('phone')?.value || '';
+    const passport = document.getElementById('passport')?.value || '';
+    const departureDate = document.getElementById('departure-date')?.value || '2025-08-01';
+    const departureTime = document.getElementById('departure-time')?.value || '08:00';
     const destination = document.getElementById('planet-name')?.textContent || 'Mars';
-    const departureDate = document.getElementById('departure-date')?.textContent || '2025-08-01';
-    const departureTime = document.getElementById('departure-time')?.textContent || '08:00';
-
-    const amountPaid = parseFloat(document.getElementById('confirmed-amount')?.textContent?.replace('$', '') || 0);
-    const change = parseFloat(document.getElementById('confirmed-change')?.textContent?.replace('$', '') || 0);
+    const amountPaid = parseFloat(document.getElementById('amount-paid')?.value || 0);
+    const change = amountPaid - selectedPlanetPrice;
     const reference = document.getElementById('booking-ref')?.textContent || '';
 
     const payload = {
@@ -50,10 +50,6 @@ async function submitTicketToDatabase() {
     }
 }
 
-
-
-
-
 // Create Stars in Background
 function createStars() {
     const starsContainer = document.getElementById('stars');
@@ -89,7 +85,7 @@ function validateForm() {
         const requiredFields = [
             'full-name', 'dob', 'nationality',
             'phone', 'email',
-             'passport', 'expiry', 'country'
+            'passport', 'expiry', 'country'
         ];
 
         requiredFields.forEach(fieldId => {
@@ -119,7 +115,7 @@ function validateForm() {
             if (emailGroup) emailGroup.classList.add('error');
             isValid = false;
         }
-        
+
         const phone = document.getElementById('phone');
         const phoneGroup = document.getElementById('phone-group');
         if (!/^09\d{9}$/.test(phone.value.trim())) {
@@ -129,14 +125,11 @@ function validateForm() {
             if (phoneGroup) phoneGroup.classList.remove('error');
         }
 
-
-
         updateProgressBar();
     }
 
     if (document.getElementById('payment-section').classList.contains('active')) {
         const amountPaid = parseFloat(document.getElementById('amount-paid')?.value || 0);
-        const totalAmount = 1250.00;
 
         if (isNaN(amountPaid)) {
             const amountGroup = document.getElementById('amount-group');
@@ -146,7 +139,7 @@ function validateForm() {
                 if (errorMessage) errorMessage.textContent = 'Please enter a valid amount';
             }
             isValid = false;
-        } else if (amountPaid < totalAmount) {
+        } else if (amountPaid < selectedPlanetPrice) {
             const amountGroup = document.getElementById('amount-group');
             if (amountGroup) {
                 amountGroup.classList.add('error');
@@ -157,7 +150,7 @@ function validateForm() {
         } else {
             const amountGroup = document.getElementById('amount-group');
             if (amountGroup) amountGroup.classList.remove('error');
-            const change = amountPaid - totalAmount;
+            const change = amountPaid - selectedPlanetPrice;
             const displayPaid = document.getElementById('display-paid');
             if (displayPaid) displayPaid.textContent = `$${amountPaid.toFixed(2)}`;
             const changeAmount = document.getElementById('change-amount');
@@ -179,7 +172,6 @@ function updateProgressBar() {
     let progress = 0;
     const fields = [
         'full-name', 'dob', 'phone', 'email',
-        'emergency-name', 'emergency-phone',
         'passport', 'expiry', 'country', 'nationality'
     ];
 
@@ -197,7 +189,7 @@ function updateProgressBar() {
         progress = 50;
         const amountPaid = parseFloat(document.getElementById('amount-paid')?.value || 0);
         if (!isNaN(amountPaid)) {
-            progress += (amountPaid / 1250) * 50;
+            progress += (amountPaid / selectedPlanetPrice) * 50;
             if (progress > 100) progress = 100;
         }
     } else if (document.getElementById('confirmation-section')?.classList.contains('active')) {
@@ -207,112 +199,42 @@ function updateProgressBar() {
     progressFill.style.width = `${progress}%`;
 }
 
-function navigateToStep(stepNumber) {
-    const currentStep = getCurrentStep();
-    if (stepNumber > currentStep && !validateForm()) return;
+async function getFlightPrice() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const flightId = urlParams.get('flight_id');
 
-    document.querySelectorAll('.form-section').forEach(sec => sec.classList.remove('active'));
-    document.querySelectorAll('.step').forEach(step => {
-        step.classList.remove('active');
-        if (parseInt(step.dataset.step) < stepNumber) step.classList.add('completed');
-        else if (parseInt(step.dataset.step) === stepNumber) step.classList.add('active');
-        else step.classList.remove('completed');
-    });
+        if (!flightId) return;
 
-    if (stepNumber === 2) {
-        const profilingSection = document.getElementById('profiling-section');
-        if (profilingSection) profilingSection.classList.add('active');
-    } else if (stepNumber === 3) {
-        const paymentSection = document.getElementById('payment-section');
-        if (paymentSection) paymentSection.classList.add('active');
-    } else if (stepNumber === 4) {
-        const confirmationSection = document.getElementById('confirmation-section');
-        if (confirmationSection) confirmationSection.classList.add('active');
+        const response = await fetch(`/handlers/getFlightPrice.php?flight_id=${flightId}`);
+        const data = await response.json();
 
-        const fullName = document.getElementById('full-name')?.value || '';
-        const firstName = fullName.split(' ')[0];
-        const confirmedFirstName = document.getElementById('confirmed-first-name');
-        if (confirmedFirstName) confirmedFirstName.textContent = firstName;
-        
-        const confirmedName = document.getElementById('confirmed-name');
-        if (confirmedName) confirmedName.textContent = fullName;
-        
-        const confirmedEmail = document.getElementById('confirmed-email');
-        if (confirmedEmail) confirmedEmail.textContent = document.getElementById('email')?.value || '';
-        
-        const genderRadio = document.querySelector('input[name="gender"]:checked');
-        const confirmedGender = document.getElementById('confirmed-gender');
-        if (confirmedGender) confirmedGender.textContent = genderRadio?.value || '';
-        
-        const confirmedNationality = document.getElementById('confirmed-nationality');
-        if (confirmedNationality) confirmedNationality.textContent = document.getElementById('nationality')?.value || '';
-        
-        const confirmedPhone = document.getElementById('confirmed-phone');
-        if (confirmedPhone) confirmedPhone.textContent = document.getElementById('phone')?.value || '';
-        
-        const confirmedPassport = document.getElementById('confirmed-passport');
-        if (confirmedPassport) confirmedPassport.textContent = document.getElementById('passport')?.value || '';
-
-        const amountPaid = parseFloat(document.getElementById('amount-paid')?.value || 0);
-        const totalAmount = 1250.00;
-        const change = amountPaid - totalAmount;
-        
-        const confirmedAmount = document.getElementById('confirmed-amount');
-        if (confirmedAmount) confirmedAmount.textContent = `$${amountPaid.toFixed(2)}`;
-        
-        const confirmedChange = document.getElementById('confirmed-change');
-        if (confirmedChange) confirmedChange.textContent = `$${change.toFixed(2)}`;
-
-        const bookingRef = document.getElementById('booking-ref');
-        if (bookingRef) bookingRef.textContent = Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000);
+        if (data.success) {
+            selectedPlanetPrice = parseFloat(data.price);
+            const totalAmountElement = document.getElementById('total-amount');
+            if (totalAmountElement) {
+                totalAmountElement.textContent = `$${selectedPlanetPrice.toFixed(2)}`;
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching flight price:', error);
     }
-
-    updateProgressBar();
-}
-
-function getCurrentStep() {
-    const activeStep = document.querySelector('.step.active');
-    return activeStep ? parseInt(activeStep.dataset.step) : 1;
-}
-
-function getStepFromClick(event) {
-    const progressBar = document.getElementById('progress-bar');
-    if (!progressBar) return 1;
-
-    const rect = progressBar.getBoundingClientRect();
-    const clickPosition = event.clientX - rect.left;
-    const percentage = (clickPosition / rect.width) * 100;
-
-    if (percentage < 25) return 1;
-    if (percentage < 50) return 2;
-    if (percentage < 75) return 3;
-    return 4;
 }
 
 function init() {
-
-    const continueBtn = document.getElementById('continue-btn');
-    if (continueBtn) {
-    continueBtn.addEventListener('click', async function () {
-        await submitTicketToDatabase();
-        window.location.href = '/pages/ClientMain/ClientMain.php';
-    });
-}
-
-
-
     document.getElementById('return-home-btn').addEventListener('click', async function () {
-    const success = await submitTicketToDatabase();
-    if (success) {
-        window.location.href = '/pages/ClientMain/ClientMain.php';
-    } else {
-        alert("❌ Failed to save ticket. Please try again.");
-    }
-});
-
+        const success = await submitTicketToDatabase();
+        if (success) {
+            window.location.href = '/pages/ClientMain/ClientMain.php';
+        } else {
+            alert("❌ Failed to save ticket. Please try again.");
+        }
+    });
 
     createStars();
+    getFlightPrice();
 
+    // Validation triggers
     document.querySelectorAll('input, select').forEach(element => {
         element.addEventListener('input', () => validateForm());
     });
@@ -325,58 +247,17 @@ function init() {
     if (amountPaidInput) {
         amountPaidInput.addEventListener('input', function () {
             const amountPaid = parseFloat(this.value) || 0;
-            const totalAmount = 1250.00;
-            const change = amountPaid - totalAmount;
-            
+            const change = amountPaid - selectedPlanetPrice;
+
             const displayPaid = document.getElementById('display-paid');
             if (displayPaid) displayPaid.textContent = `$${amountPaid.toFixed(2)}`;
-            
+
             const changeAmount = document.getElementById('change-amount');
             if (changeAmount) changeAmount.textContent = `$${change.toFixed(2)}`;
-            
+
             validateForm();
         });
     }
-
-    const nextToPaymentBtn = document.getElementById('next-to-payment');
-    if (nextToPaymentBtn) {
-        nextToPaymentBtn.addEventListener('click', function () {
-            if (validateForm()) {
-                navigateToStep(3);
-            }
-        });
-    }
-
-    const backToProfilingBtn = document.getElementById('back-to-profiling');
-    if (backToProfilingBtn) {
-        backToProfilingBtn.addEventListener('click', function () {
-            navigateToStep(2);
-        });
-    }
-
-    const payNowBtn = document.getElementById('pay-now-btn');
-    if (payNowBtn) {
-        payNowBtn.addEventListener('click', function () {
-            if (validateForm()) {
-                navigateToStep(4);
-            }
-        });
-    }
-
-    const progressBar = document.getElementById('progress-bar');
-    if (progressBar) {
-        progressBar.addEventListener('click', function (event) {
-            const step = getStepFromClick(event);
-            navigateToStep(step);
-        });
-    }
-
-    document.querySelectorAll('.step').forEach(step => {
-        step.addEventListener('click', function () {
-            const stepNumber = parseInt(this.dataset.step);
-            navigateToStep(stepNumber);
-        });
-    });
 
     updateProgressBar();
 }
