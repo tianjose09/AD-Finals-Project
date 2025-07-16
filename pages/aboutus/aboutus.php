@@ -49,19 +49,19 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
             <div id="calalay">
                 <img src="assets/img/Calalay.png" alt="Calalay Profile" draggable="false">
                 <h3>SOPHIA CALALAY</h3>
-                <p>Front-End</p>
+                <p>Lead Front-End</p>
             </div>
 
             <div id="emit">
                 <img src="assets/img/Emit.png" alt="Emit Profile" draggable="false">
                 <h3>YUKI EMIT</h3>
-                <p>Back-End</p>
+                <p>Back-End/Front-End</p>
             </div>
 
             <div id="guinto">
                 <img src="assets/img/Guinto.png" alt="Guinto Profile" draggable="false">
                 <h3>KHRISTIAN GUINTO</h3>
-                <p>Database/Leader</p>
+                <p>Back-End/Database/QA</p>
             </div>
         </div>
     
@@ -69,13 +69,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
             <div id="sadicon">
                 <img src="assets/img/Sadicon.png" alt="Sadicon Profile" draggable="false">
                 <h3>ALTHEA SADICON</h3>
-                <p>Front-End</p>
+                <p> Lead Front-End</p>
             </div>
 
             <div id="tan">
                 <img src="assets/img/Tan.png" alt="Tan Profile" draggable="false">
                 <h3>KIRK TAN</h3>
-                <p>Database/Back-End</p>
+                <p>Back-End/Database/Front-End</p>
             </div>
         </div>
         </div>
