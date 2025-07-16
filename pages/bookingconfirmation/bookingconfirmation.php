@@ -93,8 +93,8 @@
 
                     <div class="form-group" id="phone-group">
                         <label for="phone">Phone Number</label> <!-- Added for attribute -->
-                        <input type="tel" placeholder="+639XXXXXXXXX" id="phone" pattern="\+639[0-9]{9}" required />
-                        <div class="error-message">Please enter a valid phone number (+639XXXXXXXXX)</div>
+                        <input type="tel" placeholder="09XXXXXXXXX" id="phone" pattern="\09\d{9}" required />
+                        <div class="error-message">Phone number must start with 09 and must be 11 digits long</div>
                     </div>
 
                     <div class="form-group" id="email-group">
@@ -103,7 +103,7 @@
                         <div class="error-message">Please enter a valid email address</div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Emergency Contact</label>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                             <div class="form-group" id="emergency-name-group">
@@ -115,7 +115,7 @@
                                 <div class="error-message" style="margin-top: 15px;">Please enter phone number</div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <h2 class="section-title">Travel Documents</h2>
 
@@ -161,7 +161,7 @@
                         <div class="payment-amount">
                             <div class="amount-row">
                                 <span class="amount-label">Total Amount Due:</span>
-                                <span class="amount-value" id="total-amount">$1,250.00</span>
+                                <span class="amount-value" id="total-amount">$0.00</span>
                             </div>
                             <div class="amount-row">
                                 <span class="amount-label">Amount Paid:</span>
@@ -181,37 +181,37 @@
                 </div>
 
                 <!-- Confirmation Section -->
-                <div class="form-section" id="confirmation-section">
-                    <h2 class="section-title">Booking Confirmed</h2>
+            <div class="form-section" id="confirmation-section">
+                <h2 class="section-title">Booking Confirmed</h2>
 
-                    <div class="confirmation-section">
-                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                        </svg>
+                <div class="confirmation-section">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                    </svg>
 
-                        <h3 class="confirmation-title">Your stellar journey awaits, <span id="confirmed-first-name"></span>!</h3>
-                        <div class="confirmation-detail"><strong>Reference:</strong> STL-<span id="booking-ref"></span></div>
-                        <div class="confirmation-detail"><strong>Departure:</strong> Earth Spaceport</div>
-                        <div class="confirmation-detail"><strong>Destination:</strong> Mars Colony One</div>
-                        <div class="confirmation-detail"><strong>Date:</strong> 15 Nov 2023</div>
-                        <div class="confirmation-detail"><strong>Time:</strong> 15:45 GST</div>
-                        <div class="confirmation-detail"><strong>Passenger:</strong> <span id="confirmed-name"></span></div>
-                        <div class="confirmation-detail"><strong>Gender:</strong> <span id="confirmed-gender"></span></div>
-                        <div class="confirmation-detail"><strong>Nationality:</strong> <span id="confirmed-nationality"></span></div>
-                        <div class="confirmation-detail"><strong>Contact:</strong> <span id="confirmed-phone"></span></div>
-                        <div class="confirmation-detail"><strong>Passport:</strong> <span id="confirmed-passport"></span></div>
-                        <div class="confirmation-detail"><strong>Payment Method:</strong> Cash</div>
-                        <div class="confirmation-detail"><strong>Amount Paid:</strong> <span id="confirmed-amount"></span></div>
-                        <div class="confirmation-detail"><strong>Change:</strong> <span id="confirmed-change"></span></div>
-                    </div>
-
-                    <div class="ticket">
-                        <h3>Your E-Ticket</h3>
-                        <p>Your ticket has been sent to <strong id="confirmed-email"></strong></p>
-                        <button class="btn btn-primary" type="button">Download Ticket</button>
+                    <h3 class="confirmation-title">Your stellar journey awaits, <span id="confirmed-first-name"></span>!</h3>
+                    <div class="confirmation-detail"><strong>Reference:</strong> STL-<span id="booking-ref"></span></div>
+                    <div class="confirmation-detail"><strong>Departure:</strong> Earth Spaceport</div>
+                    <div class="confirmation-detail"><strong>Passenger:</strong> <span id="confirmed-name"></span></div>
+                    <div class="confirmation-detail"><strong>Gender:</strong> <span id="confirmed-gender"></span></div>
+                    <div class="confirmation-detail"><strong>Nationality:</strong> <span id="confirmed-nationality"></span></div>
+                    <div class="confirmation-detail"><strong>Contact:</strong> <span id="confirmed-phone"></span></div>
+                    <div class="confirmation-detail"><strong>Passport:</strong> <span id="confirmed-passport"></span></div>
+                    <div class="confirmation-detail"><strong>Payment Method:</strong> Cash</div>
+                    <div class="confirmation-detail"><strong>Amount Paid:</strong> <span id="confirmed-amount"></span></div>
+                    <div class="confirmation-detail"><strong>Change:</strong> <span id="confirmed-change"></span></div>
+                    
+                    <!-- Added screenshot notice and continue button -->
+                    <div class="confirmation-notice">
+                        <p>Please screenshot this page for your reference</p>
                     </div>
                 </div>
+
+                <div class="btn-container">
+                    <button class="btn btn-primary" id="return-home-btn" type="button">Confirm</button>
+                </div>
+            </div>
             </div>
         </form>
     </div>
