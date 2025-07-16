@@ -168,6 +168,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/footer/footer.template.php';
     ?>
 
-  <script src="/pages/booking1/assets/js/script.js"></script>
+  <script src="/components/templates/navbar/assets/js/navbar.js"></script>
 </body>
 </html>
