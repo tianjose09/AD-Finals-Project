@@ -57,6 +57,17 @@ try {
     $pdo = connectDB();
     $pdo->beginTransaction();
 
+    // First get the flight price
+    $flightStmt = $pdo->prepare("SELECT price FROM flights WHERE id = :fid");
+    $flightStmt->execute([':fid' => $flightId]);
+    $flight = $flightStmt->fetch(PDO::FETCH_ASSOC);
+    
+    if (!$flight) {
+        throw new Exception('Flight not found.');
+    }
+    
+    $totalPrice = $flight['price'];
+
     /* 1)  Update user profile (optional fields) */
     $update = $pdo->prepare("
         UPDATE users SET
@@ -125,8 +136,7 @@ try {
     $pdo->commit();
 
     /* SUCCESS RESPONSE */
-    $total  = 1250.00;
-    $change = $payload['amountPaid'] - $total;
+    $change = $payload['amountPaid'] - $totalPrice;
 
     echo json_encode([
         'success'    => true,
@@ -134,7 +144,8 @@ try {
         'seatNumber' => $seat,
         'amountPaid' => number_format($payload['amountPaid'],2),
         'change'     => number_format($change,2),
-        'qr'         => 'QR-'.$ticketRef
+        'qr'         => 'QR-'.$ticketRef,
+        'totalPrice' => $totalPrice
     ]);
 
 } catch (Throwable $e) {
