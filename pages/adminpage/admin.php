@@ -26,7 +26,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
 
     <!--NAVBAR-->
     <?php
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/navbar/navbar.template.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/layouts/navbaradmin/navbaradmin.php';
     ?>
 
 
@@ -36,7 +36,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
             <!-- Dots will be added dynamically -->
         </div>
 
-     <h2 class="page-title flight-schedule-title">Flight Schedule Control</h2>
+     <h2 class="page-title flight-schedule-title" id="flight-schedule-control">Flight Schedule Control</h2>
 
 <!-- Schedule Form -->
 <form id="scheduleForm">
@@ -92,7 +92,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
 
 
         <!-- Passenger Management Section -->
-        <h2 class="page-title">Passenger Management</h2>
+        <h2 class="page-title" id="passenger-management">Passenger Management</h2>
 
         <div class="passengers-grid">
             <!-- Passenger Card 1 -->
@@ -245,6 +245,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
     </div>
 
     <script src="/pages/adminpage/js/script.js"></script>
-    <script src="/components/templates/navbar/assets/js/navbar.js"></script>
+    <script src="/layouts/navbaradmin/assets/js/script.js"></script>
 </body>
 </html>

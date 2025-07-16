@@ -180,19 +180,58 @@ foreach ($booking as $index => $b) {
 }
 
 // 5. Seed tickets for database
-$ticketStmt = $pdo->prepare("INSERT INTO public.\"tickets\" (booking_id, flight_id, flight_number, launch_pad, gate, qr_code) VALUES (:booking_id, :flight_id, :flight_number, :launch_pad, :gate, :qr_code)");
+$ticketStmt = $pdo->prepare("
+    INSERT INTO public.\"tickets\" (
+        reference_number,
+        passenger_name,
+        gender,
+        nationality,
+        contact_number,
+        passport_number,
+        departure_location,
+        destination,
+        departure_date,
+        departure_time,
+        payment_method,
+        amount_paid,
+        change_given
+    ) VALUES (
+        :reference_number,
+        :passenger_name,
+        :gender,
+        :nationality,
+        :contact_number,
+        :passport_number,
+        :departure_location,
+        :destination,
+        :departure_date,
+        :departure_time,
+        :payment_method,
+        :amount_paid,
+        :change_given
+    )
+");
+
 echo "🎟️ Seeding tickets...\n";
-foreach ($tickets as $i => $t) {
-  $bookingId = $bookingIds[$i % count($bookingIds)];
-  $flightId = $flightIds[$i % count($flightIds)];
-  $ticketStmt->execute([
-    ':booking_id' => $bookingId,
-    ':flight_id' => $flightId,
-    ':flight_number' => $t['flight_number'],
-    ':launch_pad' => $t['launch_pad'],
-    ':gate' => $t['gate'],
-    ':qr_code' => $t['qr_code'],
-  ]);
+
+foreach ($bookingIds as $i => $bookingId) {
+    $flightId = $flightIds[$i % count($flightIds)];
+
+    $ticketStmt->execute([
+        ':reference_number'  => strtoupper(bin2hex(random_bytes(4))), 
+        ':passenger_name'    => "Test Passenger " . ($i + 1),
+        ':gender'            => "Other",
+        ':nationality'       => "Martian",
+        ':contact_number'    => "09981234567",
+        ':passport_number'   => "MP" . rand(100000, 999999),
+        ':departure_location'=> "Earth Spaceport",
+        ':destination'       => "Mars",
+        ':departure_date'    => date('Y-m-d', strtotime("+$i days")),
+        ':departure_time'    => "08:00:00",
+        ':payment_method'    => "Cash",
+        ':amount_paid'       => 1250.00,
+        ':change_given'      => 0.00,
+    ]);
 }
 
 echo "✅ PostgreSQL seeding complete!\n";
