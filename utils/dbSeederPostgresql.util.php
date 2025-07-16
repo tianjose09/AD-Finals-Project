@@ -33,16 +33,17 @@ $pdo->exec('
 ');
 
 // Insert planets
-$planetStmt = $pdo->prepare("INSERT INTO public.planets (name, description, distance_from_earth, image_url) VALUES (:name, :description, :distance_from_earth, :image_url) RETURNING id, name");
+$planetStmt = $pdo->prepare("INSERT INTO public.planets (name, description, distance_km, base_price) VALUES (:name, :description, :distance_km, :base_price) RETURNING id, name");
 $planetMap = [];
 echo "🚀 Seeding planets...\n";
 foreach ($planets as $p) {
     $planetStmt->execute([
         ':name' => $p['name'],
         ':description' => $p['description'],
-        ':distance_from_earth' => floatval(str_replace([',', ' km'], '', (string) $p['distance_from_earth'])),
-        ':image_url' => $p['image_url'] ?? null
+        ':distance_km' => $p['distance_km'],
+        ':base_price' => $p['base_price']
     ]);
+
     $result = $planetStmt->fetch(PDO::FETCH_ASSOC);
     $planetMap[$result['name']] = $result['id'];
 }
