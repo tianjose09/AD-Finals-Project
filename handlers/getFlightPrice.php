@@ -18,7 +18,14 @@ try {
     }
 
     $pdo = connectDB();
-    $stmt = $pdo->prepare("SELECT price FROM flights WHERE id = :flight_id");
+    $stmt = $pdo->prepare("
+        SELECT f.price, f.departure_time, f.return_time, 
+               f.departure_planet_id, f.arrival_planet_id, 
+               p.name AS destination
+        FROM flights f
+        JOIN planets p ON f.arrival_planet_id = p.id
+        WHERE f.id = :flight_id
+    ");
     $stmt->execute([':flight_id' => $flightId]);
     $flight = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -28,7 +35,9 @@ try {
 
     echo json_encode([
         'success' => true,
-        'price' => $flight['price']
+        'price' => $flight['price'],
+        'departure_time' => $flight['departure_time'],
+        'destination' => $flight['destination']
     ]);
 } catch (Exception $e) {
     echo json_encode([
