@@ -109,64 +109,6 @@
     });
 });
 
-// Current destination being edited/deleted
-let currentDestinationId = null;
-const destinationData = {
-    1: {
-        name: "MERCURY",
-        description: "Explore the closest planet to the Sun with our heat-resistant observation pods.",
-        price: "$35,000",
-        distance: "91 million km"
-    },
-    2: {
-        name: "VENUS",
-        description: "Float above the acidic clouds in our specialized atmospheric stations.",
-        price: "$38,000",
-        distance: "41 million km"
-    },
-    3: {
-        name: "MARS",
-        description: "Experience the red planet's breathtaking landscapes in our luxury biodomes.",
-        price: "$25,000",
-        distance: "78 million km"
-    },
-    4: {
-        name: "JUPITER",
-        description: "Witness the gas giant's majestic storms from our orbital observation deck.",
-        price: "$42,000",
-        distance: "628 million km"
-    },
-    5: {
-        name: "SATURN",
-        description: "Fly through the iconic rings in our shielded observation craft.",
-        price: "$58,000",
-        distance: "1.2 billion km"
-    },
-    6: {
-        name: "URANUS",
-        description: "Visit the ice giant and witness its unique sideways rotation.",
-        price: "$65,000",
-        distance: "2.6 billion km"
-    },
-    7: {
-        name: "NEPTUNE",
-        description: "Experience the deep blue winds of our solar system's outermost planet.",
-        price: "$75,000",
-        distance: "4.3 billion km"
-    },
-    8: {
-    name: "PLUTO",
-    description: "A distant dwarf planet at the edge of our solar system, offering breathtaking views of the Kuiper Belt and a truly isolated getaway.",
-    price: "$12,000",
-    distance: "5.9 billion km"
-},
-    9: {
-        name: "MOON",
-        description: "Our closest celestial neighbor with stunning Earthrises and low-gravity fun.",
-        price: "$12,000",
-        distance: "384,400 km"
-    }
-};
 
 
 // Current passenger being edited
@@ -296,26 +238,22 @@ function updateDestination() {
     closeModal('editModal');
 }
 
-    // Alert for CREATE
-    document.querySelector('.create-btn').addEventListener('click', () => {
-        alert('Schedule has been created successfully!');
-    });
+   document.querySelector('.create-btn').addEventListener('click', () => {
+    sendFlightRequest("create");
+});
 
-    // Alert for DELETE
-    document.querySelector('.delete-btn').addEventListener('click', () => {
-        const confirmDelete = confirm('Are you sure you want to delete this schedule?');
-        if (confirmDelete) {
-            alert('Schedule has been deleted!');
-        } else {
-            alert('Delete canceled.');
-        }
-    });
+document.querySelector('.delete-btn').addEventListener('click', () => {
+    const confirmDelete = confirm("Are you sure you want to delete this schedule?");
+    if (confirmDelete) {
+        sendFlightRequest("delete");
+    }
+});
 
-    // Alert for UPDATE
-    document.querySelector('.update-btn').addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent form submission for now
-        alert('Schedule has been updated!');
-    });
+document.querySelector('.update-btn').addEventListener('click', (e) => {
+    e.preventDefault();
+    sendFlightRequest("update");
+});
+
 
 
 function updatePassenger() {
@@ -433,32 +371,46 @@ function formatPHP(price) {
 
 async function sendFlightRequest(mode) {
     const form = document.getElementById("scheduleForm");
-    const destination = form.destination.value;
-    const date = form.date.value;
-    const time = form.time.value;
 
-    if (!destination || !date || !time) {
-        alert("Please complete all fields.");
+    const destination = form.destination.value.trim();
+    const departure_date = form.departure_date.value;
+    const departure_time = form.departure_time.value;
+    const return_date = form.return_date.value;
+    const return_time = form.return_time.value;
+
+    const departure_datetime = `${departure_date} ${departure_time}`;
+    const return_datetime = `${return_date} ${return_time}`;
+
+    // You can optionally include price field if needed (e.g., for update)
+    const price = prompt("Enter price (₱):", "10000");
+if (!price) {
+    alert("Price is required.");
+    return;
+}
+const numericPrice = parseFloat(price.replace(/[^\d.]/g, ''));
+if (isNaN(numericPrice)) {
+    alert("Invalid price entered.");
+    return;
+}
+
+
+    if (!destination || !departure_date || !departure_time || !return_date || !return_time || isNaN(numericPrice)) {
+        alert("Please fill all fields correctly.");
         return;
     }
 
     const response = await fetch("/utils/handleflight.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mode, destination, date, time })
+        body: JSON.stringify({
+            mode,
+            destination,
+            departure_datetime,
+            return_datetime,
+            price: numericPrice
+        })
     });
 
     const result = await response.json();
     alert(result.message);
 }
-
-document.querySelector('.create-btn').addEventListener('click', () => {
-    sendFlightRequest("create");
-});
-document.querySelector('.delete-btn').addEventListener('click', () => {
-    sendFlightRequest("delete");
-});
-document.querySelector('.update-btn').addEventListener('click', (e) => {
-    e.preventDefault();
-    sendFlightRequest("update");
-});
