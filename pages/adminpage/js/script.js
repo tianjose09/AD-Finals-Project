@@ -366,7 +366,44 @@ function formatPHP(price) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const accountItem = document.querySelector('.account-item');
 
+    if (accountItem) {
+        accountItem.addEventListener('click', function (e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!accountItem.contains(e.target)) {
+                accountItem.classList.remove('active');
+            }
+        });
+    }
+
+    const logoutBtn = document.querySelector('.logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function () {
+            alert('Logging out...');
+            window.location.href = '/main.php?logout=1';
+        });
+    }
+
+    // Auto scroll to sections
+    const flightBtn = document.getElementById('flight-schedule-btn');
+    const passengerBtn = document.getElementById('passenger-management-btn');
+
+    flightBtn?.addEventListener('click', () => {
+        const section = document.getElementById('flight-schedule-control');
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    passengerBtn?.addEventListener('click', () => {
+        const section = document.getElementById('passenger-management');
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+    });
+});
 
 
 async function sendFlightRequest(mode) {
