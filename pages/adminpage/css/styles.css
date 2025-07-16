@@ -855,3 +855,26 @@
                 margin-top: 10px;
             }
         }
+
+        .passenger-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.passenger-row {
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.passenger-field {
+    margin: 4px 0;
+}
+
+.divider {
+    margin-top: 10px;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
