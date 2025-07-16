@@ -22,7 +22,7 @@ if (!isset($data['mode'], $data['destination'], $data['departure_datetime'], $da
     echo json_encode(['success' => false, 'message' => 'Incomplete data']);
     exit;
 }
-
+    
 $mode = $data['mode'];
 $destination = strtoupper(trim($data['destination']));
 $departure_datetime = $data['departure_datetime'];
@@ -44,6 +44,18 @@ try {
 
     $arrival_planet_id = $planet['id'];
 
+    // Get departure_planet_id (assuming Earth as the fixed departure point)
+    $stmt = $pdo->prepare("SELECT id FROM planets WHERE UPPER(name) = 'EARTH'");
+    $stmt->execute();
+    $earth = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$earth) {
+        echo json_encode(['success' => false, 'message' => 'Departure planet Earth not found']);
+        exit;
+    }
+
+    $departure_planet_id = $earth['id'];
+
     if ($mode === 'create') {
         // Check for duplicate flight
         $check = $pdo->prepare("SELECT * FROM flights WHERE arrival_planet_id = :arrival AND departure_time = :departure_time");
@@ -56,28 +68,28 @@ try {
 
         // Insert new flight
         $stmt = $pdo->prepare("
-    INSERT INTO flights (
-        destination,
-        departure_planet_id,
-        arrival_planet_id,
-        departure_time,
-        return_time,
-        price,
-        flight_number
-    ) VALUES (
-        :destination,
-        NULL,
-        :arrival,
-        :departure_time,
-        :return_time,
-        :price,
-        CONCAT('FL', FLOOR(RANDOM() * 10000)::int)
-    )
-");
-
+            INSERT INTO flights (
+                destination,
+                departure_planet_id,
+                arrival_planet_id,
+                departure_time,
+                return_time,
+                price,
+                flight_number
+            ) VALUES (
+                :destination,
+                :departure,
+                :arrival,
+                :departure_time,
+                :return_time,
+                :price,
+                CONCAT('FL', FLOOR(RANDOM() * 10000)::int)
+            )
+        ");
 
         $stmt->execute([
             ':destination' => $destination,
+            ':departure' => $departure_planet_id,
             ':arrival' => $arrival_planet_id,
             ':departure_time' => $departure_datetime,
             ':return_time' => $return_datetime,
@@ -88,7 +100,6 @@ try {
     }
 
     else if ($mode === 'delete') {
-        // Delete the matching flight
         $stmt = $pdo->prepare("
             DELETE FROM flights
             WHERE arrival_planet_id = :arrival
@@ -109,7 +120,6 @@ try {
     }
 
     else if ($mode === 'update') {
-        // Update price (you can expand this to update more fields)
         $stmt = $pdo->prepare("
             UPDATE flights
             SET price = :price,
@@ -118,7 +128,6 @@ try {
               AND departure_time = :departure_time
               AND return_time = :return_time
         ");
-
         $stmt->execute([
             ':price' => $price,
             ':arrival' => $arrival_planet_id,
