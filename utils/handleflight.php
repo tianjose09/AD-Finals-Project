@@ -1,6 +1,8 @@
 <?php
-function connectDB(): PDO
-{
+header('Content-Type: application/json');
+
+// Connect to PostgreSQL
+function connectDB(): PDO {
     $host     = 'host.docker.internal';
     $port     = '5112';
     $dbname   = 'finaldatabase';
@@ -13,24 +15,24 @@ function connectDB(): PDO
     ]);
 }
 
-header('Content-Type: application/json');
+// Read and validate JSON input
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (!isset($data['mode']) || !isset($data['destination']) || !isset($data['date']) || !isset($data['time'])) {
+if (!isset($data['mode'], $data['destination'], $data['departure_datetime'], $data['return_datetime'], $data['price'])) {
     echo json_encode(['success' => false, 'message' => 'Incomplete data']);
     exit;
 }
 
 $mode = $data['mode'];
 $destination = strtoupper(trim($data['destination']));
-$date = $data['date'];
-$time = $data['time'];
-$datetime = $date . ' ' . $time;
+$departure_datetime = $data['departure_datetime'];
+$return_datetime = $data['return_datetime'];
+$price = $data['price'];
 
 try {
     $pdo = connectDB();
 
-    // Get arrival_planet_id
+    // Get arrival_planet_id from destination name
     $stmt = $pdo->prepare("SELECT id FROM planets WHERE UPPER(name) = :name");
     $stmt->execute([':name' => $destination]);
     $planet = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -44,8 +46,8 @@ try {
 
     if ($mode === 'create') {
         // Check for duplicate flight
-        $check = $pdo->prepare("SELECT * FROM flights WHERE arrival_planet_id = :arrival AND departure_time = :time");
-        $check->execute([':arrival' => $arrival_planet_id, ':time' => $datetime]);
+        $check = $pdo->prepare("SELECT * FROM flights WHERE arrival_planet_id = :arrival AND departure_time = :departure_time");
+        $check->execute([':arrival' => $arrival_planet_id, ':departure_time' => $departure_datetime]);
 
         if ($check->rowCount() > 0) {
             echo json_encode(['success' => false, 'message' => 'Flight already exists']);
@@ -54,25 +56,50 @@ try {
 
         // Insert new flight
         $stmt = $pdo->prepare("
-            INSERT INTO flights (
-                departure_planet_id, arrival_planet_id, departure_time,
-                return_time, capacity, base_price, flight_number, class
-            ) VALUES (
-                NULL, :arrival, :time, :return_time, 100, 1000, 
-                CONCAT('FL', FLOOR(RANDOM()*10000)::int), 'economy'
-            )
-        ");
+    INSERT INTO flights (
+        destination,
+        departure_planet_id,
+        arrival_planet_id,
+        departure_time,
+        return_time,
+        price,
+        flight_number
+    ) VALUES (
+        :destination,
+        NULL,
+        :arrival,
+        :departure_time,
+        :return_time,
+        :price,
+        CONCAT('FL', FLOOR(RANDOM() * 10000)::int)
+    )
+");
+
+
         $stmt->execute([
+            ':destination' => $destination,
             ':arrival' => $arrival_planet_id,
-            ':time' => $datetime,
-            ':return_time' => $datetime // Simplified: return = departure
+            ':departure_time' => $departure_datetime,
+            ':return_time' => $return_datetime,
+            ':price' => $price
         ]);
+
         echo json_encode(['success' => true, 'message' => 'Flight created successfully']);
     }
 
     else if ($mode === 'delete') {
-        $stmt = $pdo->prepare("DELETE FROM flights WHERE arrival_planet_id = :arrival AND departure_time = :time");
-        $stmt->execute([':arrival' => $arrival_planet_id, ':time' => $datetime]);
+        // Delete the matching flight
+        $stmt = $pdo->prepare("
+            DELETE FROM flights
+            WHERE arrival_planet_id = :arrival
+              AND departure_time = :departure_time
+              AND return_time = :return_time
+        ");
+        $stmt->execute([
+            ':arrival' => $arrival_planet_id,
+            ':departure_time' => $departure_datetime,
+            ':return_time' => $return_datetime
+        ]);
 
         if ($stmt->rowCount() > 0) {
             echo json_encode(['success' => true, 'message' => 'Flight deleted']);
@@ -82,19 +109,32 @@ try {
     }
 
     else if ($mode === 'update') {
-        // You might allow changing return time, base_price, etc.
+        // Update price (you can expand this to update more fields)
         $stmt = $pdo->prepare("
-            UPDATE flights 
-            SET base_price = 9999, updated_at = CURRENT_TIMESTAMP 
-            WHERE arrival_planet_id = :arrival AND departure_time = :time
+            UPDATE flights
+            SET price = :price,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE arrival_planet_id = :arrival
+              AND departure_time = :departure_time
+              AND return_time = :return_time
         ");
-        $stmt->execute([':arrival' => $arrival_planet_id, ':time' => $datetime]);
+
+        $stmt->execute([
+            ':price' => $price,
+            ':arrival' => $arrival_planet_id,
+            ':departure_time' => $departure_datetime,
+            ':return_time' => $return_datetime
+        ]);
 
         if ($stmt->rowCount() > 0) {
             echo json_encode(['success' => true, 'message' => 'Flight updated']);
         } else {
             echo json_encode(['success' => false, 'message' => 'No matching flight to update']);
         }
+    }
+
+    else {
+        echo json_encode(['success' => false, 'message' => 'Invalid mode']);
     }
 
 } catch (PDOException $e) {
