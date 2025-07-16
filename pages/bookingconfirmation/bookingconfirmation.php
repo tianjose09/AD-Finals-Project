@@ -93,8 +93,8 @@
 
                     <div class="form-group" id="phone-group">
                         <label for="phone">Phone Number</label> <!-- Added for attribute -->
-                        <input type="tel" placeholder="+639XXXXXXXXX" id="phone" pattern="\+639[0-9]{9}" required />
-                        <div class="error-message">Please enter a valid phone number (+639XXXXXXXXX)</div>
+                        <input type="tel" placeholder="09XXXXXXXXX" id="phone" pattern="\09\d{9}" required />
+                        <div class="error-message">Phone number must start with 09 and must be 11 digits long</div>
                     </div>
 
                     <div class="form-group" id="email-group">
@@ -103,7 +103,7 @@
                         <div class="error-message">Please enter a valid email address</div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Emergency Contact</label>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                             <div class="form-group" id="emergency-name-group">
@@ -115,7 +115,7 @@
                                 <div class="error-message" style="margin-top: 15px;">Please enter phone number</div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <h2 class="section-title">Travel Documents</h2>
 
@@ -193,9 +193,6 @@
                     <h3 class="confirmation-title">Your stellar journey awaits, <span id="confirmed-first-name"></span>!</h3>
                     <div class="confirmation-detail"><strong>Reference:</strong> STL-<span id="booking-ref"></span></div>
                     <div class="confirmation-detail"><strong>Departure:</strong> Earth Spaceport</div>
-                    <div class="confirmation-detail"><strong>Destination:</strong> Mars Colony One</div>
-                    <div class="confirmation-detail"><strong>Date:</strong> 15 Nov 2023</div>
-                    <div class="confirmation-detail"><strong>Time:</strong> 15:45 GST</div>
                     <div class="confirmation-detail"><strong>Passenger:</strong> <span id="confirmed-name"></span></div>
                     <div class="confirmation-detail"><strong>Gender:</strong> <span id="confirmed-gender"></span></div>
                     <div class="confirmation-detail"><strong>Nationality:</strong> <span id="confirmed-nationality"></span></div>

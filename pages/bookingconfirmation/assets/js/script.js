@@ -1,15 +1,17 @@
 let selectedPlanetPrice = 0; // This will store the flight price
 
 async function submitTicketToDatabase() {
-    const fullName = document.getElementById('full-name')?.value || '';
-    const gender = document.querySelector('input[name="gender"]:checked')?.value || '';
-    const nationality = document.getElementById('nationality')?.value || '';
-    const phone = document.getElementById('phone')?.value || '';
-    const passport = document.getElementById('passport')?.value || '';
-    const departureDate = document.getElementById('departure-date')?.value || '2025-08-01';
-    const departureTime = document.getElementById('departure-time')?.value || '08:00';
+    const fullName = document.getElementById('confirmed-name')?.textContent || '';
+    const gender = document.getElementById('confirmed-gender')?.textContent || '';
+    const nationality = document.getElementById('confirmed-nationality')?.textContent || '';
+
+    const phone = document.getElementById('confirmed-phone')?.textContent || '';
+    const passport = document.getElementById('confirmed-passport')?.textContent || '';
     const destination = document.getElementById('planet-name')?.textContent || 'Mars';
-    const amountPaid = parseFloat(document.getElementById('amount-paid')?.value || 0);
+    const departureDate = document.getElementById('departure-date')?.textContent || '2025-08-01';
+    const departureTime = document.getElementById('departure-time')?.textContent || '08:00';
+
+    const amountPaid = parseFloat(document.getElementById('confirmed-amount')?.textContent?.replace('$', '') || 0);
     const change = amountPaid - selectedPlanetPrice;
     const reference = document.getElementById('booking-ref')?.textContent || '';
 
@@ -30,7 +32,7 @@ async function submitTicketToDatabase() {
     };
 
     try {
-        const res = await fetch('/handlers/storeTicker.handler.php', {
+        const res = await fetch('/handlers/storeTicket.handler.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -38,14 +40,21 @@ async function submitTicketToDatabase() {
 
         const result = await res.json();
         if (result.success) {
-            console.log('✅ Ticket saved:', result.ticket_id);
+            console.log('✅ Ticket saved:', result.message);
+            return true;  // ✅ return success
         } else {
             console.error('❌ Save failed:', result.message);
+            return false; // ❌ return failure
         }
     } catch (err) {
         console.error('❌ Request error:', err);
+        return false; // ❌ return failure
     }
 }
+
+
+
+
 
 // Create Stars in Background
 function createStars() {
@@ -81,8 +90,8 @@ function validateForm() {
     if (document.getElementById('profiling-section').classList.contains('active')) {
         const requiredFields = [
             'full-name', 'dob', 'nationality',
-            'phone', 'email', 'emergency-name',
-            'emergency-phone', 'passport', 'expiry', 'country'
+            'phone', 'email',
+             'passport', 'expiry', 'country'
         ];
 
         requiredFields.forEach(fieldId => {
@@ -96,26 +105,6 @@ function validateForm() {
                 if (group) group.classList.remove('error');
             }
         });
-
-        // Emergency contact fix
-        const emergencyName = document.getElementById('emergency-name');
-        const emergencyPhone = document.getElementById('emergency-phone');
-        const emergencyNameError = emergencyName?.nextElementSibling;
-        const emergencyPhoneError = emergencyPhone?.nextElementSibling;
-
-        if (!emergencyName?.value.trim()) {
-            if (emergencyNameError) emergencyNameError.style.display = 'block';
-            isValid = false;
-        } else {
-            if (emergencyNameError) emergencyNameError.style.display = 'none';
-        }
-
-        if (!emergencyPhone?.value.trim()) {
-            if (emergencyPhoneError) emergencyPhoneError.style.display = 'block';
-            isValid = false;
-        } else {
-            if (emergencyPhoneError) emergencyPhoneError.style.display = 'none';
-        }
 
         const genderSelected = document.querySelector('input[name="gender"]:checked');
         const genderGroup = document.getElementById('gender-group');
@@ -132,6 +121,17 @@ function validateForm() {
             if (emailGroup) emailGroup.classList.add('error');
             isValid = false;
         }
+        
+        const phone = document.getElementById('phone');
+        const phoneGroup = document.getElementById('phone-group');
+        if (!/^09\d{9}$/.test(phone.value.trim())) {
+            if (phoneGroup) phoneGroup.classList.add('error');
+            isValid = false;
+        } else {
+            if (phoneGroup) phoneGroup.classList.remove('error');
+        }
+
+
 
         updateProgressBar();
     }
@@ -173,6 +173,28 @@ function validateForm() {
     return isValid;
 }
 
+async function getFlightPrice() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const flightId = urlParams.get('flight_id');
+
+        if (!flightId) return;
+
+        const response = await fetch(`/handlers/getFlightPrice.php?flight_id=${flightId}`);
+        const data = await response.json();
+
+        if (data.success) {
+            selectedPlanetPrice = parseFloat(data.price);
+            const totalAmountElement = document.getElementById('total-amount');
+            if (totalAmountElement) {
+                totalAmountElement.textContent = `$${selectedPlanetPrice.toFixed(2)}`;
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching flight price:', error);
+    }
+}
+
 function updateProgressBar() {
     const progressFill = document.getElementById('progress-fill');
     if (!progressFill) return;
@@ -198,7 +220,7 @@ function updateProgressBar() {
         progress = 50;
         const amountPaid = parseFloat(document.getElementById('amount-paid')?.value || 0);
         if (!isNaN(amountPaid)) {
-            progress += (amountPaid / selectedPlanetPrice) * 50;
+            progress += (amountPaid / 1250) * 50;
             if (progress > 100) progress = 100;
         }
     } else if (document.getElementById('confirmation-section')?.classList.contains('active')) {
@@ -226,12 +248,6 @@ function navigateToStep(stepNumber) {
     } else if (stepNumber === 3) {
         const paymentSection = document.getElementById('payment-section');
         if (paymentSection) paymentSection.classList.add('active');
-        
-        // Update the total amount display
-        const totalAmountElement = document.getElementById('total-amount');
-        if (totalAmountElement) {
-            totalAmountElement.textContent = `$${selectedPlanetPrice.toFixed(2)}`;
-        }
     } else if (stepNumber === 4) {
         const confirmationSection = document.getElementById('confirmation-section');
         if (confirmationSection) confirmationSection.classList.add('active');
@@ -295,35 +311,31 @@ function getStepFromClick(event) {
     return 4;
 }
 
-async function getFlightPrice() {
-    try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const flightId = urlParams.get('flight_id');
-        
-        if (!flightId) return;
-
-        const response = await fetch(`/handlers/getFlightPrice.php?flight_id=${flightId}`);
-        const data = await response.json();
-        
-        if (data.success) {
-            selectedPlanetPrice = parseFloat(data.price);
-            const totalAmountElement = document.getElementById('total-amount');
-            if (totalAmountElement) {
-                totalAmountElement.textContent = `$${selectedPlanetPrice.toFixed(2)}`;
-            }
-        }
-    } catch (error) {
-        console.error('Error fetching flight price:', error);
-    }
-}
-
 function init() {
-    document.getElementById('return-home-btn').addEventListener('click', function() {
+
+    const continueBtn = document.getElementById('continue-btn');
+    if (continueBtn) {
+    continueBtn.addEventListener('click', async function () {
+        await submitTicketToDatabase();
         window.location.href = '/pages/ClientMain/ClientMain.php';
     });
+}
+
+
+
+    document.getElementById('return-home-btn').addEventListener('click', async function () {
+    const success = await submitTicketToDatabase();
+    if (success) {
+        window.location.href = '/pages/ClientMain/ClientMain.php';
+    } else {
+        alert("❌ Failed to save ticket. Please try again.");
+    }
+});
+
 
     createStars();
     getFlightPrice();
+    createStars();
 
     document.querySelectorAll('input, select').forEach(element => {
         element.addEventListener('input', () => validateForm());
