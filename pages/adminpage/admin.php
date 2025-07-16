@@ -91,58 +91,17 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
 </form>
 
 
+
+
+
+
+
+
+
+
+
         <!-- Passenger Management Section -->
         <h2 class="page-title" id="passenger-management">Passenger Management</h2>
-
-        <div class="passengers-grid">
-            <!-- Passenger Card 1 -->
-            <div class="passenger-card">
-                <div class="card-content">
-                    <h3 class="card-title">JOHN SMITH </h3>
-                    <p class="card-detail"><strong>Email:</strong> john.smith@gmail.com</p>
-                    <p class="card-detail"><strong>Contact:</strong> +1 (555) 123-4567</p>
-                    <p class="card-detail"><strong>Birthday:</strong> 05/15/1985</p>
-                    <p class="card-detail"><strong>Nationality:</strong> United States</p>
-                    <p class="card-detail"><strong>Passport:</strong> US12345678</p>
-                </div>
-                <button class="action-btn" onclick="togglePassengerMenu(1)">⋮</button>
-                <div class="action-menu" id="passenger-menu-1">
-                    <div class="menu-item" onclick="openPassengerEditModal(1)">Edit Passenger</div>
-                </div>
-            </div>
-
-            <!-- Passenger Card 2 -->
-            <div class="passenger-card">
-                <div class="card-content">
-                    <h3 class="card-title">MARIA GARCIA</h3>
-                    <p class="card-detail"><strong>Email:</strong> maria.garcia@gmail.com</p>
-                    <p class="card-detail"><strong>Contact:</strong> +34 600 123 456</p>
-                    <p class="card-detail"><strong>Birthday:</strong> 11/22/1990</p>
-                    <p class="card-detail"><strong>Nationality:</strong> Spain</p>
-                    <p class="card-detail"><strong>Passport:</strong> ES98765432</p>
-                </div>
-                <button class="action-btn" onclick="togglePassengerMenu(2)">⋮</button>
-                <div class="action-menu" id="passenger-menu-2">
-                    <div class="menu-item" onclick="openPassengerEditModal(2)">Edit Passenger</div>
-                </div>
-            </div>
-
-            <!-- Passenger Card 3 -->
-            <div class="passenger-card">
-                <div class="card-content">
-                    <h3 class="card-title">LI WEI</h3>
-                    <p class="card-detail"><strong>Email:</strong> li.wei@gmail.com</p>
-                    <p class="card-detail"><strong>Contact:</strong> +86 138 1234 5678</p>
-                    <p class="card-detail"><strong>Birthday:</strong> 03/08/2015</p>
-                    <p class="card-detail"><strong>Nationality:</strong> China</p>
-                    <p class="card-detail"><strong>Passport:</strong> CN87654321</p>
-                </div>
-                <button class="action-btn" onclick="togglePassengerMenu(3)">⋮</button>
-                <div class="action-menu" id="passenger-menu-3">
-                    <div class="menu-item" onclick="openPassengerEditModal(3)">Edit Passenger</div>
-                </div>
-            </div>
-        </div>
 
         <div class="action-buttons-container">
             <button class="action-btn-large secondary-btn" onclick="openModal('allPassengersModal')">
@@ -150,93 +109,45 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
             </button>
             
 
-    <!-- Edit Destination Modal -->
-    <div class="modal-overlay" id="editModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">EDIT DESTINATION</h3>
-                <button class="modal-close" onclick="closeModal('editModal')">×</button>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Destination Name</label>
-                <input type="text" class="form-input" id="editName" placeholder="Enter destination name">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Description</label>
-                <textarea class="form-input" id="editDesc" rows="3" placeholder="Enter destination description"></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Price</label>
-                <input type="text" class="form-input" id="editPrice" placeholder="₱" value="₱">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Distance</label>
-                <input type="text" class="form-input" id="editDistance" placeholder="Enter distance">
-            </div>
-            
-            <div class="modal-actions">
-                <button class="modal-btn modal-btn-secondary" onclick="closeModal('editModal')">Cancel</button>
-                <button class="modal-btn modal-btn-primary" onclick="updateDestination()">Update Destination</button>
-            </div>
-        </div>
-    </div>
-
-    
     <!-- All Passengers Modal -->
     <div class="modal-overlay all-passengers-modal" id="allPassengersModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">ALL PASSENGERS</h3>
-                <button class="modal-close" onclick="closeModal('allPassengersModal')">×</button>
-            </div>
-            <table class="passengers-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Contact</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>JOHN SMITH</td>
-                        <td>john.smith@gmail.com</td>
-                        <td>+1 (555) 123-4567</td>
-                    </tr>
-                    <tr>
-                        <td>MARIA GARCIA</td>
-                        <td>maria.garcia@gmail.com</td>
-                        <td>+34 600 123 456</td>
-                    </tr>
-                    <tr>
-                        <td>LI WEI</td>
-                        <td>li.wei@gmail.com</td>
-                        <td>+86 138 1234 5678</td>
-                    </tr>
-                    <tr>
-                        <td>EMMA JOHNSON</td>
-                        <td>emma.j@gmail.com</td>
-                        <td>+44 7700 900123</td>
-                    </tr>
-                    <tr>
-                        <td>AHMED KHAN</td>
-                        <td>ahmed.k@gmail.com</td>
-                        <td>+971 50 123 4567</td>
-                    </tr>
-                    <tr>
-                        <td>SOFIA MÜLLER</td>
-                        <td>sofia.m@gmail.com</td>
-                        <td>+49 151 12345678</td>
-                    </tr>
-                    <tr>
-                        <td>JAMES WILSON</td>
-                        <td>james.w@gmail.com</td>
-                        <td>+61 412 345 678</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">ALL PASSENGERS</h3>
+            <button class="modal-close" onclick="closeModal('allPassengersModal')">×</button>
+        </div>
+        <div class="passenger-list passengers-grid" id="allPassengersContainer">
+            <!-- Populated by JS -->
         </div>
     </div>
+</div>
+
+<div class="modal-overlay" id="editPassengerModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Edit Passenger</h3>
+      <button class="modal-close" onclick="closeModal('editPassengerModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input id="editPassengerName" placeholder="Name" class="form-input">
+      <input id="editPassengerGender" placeholder="Gender" class="form-input">
+      <input id="editPassengerContact" placeholder="Contact" class="form-input">
+      <input id="editPassengerNationality" placeholder="Nationality" class="form-input">
+      <input id="editPassengerPassport" placeholder="Passport" class="form-input">
+      <button onclick="updatePassenger()" class="submit-btn">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
     <!--FOOTER-->
     <?php
