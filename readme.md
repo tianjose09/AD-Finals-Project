@@ -53,7 +53,14 @@
 
 Teddiursa Airlines offers a one-of-a-kind space travel experience across the Milky Way galaxy. From scenic planetary landscapes to thrilling interstellar adventures, every journey is designed for awe and wonder.
 
-### Technology
+### Key Components
+
+- User and Admin Authentication
+- CRUD Operations for Flight Schedule Control
+- CRUD Operations for Passenger Management
+- User Login and Sign Up
+- User Booking of Flights
+- Admin Dashboard for managing Flights and Users
 
 #### Language
 ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
@@ -133,10 +140,6 @@ AD-ProjectName
 | Title        | Purpose                                                                       | Link          |
 | ------------ | ----------------------------------------------------------------------------- | ------------- |
 | AI Assistant      | Assisted in generating code, improving functionality, and debugging.        | chatgpt.com |
-| ------------ | ----------------------------------------------------------------------------- | ------------- |
 | Code Optimization | Helped optimize and refine code logic and structure.                        | deepseek.com |
-| ------------ | ----------------------------------------------------------------------------- | ------------- |
 | YouTube Tutorials | Provided video guides on coding and Docker integration techniques.          | youtube.com |
-| ------------ | ----------------------------------------------------------------------------- | ------------- |
 | Basic Knowledge   | Offered foundational knowledge and coding syntax references.                | w3schools.com |
-| ------------ | ----------------------------------------------------------------------------- | ------------- |
