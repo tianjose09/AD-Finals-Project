@@ -1,6 +1,6 @@
 <?php
 $requiredRole = ['client', 'admin']; // or 'admin' depending on who should access it
-include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/handlers/account.handler.php';
 ?>
 
 

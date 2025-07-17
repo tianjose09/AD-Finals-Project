@@ -209,7 +209,7 @@ function updateDestination() {
 
     const destinationName = destinationData[currentDestinationId].name;
 
-    fetch('/utils/handleflight.php', {
+    fetch('/handlers/flight.handler.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -305,7 +305,7 @@ async function sendFlightRequest(mode) {
         return;
     }
 
-    const response = await fetch("/utils/handleflight.php", {
+    const response = await fetch("/handlers/flight.handler.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
