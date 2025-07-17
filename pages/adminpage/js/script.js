@@ -108,6 +108,51 @@ function loadPassengersFromDB() {
         });
 }
 
+window.addEventListener('load', createStars);
+
+// 🌐 Dropdown & Navigation
+window.addEventListener('load', createStars);
+document.addEventListener('DOMContentLoaded', function() {
+            const accountItem = document.querySelector('.account-item');
+            
+    
+            accountItem.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+            });
+       
+            document.addEventListener('click', function(e) {
+                if (!accountItem.contains(e.target)) {
+                    accountItem.classList.remove('active');
+                }
+            });
+            
+            // Handle logout button click
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    window.location.href = '/main.php?logout=1';
+                    alert('Logging out...');
+                    // window.location.href = '/logout';
+                });
+            }
+        });
+
+    // Auto scroll to sections
+    const flightBtn = document.getElementById('flight-schedule-btn');
+    const passengerBtn = document.getElementById('passenger-management-btn');
+
+    flightBtn?.addEventListener('click', () => {
+        const section = document.getElementById('flight-schedule-control');
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    passengerBtn?.addEventListener('click', () => {
+        const section = document.getElementById('passenger-management');
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+    });
+
+
 function deletePassenger(id) {
     const confirmed = confirm("Are you sure you want to delete this passenger?");
     if (!confirmed) return;
