@@ -111,7 +111,6 @@ function loadPassengersFromDB() {
 window.addEventListener('load', createStars);
 
 // 🌐 Dropdown & Navigation
-window.addEventListener('load', createStars);
 document.addEventListener('DOMContentLoaded', function() {
             const accountItem = document.querySelector('.account-item');
             

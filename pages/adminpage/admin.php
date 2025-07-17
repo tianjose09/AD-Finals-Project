@@ -156,5 +156,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/handlers/account.handler.php';
     </div>
 
     <script src="/pages/adminpage/js/script.js"></script>
+    <script src="/layouts/navbaradmin/assets/js/script.js"></script>
 </body>
 </html>
