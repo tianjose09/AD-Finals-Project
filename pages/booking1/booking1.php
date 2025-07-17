@@ -1,6 +1,6 @@
 <?php 
 $requiredRole = ['client', 'admin'];
-include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/handlers/account.handler.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +63,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/handleaccount.php';
   </div>
 
   <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/footer/footer.template.php'; ?>
-  <script src="/components/templates/navbar/assets/js/navbar.js"></script>
   <script src="/pages/booking1/assets/js/script.js"></script>
 </body>
 </html>

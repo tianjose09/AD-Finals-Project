@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById('password').value;
 
 
-        const res = await fetch('/utils/handlelogin.php', {
+        const res = await fetch('/handlers/login.handler.php', {
 
             method: 'POST',
             headers: {

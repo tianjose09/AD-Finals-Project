@@ -1,4 +1,8 @@
-let selectedPlanetPrice = 0; // This will store the flight price
+let selectedPlanetPrice = 0;
+let selectedDepartureDate = '';
+let selectedDepartureTime = '';
+let selectedDestinationName = '';
+
 
 async function submitTicketToDatabase() {
     const fullName = document.getElementById('confirmed-name')?.textContent || '';
@@ -7,9 +11,9 @@ async function submitTicketToDatabase() {
 
     const phone = document.getElementById('confirmed-phone')?.textContent || '';
     const passport = document.getElementById('confirmed-passport')?.textContent || '';
-    const destination = document.getElementById('planet-name')?.textContent || 'Mars';
-    const departureDate = document.getElementById('departure-date')?.textContent || '2025-08-01';
-    const departureTime = document.getElementById('departure-time')?.textContent || '08:00';
+    const destination = document.getElementById('planet-name')?.textContent || '';
+    const departureDate = document.getElementById('departure-date')?.textContent || '';
+    const departureTime = document.getElementById('departure-time')?.textContent || '';
 
     const amountPaid = parseFloat(document.getElementById('confirmed-amount')?.textContent?.replace('$', '') || 0);
     const change = amountPaid - selectedPlanetPrice;
@@ -23,9 +27,9 @@ async function submitTicketToDatabase() {
         contact_number: phone,
         passport_number: passport,
         departure_location: "Earth Spaceport",
-        destination,
-        departure_date: departureDate,
-        departure_time: departureTime,
+        destination: selectedDestinationName,
+        departure_date: selectedDepartureDate,
+        departure_time: selectedDepartureTime,
         payment_method: "Cash",
         price_paid: amountPaid,
         change_given: change
@@ -41,19 +45,16 @@ async function submitTicketToDatabase() {
         const result = await res.json();
         if (result.success) {
             console.log('✅ Ticket saved:', result.message);
-            return true;  // ✅ return success
+            return true;
         } else {
             console.error('❌ Save failed:', result.message);
-            return false; // ❌ return failure
+            return false;
         }
     } catch (err) {
         console.error('❌ Request error:', err);
-        return false; // ❌ return failure
+        return false;
     }
 }
-
-
-
 
 
 // Create Stars in Background
@@ -195,6 +196,38 @@ async function getFlightPrice() {
     }
 }
 
+async function getFlightPrice() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const flightId = urlParams.get('flight_id');
+
+        if (!flightId) return;
+
+        const response = await fetch(`/handlers/getFlightPrice.php?flight_id=${flightId}`);
+        const data = await response.json();
+
+        if (data.success) {
+            selectedPlanetPrice = parseFloat(data.price);
+            selectedDestinationName = data.destination || '';
+
+            if (data.departure_time) {
+                const departureDateObj = new Date(data.departure_time);
+                selectedDepartureDate = departureDateObj.toISOString().split('T')[0];
+                selectedDepartureTime = departureDateObj.toTimeString().split(':').slice(0, 2).join(':');
+            }
+
+            const totalAmountElement = document.getElementById('total-amount');
+            if (totalAmountElement) {
+                totalAmountElement.textContent = `$${selectedPlanetPrice.toFixed(2)}`;
+            }
+        } else {
+            console.error('❌ Flight data fetch failed:', data.message);
+        }
+    } catch (error) {
+        console.error('Error fetching flight price:', error);
+    }
+}
+
 function updateProgressBar() {
     const progressFill = document.getElementById('progress-fill');
     if (!progressFill) return;
@@ -287,6 +320,15 @@ function navigateToStep(stepNumber) {
 
         const bookingRef = document.getElementById('booking-ref');
         if (bookingRef) bookingRef.textContent = Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000);
+
+        const departureDateSpan = document.getElementById('departure-date');
+        const departureTimeSpan = document.getElementById('departure-time');
+        if (departureDateSpan) departureDateSpan.textContent = selectedDepartureDate;
+        if (departureTimeSpan) departureTimeSpan.textContent = selectedDepartureTime;
+
+        const planetNameSpan = document.getElementById('planet-name');
+        if (planetNameSpan) planetNameSpan.textContent = selectedDestinationName;
+
     }
 
     updateProgressBar();
