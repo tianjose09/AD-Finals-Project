@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         /* ---------- POST to the PHP handler ---------- */
         try {
-            const res = await fetch('/utils/handlesignup.php', {
+            const res = await fetch('/handlers/signup.handler.php', {
                 method : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body   : JSON.stringify({ fullname, username, contact, password })
