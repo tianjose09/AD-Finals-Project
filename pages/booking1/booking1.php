@@ -63,7 +63,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/handlers/account.handler.php';
   </div>
 
   <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/components/templates/footer/footer.template.php'; ?>
-  <script src="/components/templates/navbar/assets/js/navbar.js"></script>
   <script src="/pages/booking1/assets/js/script.js"></script>
 </body>
 </html>
