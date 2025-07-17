@@ -4,11 +4,13 @@
 
 <br />
 <div align="center">
-  
-  <h3 align="center">Activity 3</h3>
+  <a href="https://github.com/tianjose09/AD-Finals-Project">
+  <img src="/assets/img/LOGO-Transparent.png" alt="SolarSoil" width="130" height="100">
+  </a>
+  <h3 align="center">Teddiursa Airlines</h3>
 </div>
 <div align="center">
-  Applying the learnings to utilize docker.
+  Discover the breathtaking beauty of the Milky Way. Travel to distant planets with ease through Teddiursa Airlines. Experience intergalactic tourism at its finest.
 </div>
 
 <br />
@@ -49,20 +51,20 @@
 
 ## Overview
 
-The developer utilize docker, composer, and sql to practice his learnings on doing PHP.
+Teddiursa Airlines offers a one-of-a-kind space travel experience across the Milky Way galaxy. From scenic planetary landscapes to thrilling interstellar adventures, every journey is designed for awe and wonder.
 
 ### Technology
 
-<!-- TODO: List of Technology Used -->
 #### Language
 ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 
 #### Framework/Library
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 
 #### Databases
-![MySQL](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
 
@@ -128,8 +130,13 @@ AD-ProjectName
 
 ## Resources
 
-<!-- TODO: Add References -->
-
 | Title        | Purpose                                                                       | Link          |
 | ------------ | ----------------------------------------------------------------------------- | ------------- |
-| Step by Step Procedure | Guided me to accomplish the step by step procedures.                | chatgpt.com |
+| AI Assistant      | Assisted in generating code, improving functionality, and debugging.        | chatgpt.com |
+| ------------ | ----------------------------------------------------------------------------- | ------------- |
+| Code Optimization | Helped optimize and refine code logic and structure.                        | deepseek.com |
+| ------------ | ----------------------------------------------------------------------------- | ------------- |
+| YouTube Tutorials | Provided video guides on coding and Docker integration techniques.          | youtube.com |
+| ------------ | ----------------------------------------------------------------------------- | ------------- |
+| Basic Knowledge   | Offered foundational knowledge and coding syntax references.                | w3schools.com |
+| ------------ | ----------------------------------------------------------------------------- | ------------- |
