@@ -10,11 +10,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/handlers/account.handler.php';
   <title>Admin Navbar</title>
   <link rel="stylesheet" href="/components/templates/navbar/assets/css/navbar.css" />
   <link rel="icon" type="image/x-icon" href="/assets/img/TED_LOGOwoBG.png" />
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
 </head>
 <body>
   <!-- Navbar -->
